@@ -1,0 +1,9 @@
+{
+    "db.config": {
+        "host": "freedb.tech",
+        "user": "freedbtech_rootassigmnment",
+        "password":"root@123",
+        "database": "freedbtech_stockMarketAssignment",
+        "multipleStatements": true
+      }
+}

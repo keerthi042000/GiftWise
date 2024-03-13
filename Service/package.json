@@ -1,0 +1,27 @@
+{
+  "name": "StockMarket",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "test": "mocha --timeout 50000 --recursive --watch",
+    "coverage": "nyc --reporter=html --reporter=text mocha --timeout 10000 --recursive --exit"
+  },
+  "dependencies": {
+    "config": "3.1.0",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "lodash": "4.17.15",
+    "mysql": "^2.18.1",
+    "node-cron": "^3.0.0",
+    "nodemon": "^1.19.4",
+    "nyc": "^15.1.0",
+    "socket.io": "^4.1.2",
+    "socket.io-client": "^4.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "mocha": "^6.2.2"
+  }
+}
