@@ -1,65 +1,88 @@
 'user strict';
 
-const mysql = require('mysql');
-const util = require('util');
 const config = require('../config/default.json');
+const oracledb = require('oracledb');
+let pool = null; // Initialize the pool variable
 
-const pool = mysql.createPool(config['db.config']);
-pool.query = util.promisify(pool.query); 
-pool.getConnection = util.promisify(pool.getConnection);
+class SQLServer {
 
-// To get transaction connection
-pool.getTransactionConnection = async () => {
-  try {
-    const connection = await pool.getConnection();
-    connection.beginTransaction = await util.promisify(connection.beginTransaction);
-    await connection.beginTransaction();
-    connection.query = await util.promisify(connection.query);
-    connection.rollback = await util.promisify(connection.rollback);
-    connection.commit = await util.promisify(connection.commit);
-    connection.release = await util.promisify(connection.release);
-    return connection;
+  getTransactionConnection = async () => {
+    try {
+      if(!pool){
+        this.pool = await this.getPool();
+      }
+     // this.connection = await oracledb.getPool('default');
+      this.connection = await oracledb.getConnection('default');
+      return this.connection;
+    }
+    catch (error) {
+      throw error;
+    }
+  };
+  createPool = async () => {
+    try {
+      if (!this.pool) { // Check if the pool does not exist
+        // Create the pool only if it doesn't exist
+        this.pool = await oracledb.createPool(config['db.config']);
+        console.log("Connection pool created successfully.");
+      }
+      return this.pool;
+    } catch (err) {
+      console.error("Error creating connection pool: ", err);
+      throw err;
+    }
   }
-  catch (error) {
-    throw error;
+  getPool = async () => {
+    if (!this.pool) {
+      await this.createPool();
+    }
+    return this.pool;
   }
-};
+  commitAndReleaseConnection = async () => {
+    try {
+      await this.connection.commit();
+      this.connection.close();
+      return this.connection;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+  rollbackAndReleaseConnection = async () => {
+    try {
+      await this.connection.rollback();
+      this.connection.close();
+      return this.connection;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+  commit = async () => {
+    await this.connection.commit();
+    this.connection.close();
+    return this.connection;
+  };
 
-// Get Commit and release Pool;
-pool.commitAndReleaseConnection = async conn => {
-  try {
-    await conn.commit();
-    conn.release();
+  rollback = async () => {
+    await this.connection.rollback();
+    this.connection.close();
     return conn;
-  }
-  catch (error) {
-    throw error;
-  }
-};
+  };
+}
 
-// Commit the transaction and release connection to pool
+module.exports = SQLServer;
 
-pool.rollbackAndReleaseConnection = async conn => {
-  try {
-    await conn.rollback();
-    conn.release();
-    return conn;
-  }
-  catch (error) {
-    throw error;
-  }
-};
 
-pool.commit = async conn => {
-  await conn.commit();
-  conn.release();
-  return conn;
-};
+// Sample code 
 
-pool.rollback = async conn => {
-  await conn.rollback();
-  conn.release();
-  return conn;
-};
-
-module.exports = pool;
+// (async()=>{
+//   let aa  = new SQLServer()
+//   const res = await aa.getTransactionConnection();
+//     const result = await res.execute(
+//       `SELECT *
+//       FROM TransactionMode`
+//   );
+//   aa.commit()
+//   console.log(result.rows);
+// })()
