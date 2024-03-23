@@ -16,7 +16,7 @@ router.use((req, res, next) => {
 
 router.get('/', [_async(productHandler.getAllProduct)]);
 router.post('/add', [_async(productHandler.addProduct)]);
-router.put('/:productId', [_async(productHandler.updateProduct)]);
-// router.delete('/delete/:brandId',[_async(productHandler.deleteProduct)]);
+router.put('/:idProduct', [_async(productHandler.updateProduct)]);
+// router.delete('/delete/:idBrand',[_async(productHandler.deleteProduct)]);
 
 module.exports = router;

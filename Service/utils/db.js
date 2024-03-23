@@ -63,11 +63,19 @@ class SQLServer {
   async execute(SQL, parameters = {}, commit = false) {
     parameters = convertKeysToUpperCase(parameters)
     const con = await this.getTransactionConnection();
-    const result = await con.execute(SQL, parameters);
+
+    const options = {
+      outFormat: oracledb.OUT_FORMAT_OBJECT_ARRAY,
+      fetchInfo: {
+        "isExist": { type: oracledb.STRING },
+
+      }
+    };
+    const result = await con.execute(SQL, parameters, options);
     commit ? this.commitAndReleaseConnection() : null
     // Convert data to JSON format
-    console.log(result)
-
+    console.log(result.metaData[0].dbTypeName)
+    const jsonArray = [];
     if (result.rows) {
       const jsonData = result.rows.map(row => {
         const obj = {};

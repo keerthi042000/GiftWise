@@ -7,12 +7,11 @@ exports.getAllPromocode = async (_, res) => {
 };
 
 exports.addPromocode = async (req, res,) => {
-  const { productId, name, discountInPercentage } = req.body;
-  const [data] = await promocodeDA.checkIfPromocodeExist({ name, productId, promocodeId: null });
+  const { idProduct, name, discountInPercentage } = req.body;
+  const [data] = await promocodeDA.checkIfPromocodeExist({ name, idProduct, idPromocode: null });
 
-  if (data && data.ISEXIST === 0) {
-    console.log('CDCDCD');
-    await promocodeDA.addPromocode({ productId, name, discountInPercentage });
+  if (data && +data.isExist === 0) {
+    await promocodeDA.addPromocode({ idProduct, name, discountInPercentage });
     return res.json(httpUtil.getSuccess());
   }
   return res.json(httpUtil.getDuplicateRecord());
@@ -20,12 +19,12 @@ exports.addPromocode = async (req, res,) => {
 
 exports.updatePromocode = async (req, res) => {
   const {
-    promocodeId, name, productId, discountInPercentage,
+    idPromocode, name, idProduct, discountInPercentage,
   } = req.body;
-  const [data] = await promocodeDA.checkIfPromocodeExist({ name, productId, promocodeId });
-  if (data && data.ISEXIST === 1) {
+  const [data] = await promocodeDA.checkIfPromocodeExist({ name, idProduct, idPromocode });
+  if (data && +data.isExist === 1) {
     await promocodeDA.updatePromocode({
-      productId, name, discountInPercentage, promocodeId,
+      idProduct, name, discountInPercentage, idPromocode,
     });
     return res.json(httpUtil.getSuccess([]));
   }

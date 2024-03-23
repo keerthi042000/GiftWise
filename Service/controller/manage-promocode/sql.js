@@ -1,7 +1,7 @@
-exports.GET_ALL_PROMOCODE = 'Select * from Promocode';
+exports.GET_ALL_PROMOCODE = 'Select promocodeId, idProduct, name, discountInPercentage from Promocode';
 
-exports.CHECK_PROMOCODE_EXIST = 'SELECT COUNT(*) isExist FROM Promocode WHERE (name = :name AND productID= :productID) OR promocodeId= :promocodeId';
+exports.CHECK_PROMOCODE_EXIST = 'SELECT COUNT(*) "isExist" FROM Promocode WHERE (name = :name AND idProduct= :idProduct) OR promocodeId= :promocodeId';
 
-exports.UPDATE_PROMOCODE = 'Update Promocode SET productId= :productId, name= :name, discountInPercentage = :discountInPercentage WHERE  promocodeId = :promocodeId';
+exports.UPDATE_PROMOCODE = 'Update Promocode SET idProduct= :idProduct, name= :name, discountInPercentage = :discountInPercentage WHERE  promocodeId = :promocodeId';
 
-exports.ADD_PROMOCODE = 'INSERT INTO Promocode (productID, name, discountInPercentage) VALUES (:productId, :name, :discountInPercentage)';
+exports.ADD_PROMOCODE = 'INSERT INTO Promocode (idProduct, name, discountInPercentage) VALUES (:idProduct, :name, :discountInPercentage)';

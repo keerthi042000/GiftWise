@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const { apiConfig } = require('../constants');
+
 const brandController = require('./manage-brand');
 const productController = require('./manage-product');
 
