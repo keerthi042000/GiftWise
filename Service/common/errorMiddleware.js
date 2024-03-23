@@ -1,5 +1,5 @@
-const httpUtil = require('./../utils/httpUtil');
-const sqlError = require('./../constants/');
+const httpUtil = require('../utils/httpUtil');
+const sqlError = require('../constants');
 
 exports.errorLogMiddleware = (err, req, res, next) => {
   console.log('App Error', err);
@@ -16,14 +16,13 @@ exports.validationErrorMiddleware = (err, req, res, next) => {
   if (err.name === 'ValidationError') {
     const {
       details: [{
-        message
+        message,
       }],
-      code
+      code,
     } = err;
 
     res.json(httpUtil.getBadRequest([code, message.replace(/['"]+/g, '')]));
-  }
-  else {
+  } else {
     next(err);
   }
 };
@@ -33,8 +32,7 @@ exports.handleExceptionSQLMiddleware = (err, req, res, next) => {
   if (err.code === sqlError[err.errno]) {
     const { code, errno } = err;
     res.json(httpUtil.getException([errno, code]));
-  }
-  else {
+  } else {
     next(err);
   }
 };

@@ -1,4 +1,5 @@
-const apiConfig = require('./apiConfig')
+const apiConfig = require('./apiConfig');
+
 module.exports = {
-    apiConfig
-}
+  apiConfig,
+};
