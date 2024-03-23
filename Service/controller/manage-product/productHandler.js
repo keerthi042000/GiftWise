@@ -14,7 +14,7 @@ exports.addProduct = async (req, res) => {
   const [data] = await productDA.checkIfProductExist({
     idBrand, idCategory, productName, idProduct: null,
   });
-  if (data && data.isExist === 0) {
+  if (data && +data.isExist === 0) {
     await productDA.addProduct({
       idBrand,
       idCategory,
@@ -38,7 +38,7 @@ exports.updateProduct = async (req, res) => {
     idBrand, idCategory, productName, idProduct,
   });
   console.log('data>>>>', data);
-  if (data && data.isExist === 1) {
+  if (data && +data.isExist === 1) {
     await productDA.updateProduct({
       idBrand,
       idCategory,

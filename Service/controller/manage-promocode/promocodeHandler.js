@@ -10,7 +10,7 @@ exports.addPromocode = async (req, res,) => {
   const { idProduct, name, discountInPercentage } = req.body;
   const [data] = await promocodeDA.checkIfPromocodeExist({ name, idProduct, idPromocode: null });
 
-  if (data && data.isExist === 0) {
+  if (data && +data.isExist === 0) {
     await promocodeDA.addPromocode({ idProduct, name, discountInPercentage });
     return res.json(httpUtil.getSuccess());
   }
@@ -22,7 +22,7 @@ exports.updatePromocode = async (req, res) => {
     idPromocode, name, idProduct, discountInPercentage,
   } = req.body;
   const [data] = await promocodeDA.checkIfPromocodeExist({ name, idProduct, idPromocode });
-  if (data && data.isExist === 1) {
+  if (data && +data.isExist === 1) {
     await promocodeDA.updatePromocode({
       idProduct, name, discountInPercentage, idPromocode,
     });

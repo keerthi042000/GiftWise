@@ -10,7 +10,7 @@ exports.getAllBrand = async (_req, res) => {
 exports.addBrand = async (req, res) => {
   const { brandName } = req.body;
   const [data] = await brandDA.checkIfBrandExist({ brandName, idBrand: null });
-  if (data && data.isExist === 0) {
+  if (data && +data.isExist === 0) {
     await brandDA.addBrand({ brandName });
     return res.json(httpUtil.getSuccess());
   }
@@ -20,7 +20,7 @@ exports.addBrand = async (req, res) => {
 exports.updateBrand = async (req, res) => {
   const { idBrand, brandName } = req.body;
   const [data] = await brandDA.checkIfBrandExist({ brandName, idBrand });
-  if (data && data.isExist === 1) {
+  if (data && +data.isExist === 1) {
     await brandDA.updateBrand({ brandName, idBrand })
     return res.json(httpUtil.getSuccess([]));
   }

@@ -63,40 +63,28 @@ class SQLServer {
   async execute(SQL, parameters = {}, commit = false) {
     parameters = convertKeysToUpperCase(parameters)
     const con = await this.getTransactionConnection();
-   
-  const options = {
-    outFormat: oracledb.OUT_FORMAT_OBJECT_ARRAY,
-    fetchInfo: {      
+
+    const options = {
+      outFormat: oracledb.OUT_FORMAT_OBJECT_ARRAY,
+      fetchInfo: {
         "isExist": { type: oracledb.STRING },
 
-    }
-};
+      }
+    };
     const result = await con.execute(SQL, parameters, options);
     commit ? this.commitAndReleaseConnection() : null
     // Convert data to JSON format
     console.log(result.metaData[0].dbTypeName)
     const jsonArray = [];
     if (result.rows) {
-      // const jsonData = result.rows.map(row => {
-      //   const obj = {};
-      //   result.metaData.forEach((meta, index) => {
-      //     obj[meta.name] = row[index];
-      //     jsonObject[columnNames[index]] = value;
-      //   });
-      //   return obj;
-      // });
-      // return jsonData
-      const columnNames = result.metaData.map(column => column.name);
-     
-      result.rows.forEach(row => {
-          const jsonObject = {};
-          result.rows.forEach((value, index) => {
-              jsonObject[columnNames[index]] = value;
-          });
-          jsonArray.push(jsonObject);
+      const jsonData = result.rows.map(row => {
+        const obj = {};
+        result.metaData.forEach((meta, index) => {
+          obj[meta.name] = row[index];
+        });
+        return obj;
       });
-      console.log("><<><><><<><><><><><><><><><><>jsonObject",jsonArray)
-      return jsonObject;
+      return jsonData
     }
     return result
   }

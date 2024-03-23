@@ -9,7 +9,7 @@ exports.getAllCategory = async (_, res,) => {
 exports.addCategory = async (req, res) => {
   const { categoryName } = req.body;
   const [data] = await categoryDA.checkIfCategoryExist({ categoryName, idCategory: null });
-  if (data && data.isExist === 0) {
+  if (data && +data.isExist === 0) {
     await categoryDA.addCategory({ categoryName });
     return res.json(httpUtil.getSuccess());
   }
@@ -19,7 +19,7 @@ exports.addCategory = async (req, res) => {
 exports.updateCategory = async (req, res) => {
   const { idCategory, categoryName } = req.body;
   const [data] = await categoryDA.checkIfCategoryExist({ categoryName, idCategory });
-  if (data && data.isExist === 1) {
+  if (data && +data.isExist === 1) {
     await categoryDA.updateCategory({ categoryName, idCategory });
     return res.json(httpUtil.getSuccess([]));
   }
