@@ -10,5 +10,5 @@ function customException(message, code) {
 module.exports = {
   httpUtil,
   db,
-  customException
+  customException,
 };

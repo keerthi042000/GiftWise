@@ -1,7 +1,7 @@
-const {asyncMiddleware}= require('./asyncMiddleware');
+const { asyncMiddleware } = require('./asyncMiddleware');
 const errorHandlers = require('./errorMiddleware');
 
 module.exports = {
   asyncMiddleware,
-  errorHandlers
+  errorHandlers,
 };

@@ -4,71 +4,82 @@ const config = require('../config/default.json');
 const oracledb = require('oracledb');
 let pool = null; // Initialize the pool variable
 
+function convertKeysToUpperCase(obj) {
+  const newObj = {};
+  for (let key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      newObj[key.toUpperCase()] = obj[key];
+    }
+  }
+  return newObj;
+}
+
+
 class SQLServer {
 
-  getTransactionConnection = async () => {
-    try {
-      if(!pool){
-        this.pool = await this.getPool();
-      }
-     // this.connection = await oracledb.getPool('default');
-      this.connection = await oracledb.getConnection('default');
-      return this.connection;
+  async getTransactionConnection() {
+    if (!pool) {
+      this.pool = await this.getPool();
     }
-    catch (error) {
-      throw error;
-    }
-  };
-  createPool = async () => {
-    try {
-      if (!this.pool) { // Check if the pool does not exist
-        // Create the pool only if it doesn't exist
-        this.pool = await oracledb.createPool(config['db.config']);
-        console.log("Connection pool created successfully.");
-      }
-      return this.pool;
-    } catch (err) {
-      console.error("Error creating connection pool: ", err);
-      throw err;
-    }
+    // this.connection = await oracledb.getPool('default');
+    this.connection = await oracledb.getConnection('default');
+    return this.connection;
   }
-  getPool = async () => {
-    if (!this.pool) {
+  async createPool() {
+    if (!pool) { // Check if the pool does not exist
+      // Create the pool only if it doesn't exist
+      pool = await oracledb.createPool(config['db.config']);
+      console.log("Connection pool created successfully.");
+    }
+    return pool;
+
+  }
+  async getPool() {
+    if (!pool) {
       await this.createPool();
     }
-    return this.pool;
+    return pool;
   }
-  commitAndReleaseConnection = async () => {
-    try {
-      await this.connection.commit();
-      this.connection.close();
-      return this.connection;
-    }
-    catch (error) {
-      throw error;
-    }
-  }
-  rollbackAndReleaseConnection = async () => {
-    try {
-      await this.connection.rollback();
-      this.connection.close();
-      return this.connection;
-    }
-    catch (error) {
-      throw error;
-    }
-  }
-  commit = async () => {
-    await this.connection.commit();
-    this.connection.close();
-    return this.connection;
-  };
+  async commitAndReleaseConnection() {
 
-  rollback = async () => {
+    await this.connection.commit();
+    await this.connection.close();
+    return this.connection;
+
+  }
+  async rollbackAndReleaseConnection() {
+
+    await this.connection.rollback();
+    await this.connection.close();
+    return this.connection;
+
+  }
+
+  async rollback() {
     await this.connection.rollback();
     this.connection.close();
-    return conn;
-  };
+    return this.connection;
+  }
+  async execute(SQL, parameters = {}, commit = false) {
+    parameters = convertKeysToUpperCase(parameters)
+    const con = await this.getTransactionConnection();
+    const result = await con.execute(SQL, parameters);
+    commit ? this.commitAndReleaseConnection() : null
+    // Convert data to JSON format
+    console.log(result)
+
+    if (result.rows) {
+      const jsonData = result.rows.map(row => {
+        const obj = {};
+        result.metaData.forEach((meta, index) => {
+          obj[meta.name] = row[index];
+        });
+        return obj;
+      });
+      return jsonData
+    }
+    return result
+  }
 }
 
 module.exports = SQLServer;

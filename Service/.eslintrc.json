@@ -1,0 +1,21 @@
+{
+    "parserOptions": {
+      "ecmaVersion": 2021, // Use ECMAScript 2021 syntax
+      "sourceType": "module", // Use module syntax (if you're using ES modules)
+      "ecmaFeatures": {
+        "jsx": false // Disable JSX parsing (if you're not using React)
+      }
+    },
+    "env": {
+      "browser": true, // Enable browser global variables
+      "node": true, // Enable Node.js global variables
+      "es2021": true // Enable ES2021 syntax
+    },
+    "extends": [
+      "eslint:recommended" // Use recommended ESLint rules
+    ],
+    "rules": {
+      // Add your custom rules here
+    }
+}
+  
