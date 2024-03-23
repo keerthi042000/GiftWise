@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {asyncMiddleware:_async} = require('../../common');
-const stockHandler = require('./accountHandler')
-var cron = require('node-cron');
+const accountHandler = require('./accountHandler')
 
 router.use((req, res, next) => {
   next();
@@ -14,27 +13,8 @@ router.use((req, res, next) => {
   next();
 });
 
-
-cron.schedule('*/30 * * * * *', async () => {
-  console.log("HERE")
-  let result= await stockHandler.updateStockValue();
-  console.log("result",result);
-    if(result.length)
-    global.io.emit('stockvalue', JSON.stringify(result));
-    
-    console.log("DONE")
-});
-
- router.post('/login',[_async(stockHandler.login)]);
- router.post('/signup', [_async(stockHandler.signup)]);
- router.get('/account_overview',[_async(stockHandler.getAccountOverview)])
- router.post('/save',[_async(stockHandler.saveStockValue)]);
- router.get('/user/:idUser/list',[_async(stockHandler.getlist)])
-
- router.get('/getAllStockTransaction',[_async(stockHandler.getAllStockTransaction)]);
- router.get('/getAllUser',[_async(stockHandler.getAllUser)]);
- router.get('/getAllSystemAttributes',[_async(stockHandler.getAllSystemAttributes)]);
- router.get('/getAllUserGrants',[_async(stockHandler.getAllUserGrants)]);
- 
+ router.post('/login',[_async(accountHandler.login)]);
+ router.post('/signup', [_async(accountHandler.signup)]);
+ router.get('/account_overview',[_async(accountHandler.getAccountOverview)])
  
 module.exports = router;

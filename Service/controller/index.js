@@ -7,6 +7,7 @@ const productController = require('./manage-product');
 
 const categoryController = require('./manage-category');
 const promocodeController = require('./manage-promocode');
+const accountController = require('./manage_account');
 
 const { API } = apiConfig;
 const httpUtil = require('../utils/httpUtil');
@@ -22,6 +23,7 @@ router.use(API.PRODUCT_API, productController);
 
 router.use(API.CATEGORY_API, categoryController);
 router.use(API.PROMOCODE_API, promocodeController);
+router.use(API.ACCOUNT_API, accountController);
 
 // eslint-disable-next-line no-unused-vars
 router.use((req, res, next) => res.json(httpUtil.getNotFound()));

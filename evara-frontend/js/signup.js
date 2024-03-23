@@ -2,7 +2,6 @@ $(document).ready(function () {
 
     $('#email_signup').on('blur', function () {
         var email = $(this).val();
-            // Email validation
         if (!isValidEmail(email)) {
             $('#emailsignupError').text('Please enter a valid email address.');
             return false;
@@ -13,7 +12,6 @@ $(document).ready(function () {
 
     $('#password_signup').on('blur', function () {
         var password = $(this).val();
-        // Email validation
         if (!isValidPassword(password)) {
             $('#passwordError').text('Please enter a valid password.');
             return false;
@@ -43,7 +41,6 @@ $(document).ready(function () {
         }
     });
 
-    // Zip Code validation
     $('#zipcode').on('blur', function () {
         var zipcode = $(this).val();
         $('#zipcodeError').text('');
@@ -54,7 +51,6 @@ $(document).ready(function () {
         }
     });
 
-    // Phone Number validation
     $('#phone').on('blur', function () {
         var phone = $(this).val();
         $('#phoneError').text('');
@@ -66,9 +62,7 @@ $(document).ready(function () {
     });
 
     $('#signupForm').submit(function (e) {
-        e.preventDefault(); // Prevent the default form submission
-
-        // Validate all fields before submitting the form
+        e.preventDefault(); 
         var confirmPassword = $('#confirmPassword').val();
 
         var formData = {
@@ -76,12 +70,13 @@ $(document).ready(function () {
             password: $('#password_signup').val(),
             firstname: $('#firstname').val(),
             lastname: $('#lastname').val(),
-            dob: $('#dob').val(),
+            dob_string: $('#dob').val(),
             address: $('#address').val(),
-            zipcode: $('#zipcode').val(),
-            phone: $('#phone').val(),
+            zipcode: parseInt($('#zipcode').val(), 10),
+            phone: parseInt($('#phone').val(), 10),
             phonetype: 'mobile',
-            isCustomer: 1
+            isCustomer: 1,
+            isSuperAdmin: 0
         };
 
         if (!isValidString(formData.firstname)) {
@@ -98,7 +93,6 @@ $(document).ready(function () {
             $('#lastnameError').text('');
         }
 
-        // Address validation
         if (!isValidString(formData.address)) {
             $('#addressError').text('Please enter a valid address.');
             return false;
@@ -107,23 +101,18 @@ $(document).ready(function () {
         }
         console.log(formData);
 
-        // If all fields are valid, submit the form
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:3004/api/stock/signup/', // Update the URL with your backend API endpoint
+            url: 'http://localhost:3004/api/account/signup/',
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function (response) {
                 console.log('Signup successful:', response);
-                // Handle success response
                 window.location.href = 'page-account.html';
             },
             error: function (error) {
                 console.error('Signup error:', error);
                 $('#errorMessage').text(error.responseText);
-                // var errorMessage = '';
-                // errorMessage = 'Something went wrong. Please try again later.';
-                // alert(errorMessage);
             }
         });
     });

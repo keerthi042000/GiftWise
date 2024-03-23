@@ -4,7 +4,7 @@ exports.API = {
   PRODUCT_API: '/product',
   CATEGORY_API: '/category',
   PROMOCODE_API: '/promocode',
-
+  ACCOUNT_API: '/account',
 };
 
 exports.ROOT_URL = '/api';
