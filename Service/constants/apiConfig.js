@@ -1,5 +1,5 @@
 exports.API = {
-  STOCK_API: '/stock',
+  ACCOUNT_API: '/account',
   BRAND_API: '/brand',
   PRODUCT_API: '/product',
   CATEGORY_API: '/category',

@@ -8,16 +8,16 @@ exports.getAllProduct = async (_, res) => {
 
 exports.addProduct = async (req, res) => {
   const {
-    brandId, categoryId, productName,
+    idBrand, idCategory, productName,
     description, termsAndConditions, stepsToRedeem, imageURL,
   } = req.body;
   const [data] = await productDA.checkIfProductExist({
-    brandId, categoryId, productName, productId: null,
+    idBrand, idCategory, productName, idProduct: null,
   });
-  if (data && data.ISEXIST === 0) {
+  if (data && data.isExist === 0) {
     await productDA.addProduct({
-      brandId,
-      categoryId,
+      idBrand,
+      idCategory,
       productName,
       description,
       termsAndConditions,
@@ -31,23 +31,23 @@ exports.addProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   const {
-    productId, brandId, categoryId, productName,
+    idProduct, idBrand, idCategory, productName,
     description, termsAndConditions, stepsToRedeem, imageURL,
   } = req.body;
   const [data] = await productDA.checkIfProductExist({
-    brandId, categoryId, productName, productId,
+    idBrand, idCategory, productName, idProduct,
   });
   console.log('data>>>>', data);
-  if (data && data.ISEXIST === 1) {
+  if (data && data.isExist === 1) {
     await productDA.updateProduct({
-      brandId,
-      categoryId,
+      idBrand,
+      idCategory,
       productName,
       description,
       termsAndConditions,
       stepsToRedeem,
       imageURL,
-      productId,
+      idProduct,
     });
     return res.json(httpUtil.getSuccess([]));
   }
