@@ -8,12 +8,11 @@ const productController = require('./manage-product');
 
 const categoryController = require('./manage-category');
 const promocodeController = require('./manage-promocode');
-const accountController = require('./manage_account');
+const accountController = require('./manage-account');
 
 const { API } = apiConfig;
 const httpUtil = require('../utils/httpUtil');
 
-// eslint-disable-next-line no-unused-vars
 router.use((_req, _res, next) => { 
   console.log('All Routes are configuring...');
   next();

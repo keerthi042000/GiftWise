@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('#email_signup').on('blur', function () {
+    $('#email').on('blur', function () {
         var email = $(this).val();
         if (!isValidEmail(email)) {
             $('#emailsignupError').text('Please enter a valid email address.');
@@ -10,7 +10,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#password_signup').on('blur', function () {
+    $('#password').on('blur', function () {
         var password = $(this).val();
         if (!isValidPassword(password)) {
             $('#passwordError').text('Please enter a valid password.');
@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     $('#confirmPassword').on('blur', function () {
         var confirmPassword = $(this).val();
-        var password = $('#password_signup').val()
+        var password = $('#password').val()
         if (password !== confirmPassword) {
             $('#confirmPasswordError').text('Passwords do not match.');
             return false;
@@ -66,27 +66,27 @@ $(document).ready(function () {
         var confirmPassword = $('#confirmPassword').val();
 
         var formData = {
-            email: $('#email_signup').val(),
-            password: $('#password_signup').val(),
-            firstname: $('#firstname').val(),
-            lastname: $('#lastname').val(),
-            dob_string: $('#dob').val(),
+            emailId: $('#email').val(),
+            password: $('#password').val(),
+            firstName: $('#firstName').val(),
+            lastName: $('#lastName').val(),
+            dob: $('#dob').val(),
             address: $('#address').val(),
             zipcode: parseInt($('#zipcode').val(), 10),
             phone: parseInt($('#phone').val(), 10),
-            phonetype: 'mobile',
+            phoneType: 'mobile',
             isCustomer: 1,
             isSuperAdmin: 0
         };
 
-        if (!isValidString(formData.firstname)) {
+        if (!isValidString(formData.firstName)) {
             $('#firstnameError').text('Please enter a valid first name.');
             return false;
         } else {
             $('#firstnameError').text('');
         }
 
-        if (!isValidString(formData.lastname)) {
+        if (!isValidString(formData.lastName)) {
             $('#lastnameError').text('Please enter a valid last name.');
             return false;
         } else {
@@ -108,7 +108,11 @@ $(document).ready(function () {
             data: JSON.stringify(formData),
             success: function (response) {
                 console.log('Signup successful:', response);
-                window.location.href = 'page-account.html';
+                if(response.status !== 200){
+                    $('#errorMessage').text(response.errorMessage);
+                }else{
+                    window.location.href = 'page-account.html';
+                }
             },
             error: function (error) {
                 console.error('Signup error:', error);

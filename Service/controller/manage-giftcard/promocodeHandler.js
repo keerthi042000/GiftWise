@@ -13,7 +13,3 @@ exports.addGiftcard = async (req, res,) => {
     await giftcardDA.addGiftcard(giftCardArr);
     return res.json(httpUtil.getSuccess());
 };
-
-exports.delete = async (req, res) => {
- //  TODO
-};

@@ -1,15 +1,15 @@
 $(document).ready(function () {
-    $('#email').on('blur', function () {
-        var email = $(this).val();
+    $('#emailId').on('blur', function () {
+        var emailId = $(this).val();
         $('#passwordError').text('');
-        if (!isValidEmail(email)) {
+        if (!isValidEmail(emailId)) {
             $('#emailError').text('Please enter a valid email address.');
         } else {
             $('#emailError').text('');
         }
     });
 
-    $('#email').on('input', function () {
+    $('#emailId').on('input', function () {
         $('#emailError').text('');
         $('#passwordError').text('');
     });
@@ -22,10 +22,10 @@ $(document).ready(function () {
         e.preventDefault();
 
         var formData = {
-            email: $('#email').val(),
+            emailId: $('#emailId').val(),
             password: $('#password').val()
         };
-        if (!isValidEmail(formData.email)) {
+        if (!isValidEmail(formData.emailId)) {
             $('#emailError').text('Please enter a valid email address.');
             return false;
         }
@@ -37,7 +37,11 @@ $(document).ready(function () {
             data: JSON.stringify(formData),
             success: function (response) {
                 console.log('Login successful:', response);
-                window.location.href = 'page-account.html';
+                if(response.status !== 200){
+                    $('#errorMessage').text(response.errorMessage);
+                }else{
+                    window.location.href = 'page-account.html';
+                }
             },
             error: function (error) {
                 console.error('Login error:', error);
@@ -47,7 +51,7 @@ $(document).ready(function () {
     });
 });
 
-function isValidEmail(email) {
+function isValidEmail(emailId) {
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    return emailRegex.test(emailId);
 }

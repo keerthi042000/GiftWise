@@ -75,7 +75,6 @@ class SQLServer {
     commit ? this.commitAndReleaseConnection() : null
     // Convert data to JSON format
     console.log(result.metaData[0].dbTypeName)
-    const jsonArray = [];
     if (result.rows) {
       const jsonData = result.rows.map(row => {
         const obj = {};
