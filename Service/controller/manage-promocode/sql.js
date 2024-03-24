@@ -1,4 +1,4 @@
-exports.GET_ALL_PROMOCODE = 'Select promocodeId, idProduct, name, discountInPercentage from Promocode';
+exports.GET_ALL_PROMOCODE = 'Select idPromocode as "idPromocode", idProduct AS "idProduct", name AS "name", discountInPercentage AS "discountInPercentage" from Promocode';
 
 exports.CHECK_PROMOCODE_EXIST = 'SELECT COUNT(*) "isExist" FROM Promocode WHERE (name = :name AND idProduct= :idProduct) OR promocodeId= :promocodeId';
 

@@ -1,4 +1,4 @@
-exports.GET_ALL_BRAND = 'Select idBrand, brandName from brand';
+exports.GET_ALL_BRAND = 'Select idBrand AS "idBrand", brandName AS "brandName" from brand';
 
 exports.CHECK_BRAND_EXIST = 'SELECT COUNT(*) "isExist" FROM brand WHERE brandName = :brandName OR idBrand= :idBrand';
 

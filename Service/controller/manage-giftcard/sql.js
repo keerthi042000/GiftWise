@@ -1,4 +1,4 @@
-exports.GET_ALL_GIFTCARD = 'Select idGiftcard,idProduct, giftCardNumber, giftCardPin, status from giftcard';
+exports.GET_ALL_GIFTCARD = 'Select idGiftcard AS "idGiftcard",idProduct AS "idProduct", giftCardNumber AS "giftCardNumber", giftCardPin AS "giftCardPin", status AS "status" from giftcard';
 
 exports.CHECK_GIFTCARD_EXIST = 'SELECT COUNT(*) "isExist" FROM giftcard WHERE idGiftcard = :idGiftcard';
 

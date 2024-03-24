@@ -1,4 +1,4 @@
-exports.GET_ALL_PRODUCT = 'Select idProduct,idBrand, idCategory,productName, description, termsAndConditions, stepsToRedeem, imageURL, quantity from product';
+exports.GET_ALL_PRODUCT = 'Select idProduct AS "idProduct",idBrand AS "idBrand", idCategory AS "idCategory",productName AS "productName", description AS "description", termsAndConditions AS "termsAndConditions", stepsToRedeem AS "stepsToRedeem", imageURL AS "imageURL", quantity AS "quantity" from product';
 
 exports.CHECK_PRODUCT_EXIST = 'SELECT COUNT(*) "isExist" FROM product WHERE (idBrand = :idBrand AND idCategory= :idCategory AND productName= :productName) OR idProduct = :idProduct';
 

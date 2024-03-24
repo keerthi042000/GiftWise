@@ -1,4 +1,4 @@
-exports.GET_ALL_CATEGORY = 'Select * from Category';
+exports.GET_ALL_CATEGORY = 'Select idCategory AS "idCategory", categoryName as "categoryName"  from ProductCategory';
 
 exports.CHECK_CATEGORY_EXIST = 'SELECT COUNT(*) "isExist" FROM Category WHERE categoryName = :categoryName OR categoryId= :categoryId';
 
