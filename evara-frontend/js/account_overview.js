@@ -1,5 +1,18 @@
 $(document).ready(function () {
     // Fetch user data when the page loads
+    $('#logoutBtn').click(function() {
+        $.ajax({
+            url: 'http://localhost:3004/api/account/logout',
+            type: 'GET',
+            success: function(response) {
+                window.location.href = 'page-login.html';
+            },
+            error: function(xhr, status, error) {
+                console.error('Error logging out:', error);
+            }
+        });
+    });
+
     $.get('http://localhost:3004/api/account/account_overview', function (data, status) {
         if (status === 'success') {
             console.log(data)

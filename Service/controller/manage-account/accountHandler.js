@@ -17,6 +17,7 @@ exports.login = async (req, res) => {
     if (!passwordMatch) {
       return res.json(httpUtil.getBadRequest([null,'Incorrect password']))
     }
+    req.session.email = emailId;
     return res.json(httpUtil.getSuccess(user));
   } catch (error) {
     console.error('Login error:', error);
@@ -47,11 +48,23 @@ exports.signup = async (req, res) => {
     await accountDA.InsertCustomer(connection, userId, firstName, lastName, new Date(dob), address, zipcode, phone, phoneType);
     
     connection.commit();
+    req.session.email = emailId;
     return res.json(httpUtil.getSuccess({ userId }));
   } catch (error) {
       console.error('Signup error:', error);
       return res.json(httpUtil.getBadRequest([null,'Something went wrong']))
   }
+};
+
+
+exports.logout = async (req, res) => {
+  req.session.destroy((err) => {
+      if (err) {
+          console.error('Error destroying session:', err);
+          return res.status(500).send('Error logging out');
+      }
+      return res.json(httpUtil.getSuccess());;
+  });
 };
 
 exports.getAccountOverview = async (_, res) => {
