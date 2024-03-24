@@ -44,7 +44,7 @@ exports.signup = async (req, res) => {
     if (!userId) {
       return res.json(httpUtil.getBadRequest([null,'User not created']))
     }
-    await accountDA.InsertCustomer(connection, userId, firstName, lastName, dob, address, zipcode, phone, phoneType);
+    await accountDA.InsertCustomer(connection, userId, firstName, lastName, new Date(dob), address, zipcode, phone, phoneType);
     
     connection.commit();
     return res.json(httpUtil.getSuccess({ userId }));
