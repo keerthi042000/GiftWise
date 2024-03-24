@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Fetch user data when the page loads
-    $.get('http://localhost:3004/api/stock/account_overview', function (data, status) {
+    $.get('http://localhost:3004/api/account/account_overview', function (data, status) {
         if (status === 'success') {
             console.log(data)
             // Populate the update form with existing data

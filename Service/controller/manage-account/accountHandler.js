@@ -40,7 +40,7 @@ exports.signup = async (req, res) => {
     if (!roleId) {
       return res.json(httpUtil.getBadRequest([null,'No Roles found']))
     }
-    const userId = await accountDA.createUser(connection, roleId[0] , emailId, hashedPassword, firstName, lastName, new Date(dob), address, zipcode, phone, phoneType);
+    const userId = await accountDA.createUser(connection, roleId[0] , emailId, hashedPassword);
     if (!userId) {
       return res.json(httpUtil.getBadRequest([null,'User not created']))
     }
