@@ -38,7 +38,7 @@ $(document).ready(function () {
             success: function (response) {
                 console.log('Login successful:', response);
                 if(response.status !== 200){
-                    $('#errorMessage').text(response.errorMessage);
+                    $('#passwordError').text(response.errorMessage);
                 }else{
                     window.location.href = 'page-account.html';
                 }
