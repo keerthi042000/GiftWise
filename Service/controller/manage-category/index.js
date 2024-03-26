@@ -15,8 +15,8 @@ router.use((req, res, next) => {
 });
 
 router.get('/', [_async(categoryHandler.getAllCategory)]);
-router.post('/add', [_async(categoryHandler.addCategory)]);
-router.put('/:categoryId', [_async(categoryHandler.updateCategory)]);
-// router.delete('/delete/:categoryId',[_async(categoryHandler.deleteCategory)]);
+router.post('/', [_async(categoryHandler.addCategory)]);
+router.put('/:idCategory', [_async(categoryHandler.updateCategory)]);
+router.delete('/:idCategory',[_async(categoryHandler.deleteCategory)]);
 
 module.exports = router;

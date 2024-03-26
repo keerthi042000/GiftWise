@@ -1,0 +1,317 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>GiftWise. </title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <script>
+        localStorage.setItem("currentScreen", "promocode");
+    </script>
+
+
+</head>
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="index.html" class="promocode-wrap">
+                <img src="assets/imgs/theme/logo.png" class="logo" alt="GiftWise. ">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="nav"></nav>
+    </aside>
+    <main class="main-wrap">
+        <header id="headertop"></header>
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Promocode </h2>
+                    <p>Add, edit or delete a promocode</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <form id="addPromocodeForm" method="post">
+
+                            </form>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Promocode</th>
+                                            <th>Product Name</th>
+                                            <th>Discount %</th>
+                                            <th>Status</th>
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="promocodeTable">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> <!-- .col// -->
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+
+                    </script>
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendors/select2.min.js"></script>
+    <script src="assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="assets/js/main.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="./nav.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+    <script>
+
+        function deletePromocode(idPromocode) {
+            $.ajax({
+                type: 'DELETE',
+                url: `http://localhost:3004/api/promocode/${idPromocode}`,
+                contentType: 'application/json',
+                success: function (response) {
+
+                    if (response.status !== 200) {
+                        console.log(response)
+                    } else {
+                        getPromocodeDetails()
+                    }
+                },
+                error: function (error) {
+                    console.error('error:', error);
+                }
+            });
+        }
+        function submitPromocode(idPromocode) {
+            const name = $(`#promocodeName${idPromocode}`).val()
+            const discountInPercentage = $(`#discountInPercentage${idPromocode}`).val()
+            let idProduct = $(`#productId${idPromocode}`).find(":selected").val();
+            let isActive = $(`#isActive${idPromocode}`).find(":selected").val();
+            idProduct = idProduct == "0" ? null: idProduct
+            console.log("cdcdcd>>>>",{
+                    idPromocode,
+                    idProduct: idProduct,
+                    name,
+                    discountInPercentage,
+                    isActive: isActive === "isActive" ? 1 : 0 
+                })
+            $.ajax({
+                type: 'PUT',
+                url: `http://localhost:3004/api/promocode/${idPromocode}`,
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    idPromocode,
+                    idProduct: idProduct,
+                    name,
+                    discountInPercentage,
+                    isActive: isActive === "isActive" ? 1 : 0 
+                }),
+                success: function (response) {
+
+                    if (response.status !== 200) {
+                        console.log(response)
+                    } else {
+                        getPromocodeDetails()
+                    }
+                },
+                error: function (error) {
+                    console.error('error:', error);
+                }
+            });
+        }
+
+        function processData(response, productResponse) {
+            $('#promocodeTable').empty();
+            response.payload.forEach(element => {
+                let { idPromocode, idProduct, name, discountInPercentage, isActive } = element
+                let idProductExists = false 
+                let dropdown = productResponse.payload.map(val => {
+                    idProductExists = val.idProduct === idProduct
+                    return `<option value="${val.idProduct}" ${val.idProduct == idProduct ? "Selected": ''}>${val.idProduct} - ${val.productName}</option>`
+                })
+
+                $('#promocodeTable').append(`
+                 
+                <tr>
+                    <form id="promocode${idPromocode}"> 
+                        <td>${idPromocode}</td> 
+              
+                <td><b><input type="text" placeholder="Enter Promocode" name="promocodeName${idPromocode}" value="${name}"
+                                        class="form-control" id="promocodeName${idPromocode}" required></b></td>
+                                        <td> 
+                                    <select class="form-select" id="productId${idPromocode}">
+                                        <option value="0" ${idProductExists ? 'Selected': ''}>Select product</option>
+                                        ${dropdown.join("\n")}
+                                    </select>
+                                
+                                </td>
+                <td><input type="number" placeholder="Enter discount %" name="discountInPercentage${idPromocode}" value="${discountInPercentage}"
+                                        class="form-control" id="discountInPercentage${idPromocode}" required></b></td>
+                                       <td>
+                                        <select class="form-select" id="isActive${idPromocode}">
+                                            <option ${isActive === 1 ? 'selected' : ''}>Active</option>
+                                            <option ${isActive === 0 ? 'selected' : ''}>Inactive</option>
+                                        </select>
+                                    </td>
+                                        <td class="text-end">
+                    <div class="dropdown">
+                        <a href="#" data-bs-toggle="dropdown"
+                            class="btn btn-light rounded btn-sm font-sm"> <i
+                                class="material-icons md-more_horiz"></i> </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" onClick="submitPromocode(${idPromocode})">Submit</a>
+                            <a class="dropdown-item text-danger" onClick="deletePromocode(${idPromocode})">Delete</a>
+                        </div>
+                    </div>
+                </td>
+                </form>
+                </tr>`)
+            });
+
+        }
+
+        async function getProduct() {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'GET',
+                    url: `${domain}/api/product/`,
+                    contentType: 'application/json',
+                    success: function (response) {
+                        if (response.status !== 200) {
+                            console.log(response)
+                        } else {
+                            resolve(response)
+                        }
+                    },
+                    error: function (error) {
+                        reject(reject)
+                    }
+                });
+            })
+        }
+        async function getPromocodeDetails() {
+            const productResponse = await getProduct()
+            console.log(productResponse)
+               $('#addPromocodeForm').empty()
+            let dropdown = productResponse.payload.map(val => `<option value="${val.idProduct}">${val.idProduct} - ${val.productName}</option>`)
+            $('#addPromocodeForm').append(`
+            <div class="mb-4">
+                                    <label for="promocodeName" class="form-label">Promocode</label>
+                                    <input type="text" placeholder="Enter Promocode" name="promocodeName"
+                                        class="form-control" id="promocodeName" required />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="discountInPercentage" class="form-label">Discount %</label>
+                                    <input type="text" placeholder="Enter Promocode" name="discountInPercentage"
+                                        class="form-control" id="discountInPercentage" required />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="isActive" class="form-label">Status</label>
+                                    <select class="form-select" id="isActive">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+               <div class="mb-4">
+                                    <label for="product" class="form-label">Select Product</label>
+                                    <select class="form-select" id="productId">
+                                        <option value="0">Select product</option>
+                                        ${dropdown.join("\n")}
+                                    </select>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary">Create Promocode</button>
+                                </div>
+                `)
+            $.ajax({
+                type: 'GET',
+                url: `${domain}/api/promocode/`,
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.status !== 200) {
+                        console.log(response)
+                    } else {
+                        processData(response, productResponse)
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        }
+        getPromocodeDetails()
+        $('#addPromocodeForm').submit(function (e) {
+            e.preventDefault();
+            let idProduct = $('#productId').find(":selected").val();
+            let isActive = $('#isActive').find(":selected").val();
+            const discountInPercentage = $(`#discountInPercentage`).val()
+            const name = $(`#promocodeName`).val()
+            idProduct = idProduct == "0" ? null: idProduct
+            var formData = {
+                name,
+                idProduct,
+                isActive,
+                discountInPercentage
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3004/api/promocode/',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+
+                    if (response.status !== 200) {
+                        $('#errorMessage').text(response.errorMessage);
+                    } else {
+                       getPromocodeDetails()
+                    }
+                },
+                error: function (error) {
+                    console.error('error:', error);
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,12 +1,11 @@
-const SQLServer = require('../../utils/db');
 const sql = require('./sql');
 
-const SQLConnection = new SQLServer();
+exports.getAllPromocode = async (SQLConnection) => SQLConnection.execute(sql.GET_ALL_PROMOCODE);
 
-exports.getAllPromocode = () => SQLConnection.execute(sql.GET_ALL_PROMOCODE);
+exports.checkIfPromocodeExist = async (SQLConnection,promoObj) => SQLConnection.execute(sql.CHECK_PROMOCODE_EXIST, promoObj);
 
-exports.checkIfPromocodeExist = (promoObj) => SQLConnection.execute(sql.CHECK_PROMOCODE_EXIST, promoObj);
+exports.addPromocode = async (SQLConnection, promoObj) => SQLConnection.execute(sql.ADD_PROMOCODE, promoObj, true);
 
-exports.addPromocode = (promoObj) => SQLConnection.execute(sql.ADD_PROMOCODE, promoObj, true);
+exports.updatePromocode = async (SQLConnection,promoObj) => SQLConnection.execute(sql.UPDATE_PROMOCODE, promoObj, true);
 
-exports.updatePromocode = (promoObj) => SQLConnection.execute(sql.UPDATE_PROMOCODE, promoObj, true);
+exports.deletePromocode = async (SQLConnection,promoObj) => SQLConnection.execute(sql.DELETE_PROMOCODE, promoObj, true);

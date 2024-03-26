@@ -17,6 +17,6 @@ router.use((req, res, next) => {
 router.get('/', [_async(brandHandler.getAllBrand)]);
 router.post('/', [_async(brandHandler.addBrand)]);
 router.put('/:idBrand', [_async(brandHandler.updateBrand)]);
-// router.delete('/delete/:idBrand',[_async(brandHandler.deleteBrand)]);
+router.delete('/:idBrand',[_async(brandHandler.deleteBrand)]);
 
 module.exports = router;

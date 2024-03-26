@@ -3,6 +3,10 @@
       "user": "ADMIN",
       "password": "dbmsCS542...",
       "connectString": "(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.us-ashburn-1.oraclecloud.com))(connect_data=(service_name=g5f2f7abaf43d27_gcms_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))",
-      "poolAlias": "default"
+      "poolMin": 2, 
+      "poolMax": 20, 
+      "poolIncrement": 5, 
+      "poolTimeout": 60,
+      "queueTimeout": 120000
   }
 }

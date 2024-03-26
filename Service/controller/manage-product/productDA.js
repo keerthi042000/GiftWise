@@ -1,12 +1,9 @@
-const SQLServer = require('../../utils/db');
 const sql = require('./sql');
 
-const SQLConnection = new SQLServer();
+exports.getAllProduct = async (SQLConnection) => SQLConnection.execute(sql.GET_ALL_PRODUCT);
 
-exports.getAllProduct = () => SQLConnection.execute(sql.GET_ALL_PRODUCT);
+exports.checkIfProductExist = async (SQLConnection, productObj) => SQLConnection.execute(sql.CHECK_PRODUCT_EXIST, productObj);
 
-exports.checkIfProductExist = (productObj) => SQLConnection.execute(sql.CHECK_PRODUCT_EXIST, productObj);
+exports.addProduct = async (SQLConnection, productObj) => SQLConnection.execute(sql.ADD_PRODUCT, productObj, true);
 
-exports.addProduct = (productObj) => SQLConnection.execute(sql.ADD_PRODUCT, productObj, true);
-
-exports.updateProduct = (productObj) => SQLConnection.execute(sql.UPDATE_PRODUCT, productObj, true);
+exports.updateProduct = async (SQLConnection, productObj) => SQLConnection.execute(sql.UPDATE_PRODUCT, productObj, true);

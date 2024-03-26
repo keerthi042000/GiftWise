@@ -16,7 +16,7 @@ router.use((req, res, next) => {
 
 router.get('/', [_async(promocodeHandler.getAllPromocode)]);
 router.post('/', [_async(promocodeHandler.addPromocode)]);
-router.put('/:promocodeId', [_async(promocodeHandler.updatePromocode)]);
-// router.delete('/delete/:categoryId',[_async(promocodeHandler.deleteCategory)]);
+router.put('/:idPromocode', [_async(promocodeHandler.updatePromocode)]);
+router.delete('/:idPromocode',[_async(promocodeHandler.deletePromocode)]);
 
 module.exports = router;

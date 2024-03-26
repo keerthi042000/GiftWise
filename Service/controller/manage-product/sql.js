@@ -11,8 +11,9 @@ SET
     termsAndConditions = :termsAndConditions, 
     stepsToRedeem = :stepsToRedeem, 
     imageURL = :imageURL 
-    quantity = :quantity WHERE idProduct = :idProduct`;
+    quantity = :quantity
+    isDelete = :isDelete WHERE idProduct = :idProduct`;
 
 exports.ADD_PRODUCT = `INSERT INTO product (idBrand, idCategory, productName,
-    description,termsAndConditions,stepsToRedeem,imageURL ) VALUES (:idBrand, :idCategory, :productName,
-        :description,:termsAndConditions,:stepsToRedeem,:imageURL)`;
+    description,termsAndConditions,stepsToRedeem,imageURL, quantity ) VALUES (:idBrand, :idCategory, :productName,
+        :description,:termsAndConditions,:stepsToRedeem,:imageURL, :quantity)`;
