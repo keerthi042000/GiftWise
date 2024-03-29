@@ -14,10 +14,8 @@ exports.addCategory = async (req, res) => {
   const [data] = await categoryDA.checkIfCategoryExist(instanceOfSQLServer,{ categoryName, idCategory: null });
   if (data && +data.isExist === 0) {
     await categoryDA.addCategory(instanceOfSQLServer,{ categoryName });
-    instanceOfSQLServer.commitAndReleaseConnection()
     return res.json(httpUtil.getSuccess());
   }
-  instanceOfSQLServer.commitAndReleaseConnection()
   return res.json(httpUtil.getDuplicateRecord());
 };
 
