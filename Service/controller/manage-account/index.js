@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { asyncMiddleware: _async } = require('../../common');
+const { asyncMiddleware: _async, authFilterMiddleware } = require('../../common');
 const accountHandler = require('./accountHandler')
 
 // Module access defining here
