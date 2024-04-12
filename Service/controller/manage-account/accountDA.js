@@ -39,3 +39,25 @@ exports.InsertPhoneDetails = async (connection, idCustomer, phone, phoneType) =>
   const result = await connection.execute(sql.INSERT_PHONEDETAILS, { idCustomer, phone, phoneType });
   return result.rowsAffected;
 };
+
+
+exports.getCustomerDetails = async(SQLConnection, obj) => SQLConnection.execute(sql.FETCH_CUSTOMERDETAILS, obj);
+
+exports.updateDetails = async (connection, idUser, data, queryName) => {
+  const queries = {
+    updateUser: sql.UPDATE_USERDETAILS,
+    updateCustomer: sql.UPDATE_CUSTOMERDETAILS,
+    updatePhone: sql.UPDATE_PHONEDETAILS,
+  };
+  const columnsToUpdate = Object.keys(data);
+  const queryValues = Object.values(data);
+  const updateValues = columnsToUpdate.map((col, index) => `${col} = :val${index+1}`).join(', ');
+  const bindParams = {};
+  columnsToUpdate.forEach((col, index) => {
+    bindParams[`val${index+1}`] = queryValues[index];
+  });
+  bindParams.idUser = idUser;
+  const sqlQuery = queries[queryName].replace(':updateValues', updateValues);
+  const result = await connection.execute(sqlQuery, bindParams);
+  return result.rowsAffected;
+};

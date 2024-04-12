@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const secretKey = require('./../../config/default.json').secretKey;
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
 
 
 exports.login = async (req, res) => {
@@ -82,12 +83,41 @@ exports.logout = async (req, res) => {
 };
 
 exports.getAccountOverview = async (req, res) => {
-  const accountOverviewData = {
-    firstName: 'Keerthi',
-    lastName: 'Doe',
-    emailId: 'rosie.doe@example.com',
-  };
-  console.log("req.session>>>90",req.sessionID)
+  let instanceOfSQLServer = new SQLServer()
+  idUser = req.userID;
+  idUser = 1;
+  [customer_details] = await accountDA.getCustomerDetails(instanceOfSQLServer, {idUser});
+  const orderApiResponse = await axios.get(`http://localhost:3004/api/order?idUser=${idUser}`);
+  customer_details['order_details'] = orderApiResponse.data.payload;
+  return res.json(httpUtil.getSuccess(customer_details));
+};
 
-  return res.json(httpUtil.getSuccess(accountOverviewData));
+
+exports.updateAccount = async (req, res) => {
+  try{
+    let instanceOfSQLServer = new SQLServer();
+    const connection = await instanceOfSQLServer.getTransactionConnection();
+    console.log(req.body);
+    idUser = 1;
+    const { user, customer, Phone } = req.body;
+    console.log("user : ", user, "customer : ",customer, "phone : ", Phone);
+    if (user && Object.keys(user).length) {
+      // const hashedPassword = await bcrypt.hash(password, saltRounds);
+      const userUpdateResult = await accountDA.updateDetails(connection, idUser, user, 'updateUser');
+      console.log('User update result:', userUpdateResult);
+    }
+    if (customer && Object.keys(customer).length) {
+      const customerUpdateResult = await accountDA.updateDetails(connection, idUser, customer, 'updateCustomer');
+      console.log('Customer update result:', customerUpdateResult);
+    }
+    if (Phone && Object.keys(Phone).length) {
+      const phoneUpdateResult = await accountDA.updateDetails(instanceOfSQLServer, connection, idUser, Phone, 'updatePhone');
+      console.log('Phone update result:', phoneUpdateResult);
+    }
+    connection.commit();
+    return res.json(httpUtil.getSuccess({ idUser }));
+} catch (error) {
+  console.error('Error while updating details:', error);
+  return res.json(httpUtil.getBadRequest([null, 'Something went wrong']))
+}
 };

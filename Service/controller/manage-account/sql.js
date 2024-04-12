@@ -12,3 +12,11 @@ exports.INSERT_CUSTOMER = `INSERT INTO Customer (idUser, firstName, lastName, DO
 exports.INSERT_FAVOURITE = `INSERT INTO UserFavourites (idUser) VALUES (:idUser)`
 
 exports.INSERT_PHONEDETAILS = `INSERT INTO CustomerPhoneDetails (idCustomer, phoneNumber, phoneType) VALUES (:idCustomer, :phone, :phoneType)`
+
+exports.FETCH_CUSTOMERDETAILS = `Select * from Users join Customer using(idUser) join CustomerPhoneDetails using(idCustomer)  where idUser=:idUser`
+
+exports.UPDATE_USERDETAILS = `UPDATE Users set :updateValues where idUser = :idUser`
+
+exports.UPDATE_CUSTOMERDETAILS = `UPDATE Customer set :updateValues where idUser = :idUser`
+
+exports.UPDATE_PHONEDETAILS = `UPDATE CustomerPhoneDetails SET :updateValues where idCustomer = (select idCustomer from Customer where idUser = :idUser)`

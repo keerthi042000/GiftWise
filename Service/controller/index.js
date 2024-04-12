@@ -8,6 +8,7 @@ const productController = require('./manage-product');
 
 const categoryController = require('./manage-category');
 const promocodeController = require('./manage-promocode');
+const orderController = require('./manage-order');
 const accountController = require('./manage-account');
 
 const { API } = apiConfig;
@@ -23,6 +24,7 @@ router.use(API.PRODUCT_API, productController);
 
 router.use(API.CATEGORY_API, categoryController);
 router.use(API.PROMOCODE_API, promocodeController);
+router.use(API.ORDER_API, orderController);
 router.use(API.ACCOUNT_API, accountController);
 
 // eslint-disable-next-line no-unused-vars

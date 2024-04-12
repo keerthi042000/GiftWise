@@ -1,10 +1,11 @@
 const orderDA = require('./orderDA');
 const { httpUtil } = require('../../utils');
 const SQLServer = require('../../utils/db');
-let instanceOfSQLServer = new SQLServer()
+let instanceOfSQLServer = new SQLServer();
 
 exports.getOrder = async (_, res,) => { 
-  const data = await orderDA.getOrder(instanceOfSQLServer, idUser);
+  const idUser = _.query.idUser;
+  const [data] = await orderDA.getOrder(instanceOfSQLServer, idUser);
   return res.json(httpUtil.getSuccess(data));
 };
 

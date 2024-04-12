@@ -27,10 +27,10 @@ O.totalAmount AS "totalAmount",
 O.startDate AS "startDate",
 O.endDate AS "endDate",
 O.orderDatetime AS "orderDatetime",
-G.giftCardNumber AS "giftCardNumber"
-G.giftCardPin AS "giftCardPin"
+G.giftCardNumber AS "giftCardNumber",
+G.giftCardPin AS "giftCardPin",
 G.status AS "giftCardStatus",
-G.idProduct AS "idProduct"
+G.idProduct AS "idProduct",
 P.productName AS "productName"
 FROM Orders O
 LEFT JOIN GiftCard G ON O.idGiftcard = G.idGiftcard
