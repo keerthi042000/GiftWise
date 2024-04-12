@@ -11,7 +11,6 @@ router.use((_req, _res, next) => {
 
 router.post('/login', [_async(accountHandler.login)]);
 router.post('/signup', [_async(accountHandler.signup)]);
-router.get('/logout', [_async(accountHandler.logout)]);
 router.get('/account_overview', [_async(accountHandler.getAccountOverview)])
 router.put('/update_details', [_async(accountHandler.updateAccount)])
 

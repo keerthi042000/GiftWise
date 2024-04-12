@@ -40,6 +40,7 @@ $(document).ready(function () {
                 if(response.status !== 200){
                     $('#passwordError').text(response.errorMessage);
                 }else{
+                    localStorage.setItem('accessToken', response.payload.accessToken);
                     window.location.href = 'page-account.html';
                 }
             },

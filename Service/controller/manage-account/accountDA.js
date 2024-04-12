@@ -11,6 +11,31 @@ exports.verifyUser = async (connection, emailId, password) => {
   return result.rows;
 };
 
+exports.checkLockedAccount = async (connection, idUser) => {
+  const result = await connection.execute(sql.CHECK_LOGINATTEMPTS, { idUser });
+  const [result1] = result.rows;
+  const loginAttempts = result1[1];
+  const lastLockTime = new Date(result1[2]);
+
+  const twentyFourHoursAgo = new Date();
+  twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+
+  if (loginAttempts > 3 && lastLockTime > twentyFourHoursAgo) {
+    return true;
+  }
+  return false;
+};
+
+exports.updateLoginAttempts = async (connection, idUser) => {
+  const result = await connection.execute(sql.UPDATE_LOGINATTEMPTS, { idUser });
+  return result.rows;
+};
+
+exports.resetLoginAttempts = async (connection, idUser) => {
+  const result = await connection.execute(sql.RESET_LOGINATTEMPTS, { idUser });
+  return result.rows;
+};
+
 exports.getRoleID = async (connection, isSuperAdmin, isCustomer) => {
   const result = await connection.execute(sql.GET_ID_ROLE, { isSuperAdmin, isCustomer });
   return result.rows[0]
@@ -19,6 +44,7 @@ exports.getRoleID = async (connection, isSuperAdmin, isCustomer) => {
 exports.createUser = async (connection, idRole, emailId, password) => {
   const result = await connection.execute(sql.CREATE_USER, { idRole, emailId, password, out_userId: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT } });
   const [userId] = result.outBinds.out_userId;
+  await connection.execute(sql.INSERT_LOGINATTEMPTS, { idUser : userId });
   return userId;
 };
 
