@@ -173,46 +173,27 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5 class="mb-0">Your Orders</h5>
                                             </div>
                                             <div class="card-body">
                                                 <div class="table-responsive">
-                                                    <table class="table">
-                                                        <thead>
+                                                    <table style="border-collapse: collapse;" >
+                                                        <thead style="background-color: #f7f8f9;">
                                                             <tr>
-                                                                <th>Order</th>
-                                                                <th>Date</th>
-                                                                <th>Status</th>
-                                                                <th>Total</th>
-                                                                <th>Actions</th>
+                                                                <th style="border: none;">Order ID</th>
+                                                                <th style="border: none;">Order Date</th>
+                                                                <th style="border: none;">Status</th>
+                                                                <th style="border: none;">Total Amount</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>#1357</td>
-                                                                <td>March 45, 2020</td>
-                                                                <td>Processing</td>
-                                                                <td>$125.00 for 2 item</td>
-                                                                <td><a href="#" class="btn-small d-block">View</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>#2468</td>
-                                                                <td>June 29, 2020</td>
-                                                                <td>Completed</td>
-                                                                <td>$364.00 for 5 item</td>
-                                                                <td><a href="#" class="btn-small d-block">View</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>#2366</td>
-                                                                <td>August 02, 2020</td>
-                                                                <td>Completed</td>
-                                                                <td>$280.00 for 3 item</td>
-                                                                <td><a href="#" class="btn-small d-block">View</a></td>
-                                                            </tr>
+                                                        <tbody id="ordersBody">                   
                                                         </tbody>
+                                                        
                                                     </table>
+                                                    <div id="pagination"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -230,10 +211,6 @@
                                                             <div class="input-style mb-20">
                                                                 <label>Order ID</label>
                                                                 <input name="order-id" placeholder="Found in your order confirmation email" type="text" class="square">
-                                                            </div>
-                                                            <div class="input-style mb-20">
-                                                                <label>Billing email</label>
-                                                                <input name="billing-email" placeholder="Email you used during checkout" type="email" class="square">
                                                             </div>
                                                             <button class="submit submit-auto-width" type="submit">Track</button>
                                                         </form>
@@ -270,13 +247,11 @@
                                                             <button class="btn btn-md btn-primary" id="saveButton" style="display: none;">Save details</button>
                                                         </div>
                                                     </div>
-                                                <!-- </form> -->
                                             </div>
                                             <div class="card-header">
                                                 <h5>Address & Phone details</h5>
                                             </div>
                                             <div class="card-body">
-                                                <!-- <form method="put" name="enq" id="accountUpdate"> -->
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label>Address <span class="required">*</span></label>
@@ -300,19 +275,19 @@
                                                 <h5>Do you want to change Password?</h5>
                                             </div>
                                             <div class="card-body">
-                                                <form method="put" name="enq" id="accountUpdate">
+                                                <form method="put" name="enq" id="accountUpdatepwd">
                                                     <div class="row">
                                                         <div class="form-group col-md-12">
                                                             <label>Current Password <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" name="password" type="password" onchange="myFunction('saveButton2')">
+                                                            <input required="" class="form-control square" id="password" name="password" type="password" onchange="myFunction('saveButton2')">
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <label>New Password <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" name="npassword" type="password" onchange="myFunction('saveButton2')">
+                                                            <input required="" class="form-control square" id="npassword" name="npassword" type="password" onchange="myFunction('saveButton2')">
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <label>Confirm Password <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" name="cpassword" type="password" onchange="myFunction('saveButton2')">
+                                                            <input required="" class="form-control square" id="cpassword" name="cpassword" type="password" onchange="myFunction('saveButton2')">
                                                         </div>
                                                         <div class="col-md-12">
                                                             <button id="saveButton2" style="display: none;" type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>
@@ -329,6 +304,23 @@
                 </div>
             </div>
         </section>
+        <div class="modal fade" id="orderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderDetailsModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="orderDetailsModalTitle">Order Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="orderDetailsModalBody">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer class="main">
         <section class="section-padding footer-mid">

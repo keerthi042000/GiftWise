@@ -111,6 +111,7 @@ $(document).ready(function () {
                 if(response.status !== 200){
                     $('#errorMessage').text(response.errorMessage);
                 }else{
+                    localStorage.setItem('accessToken', response.payload.accessToken);
                     window.location.href = 'page-account.html';
                 }
             },

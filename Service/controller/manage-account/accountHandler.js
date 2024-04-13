@@ -97,7 +97,7 @@ exports.getAccountOverview = async (req, res) => {
     [customer_details] = await accountDA.getCustomerDetails(instanceOfSQLServer, {idUser});
     const orderApiResponse = await axios.get(`http://localhost:3004/api/order?idUser=${idUser}`);
     customer_details['order_details'] = orderApiResponse.data.payload;
-
+    console.log("customer_Details ; ", customer_details);
     return res.json(httpUtil.getSuccess(customer_details));
   } catch (err) {
     console.log("Error while getting details : ",err);
@@ -119,10 +119,17 @@ exports.updateAccount = async (req, res) => {
     const decoded = await jwt.verify(token, secretKey);
     const idUser = decoded.idUser;
 
-    console.log(" details : ", req.body);
     const { user, customer, Phone } = req.body;
     if (user && Object.keys(user).length) {
-      // const hashedPassword = await bcrypt.hash(password, saltRounds);
+      if (user.password && user.newpassword){
+        const [idUser] = await accountDA.verifyUserName(connection, decoded.emailId);
+        const passwordMatch = await bcrypt.compare(user.password, idUser[2]);
+        if (!passwordMatch) {
+          return res.json(httpUtil.getBadRequest([null, 'Incorrect password']))
+        }
+        user.password = await bcrypt.hash(user.newpassword, saltRounds);
+        delete user.newpassword;
+      }
       const userUpdateResult = await accountDA.updateDetails(connection, idUser, user, 'updateUser');
       console.log('User update result:', userUpdateResult);
     }
