@@ -1,7 +1,5 @@
 const productDA = require('./productDA');
 const { httpUtil } = require('../../utils');
-const SQLServer = require('../../utils/db');
-let instanceOfSQLServer = new SQLServer()
 
 exports.getAllProduct = async (_, res) => {
   const data = await productDA.getAllProduct(instanceOfSQLServer);

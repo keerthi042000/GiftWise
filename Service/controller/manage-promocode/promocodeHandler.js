@@ -1,7 +1,5 @@
 const promocodeDA = require('./promocodeDA');
 const { httpUtil } = require('../../utils');
-const SQLServer = require('../../utils/db');
-let instanceOfSQLServer = new SQLServer()
 
 exports.getAllPromocode = async (_, res) => {
   const data = await promocodeDA.getAllPromocode(instanceOfSQLServer);

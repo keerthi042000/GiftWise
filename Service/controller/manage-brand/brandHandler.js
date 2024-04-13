@@ -1,7 +1,5 @@
 const brandDA = require('./brandDA');
 const { httpUtil } = require('../../utils')
-const SQLServer = require('../../utils/db');
-let instanceOfSQLServer = new SQLServer()
 
 exports.getAllBrand = async (_req, res) => {
   const data = await brandDA.getAllBrand(instanceOfSQLServer);
@@ -21,7 +19,6 @@ exports.addBrand = async (req, res) => {
 
 exports.updateBrand = async (req, res) => {
   const { idBrand, brandName } = req.body;
-  let instanceOfSQLServer = new SQLServer()
   const [data] = await brandDA.checkIfBrandExist(instanceOfSQLServer, { brandName, idBrand });
   if (data && +data.isExist === 1) {
     await brandDA.updateBrand(instanceOfSQLServer, { brandName, idBrand })
