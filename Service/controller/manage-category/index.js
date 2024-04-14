@@ -10,7 +10,7 @@ router.use((req, res, next) => {
 
 // Module access defining here
 router.use((req, res, next) => {
-  console.log('All Routes are configuring...');
+  console.log('All Routes are configuring... Category');
   next();
 });
 

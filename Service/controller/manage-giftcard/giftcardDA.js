@@ -1,7 +1,4 @@
-const SQLServer = require('../../utils/db');
 const sql = require('./sql');
-
-const SQLConnection = new SQLServer();
 
 exports.getAllGiftcard = () => SQLConnection.execute(sql.GET_ALL_GIFTCARD);
 

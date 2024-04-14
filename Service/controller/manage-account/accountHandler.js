@@ -1,16 +1,13 @@
 const accountDA = require('./accountDA');
 const { httpUtil } = require('../../utils')
-const SQLServer = require('../../utils/db');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const secretKey = require('./../../config/default.json').secretKey;
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
 
-
 exports.login = async (req, res) => {
   try {
-    let instanceOfSQLServer = new SQLServer()
     const connection = await instanceOfSQLServer.getTransactionConnection();
     const { emailId, password } = req.body;
     const user = await accountDA.verifyUserName(connection, emailId);
@@ -51,7 +48,6 @@ exports.login = async (req, res) => {
 exports.signup = async (req, res) => {
   try {
 
-    let instanceOfSQLServer = new SQLServer()
     const connection = await instanceOfSQLServer.getTransactionConnection();
 
     const { emailId, password, firstName, lastName, dob, address, zipcode, phone, phoneType, isCustomer, isSuperAdmin } = req.body;
@@ -88,7 +84,6 @@ exports.signup = async (req, res) => {
 
 exports.getAccountOverview = async (req, res) => {
   try{    
-    let instanceOfSQLServer = new SQLServer()
 
     const token = req.headers.authorization.split(' ')[1];
     const decoded = await jwt.verify(token, secretKey);
@@ -112,7 +107,6 @@ exports.getAccountOverview = async (req, res) => {
 
 exports.updateAccount = async (req, res) => {
   try{
-    let instanceOfSQLServer = new SQLServer();
     const connection = await instanceOfSQLServer.getTransactionConnection();
 
     const token = req.headers.authorization.split(' ')[1];

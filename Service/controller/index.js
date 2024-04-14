@@ -15,6 +15,13 @@ const accountController = require('./manage-account');
 const { API } = apiConfig;
 const httpUtil = require('../utils/httpUtil');
 
+const SQLServer = require('../utils/db');
+global.instanceOfSQLServer =  new SQLServer()
+
+router.get('/restart', function (req, res, next) {
+  process.exit(1);
+});
+
 router.use((_req, _res, next) => { 
   console.log('All Routes are configuring...');
   next();

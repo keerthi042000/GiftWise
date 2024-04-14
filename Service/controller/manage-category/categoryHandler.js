@@ -1,7 +1,5 @@
 const categoryDA = require('./categoryDA');
 const { httpUtil } = require('../../utils');
-const SQLServer = require('../../utils/db');
-let instanceOfSQLServer = new SQLServer()
 
 exports.getAllCategory = async (_, res,) => { 
   const data = await categoryDA.getAllCategory(instanceOfSQLServer);
@@ -10,7 +8,6 @@ exports.getAllCategory = async (_, res,) => {
 
 exports.addCategory = async (req, res) => {
   const { categoryName } = req.body;
-  let instanceOfSQLServer = new SQLServer()
   const [data] = await categoryDA.checkIfCategoryExist(instanceOfSQLServer,{ categoryName, idCategory: null });
   if (data && +data.isExist === 0) {
     await categoryDA.addCategory(instanceOfSQLServer,{ categoryName });
