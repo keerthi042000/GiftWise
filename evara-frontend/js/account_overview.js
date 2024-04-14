@@ -111,6 +111,7 @@ $(document).ready(function () {
                 $('#phno').val(data.payload.PHONENUMBER);
                 const dobDate = new Date(data.payload.DOB.split("T")[0]);
                 $('#dob').val(dobDate.toISOString().split("T")[0]);
+                $('#rewardPointsCircle').text(data.payload.POINTS);
 
                 originalFirstName = data.payload.FIRSTNAME;
                 originalLastName = data.payload.LASTNAME;

@@ -4,6 +4,7 @@ exports.API = {
   CATEGORY_API: '/category',
   PROMOCODE_API: '/promocode',
   ORDER_API: '/order',
+  FAV_API: '/favourites',
   ACCOUNT_API: '/account',
 };
 

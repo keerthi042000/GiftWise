@@ -21,7 +21,7 @@ exports.INSERT_FAVOURITE = `INSERT INTO UserFavourites (idUser) VALUES (:idUser)
 
 exports.INSERT_PHONEDETAILS = `INSERT INTO CustomerPhoneDetails (idCustomer, phoneNumber, phoneType) VALUES (:idCustomer, :phone, :phoneType)`
 
-exports.FETCH_CUSTOMERDETAILS = `Select * from Users join Customer using(idUser) join CustomerPhoneDetails using(idCustomer)  where idUser=:idUser`
+exports.FETCH_CUSTOMERDETAILS = `Select * from Users left join Customer using(idUser) left join CustomerPhoneDetails using(idCustomer) left join UserRewards using(idUser) where idUser=:idUser`
 
 exports.UPDATE_USERDETAILS = `UPDATE Users set :updateValues where idUser = :idUser`
 
