@@ -423,6 +423,10 @@
             $('#ProductsList').empty();
             ProductResponse.payload.forEach(element => {
                 console.log("element : ",element);
+                let Valstock = "In Stock";
+                if (element.quantity > 0){
+                    Valstock = "In Stock";
+                }
                 $('#ProductsList').append(`  
                 <div class="col-lg-3 col-md-4 col-8 col-sm-4">              
                 <div class="card-1" onClick="redirectProduct(${element.idProduct})">
@@ -430,6 +434,8 @@
                         <a ><img src="assets/imgs/shop/category-thumb-1.jpg" alt=""></a>
                     </figure>
                     <h5><a >${element.productName}</a></h5>
+                    <h5><a >Price : ${element.Amount}</a></h5>
+                    <h5><a >${Valstock}</a></h5>
                 </div></div>`)
             });
         }
