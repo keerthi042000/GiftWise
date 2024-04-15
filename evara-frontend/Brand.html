@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
 
 <head>
@@ -169,50 +169,12 @@
             </div>
         </div>    
         <section class="product-tabs section-padding position-relative wow fadeIn animated">
-            <div class="container">
-                <div class="tab-header section-padding mt-15 mb-25">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Shop by Category</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Shop by Brands</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">All Products</button>
-                    </li>
-                    </ul>
-                </div>
-                <div class="tab-content wow fadeIn animated" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                        <!-- <section class="popular-categories section-padding mt-15 mb-25"> -->
                             <div class="container wow fadeIn animated">
-                                <!-- <h3 class="section-title mb-20">Categories</h3> -->
-                                <div class="row product-grid-4" id = "CategoryList">
+                                <h3 class="section-title mb-20">Available products</h3>
+                                <div class="row product-grid-4" id = "ProductList">
                                 </div>
                             </div>
-                        <!-- </section> -->
-                    </div>
-                    <div class="tab-pane fade show" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
-                        <!-- <section class="popular-categories section-padding mt-15 mb-25"> -->
-                            <div class="container wow fadeIn animated">
-                                <!-- <h3 class="section-title mb-20">Brands</h3> -->
-                                <div class="row product-grid-4" id = "BrandsList">
-                                </div>
-                            </div>
-                        <!-- </section> -->
-                    </div>
-                    <div class="tab-pane fade show" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
-                        <!-- <section class="popular-categories section-padding mt-15 mb-25"> -->
-                            <div class="container wow fadeIn animated">
-                                <!-- <h3 class="section-title mb-20">Products</h3> -->
-                                <div class="row product-grid-4" id = "ProductsList">
-                                </div>
-                            </div>
-                        <!-- </section> -->
-                    </div>
-                </div>
-            </div>
+                        </section>
         </section>
     </main>
     <footer class="main">
@@ -308,136 +270,60 @@
         function redirectProduct(idProduct) {
             window.location.href = `product.html?id=${idProduct}`;
         }
-        function redirectCategory(idCategory) {
-            window.location.href = `category.html?id=${idCategory}`;
-        }
-        function redirectBrand(idBrand) {
-            window.location.href = `brand.html?id=${idBrand}`;
+
+        async function getAllProductsByBrand(brandId) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'GET',
+                    url: `http://localhost:3004/api/product?type=idBrand&id=${brandId}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    },
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log("res",response);
+                        if (response.status !== 200) {
+                            console.log(response)
+                        } else {
+                            resolve(response)
+                        }
+                    },
+                    error: function (error) {
+                        reject(reject)
+                    }
+                });
+            })
         }
 
-        async function getAllCategories() {
-            return new Promise((resolve, reject) => {
-                console.log("inside getcat");
-                $.ajax({
-                    type: 'GET',
-                    url: `http://localhost:3004/api/category`,
-                    headers: {
-                        'Authorization': 'Bearer ' + accessToken
-                    },
-                    contentType: 'application/json',
-                    success: function (response) {
-                        console.log("res",response);
-                        if (response.status !== 200) {
-                            console.log(response)
-                        } else {
-                            resolve(response)
-                        }
-                    },
-                    error: function (error) {
-                        reject(reject)
-                    }
-                });
-            })
-        }
-        async function getAllBrands() {
-            return new Promise((resolve, reject) => {
-                console.log("inside getbrand");
-                $.ajax({
-                    type: 'GET',
-                    url: `http://localhost:3004/api/brand`,
-                    headers: {
-                        'Authorization': 'Bearer ' + accessToken
-                    },
-                    contentType: 'application/json',
-                    success: function (response) {
-                        console.log("res",response);
-                        if (response.status !== 200) {
-                            console.log(response)
-                        } else {
-                            resolve(response)
-                        }
-                    },
-                    error: function (error) {
-                        reject(reject)
-                    }
-                });
-            })
-        }
-        async function getAllProducts() {
-            return new Promise((resolve, reject) => {
-                console.log("inside getproduct");
-                $.ajax({
-                    type: 'GET',
-                    url: `http://localhost:3004/api/product`,
-                    headers: {
-                        'Authorization': 'Bearer ' + accessToken
-                    },
-                    contentType: 'application/json',
-                    success: function (response) {
-                        console.log("res",response);
-                        if (response.status !== 200) {
-                            console.log(response)
-                        } else {
-                            resolve(response)
-                        }
-                    },
-                    error: function (error) {
-                        reject(reject)
-                    }
-                });
-            })
-        }
         async function processData() {
-            const CategoryResponse = await getAllCategories();
 
-            $('#CategoryList').empty();
-            CategoryResponse.payload.forEach(element => {
-                console.log("element : ",element);
-                $('#CategoryList').append(`  
-                <div class="col-lg-3 col-md-4 col-8 col-sm-4">              
-                <div class="card-1" onClick="redirectCategory(${element.idCategory})">
-                    <figure class=" img-hover-scale overflow-hidden">
-                        <a><img src="assets/imgs/shop/category-thumb-1.jpg" alt=""></a>
-                    </figure>
-                    <h5><a>${element.categoryName}</a></h5>
-                </div></div>`)
-            });
-
-            const BrandsResponse = await getAllBrands();
-
-            $('#BrandsList').empty();
-            BrandsResponse.payload.forEach(element => {
-                console.log("element : ",element);
-                $('#BrandsList').append(`  
-                <div class="col-lg-3 col-md-4 col-8 col-sm-4">              
-                <div class="card-1" onClick="redirectBrand(${element.idBrand})">
-                    <figure class=" img-hover-scale overflow-hidden">
-                        <a><img src="assets/imgs/shop/category-thumb-1.jpg" alt=""></a>
-                    </figure>
-                    <h5><a>${element.brandName}</a></h5>
-                </div></div>`)
-            });
-
-            const ProductResponse = await getAllProducts();
-
-            $('#ProductsList').empty();
-            ProductResponse.payload.forEach(element => {
-                console.log("element : ",element);
-                $('#ProductsList').append(`  
-                <div class="col-lg-3 col-md-4 col-8 col-sm-4">              
-                <div class="card-1" onClick="redirectProduct(${element.idProduct})">
-                    <figure class=" img-hover-scale overflow-hidden">
-                        <a ><img src="assets/imgs/shop/category-thumb-1.jpg" alt=""></a>
-                    </figure>
-                    <h5><a >${element.productName}</a></h5>
-                </div></div>`)
-            });
+            const urlParams = new URLSearchParams(window.location.search);
+            const brandId = urlParams.get('id');
+            if (brandId) {
+                const ProductResponse = await getAllProductsByBrand(brandId);
+                console.log("rpoved", ProductResponse);
+                if(ProductResponse.payload){
+                    $('#ProductList').empty();
+                    ProductResponse.payload.forEach(element => {
+                        console.log("element : ",element);
+                        $('#ProductList').append(`  
+                        <div class="col-lg-3 col-md-4 col-8 col-sm-4">              
+                        <div class="card-1" onClick="redirectProduct(${element.idProduct})">
+                            <figure class=" img-hover-scale overflow-hidden">
+                                <a ><img src="assets/imgs/shop/category-thumb-1.jpg" alt=""></a>
+                            </figure>
+                            <h5><a >${element.productName}</a></h5>
+                        </div></div>`)
+                    });
+                } else {
+                    $('#ProductList').empty();
+                    $('#ProductList').append(`There are not currently any products available under this brand`);
+                }
+            } else {
+                console.error('Brand ID not found in URL parameters.');
+            }
         }
-
         processData();
-        var fName = localStorage.getItem('firstName');
-        console.log(fName);
-        $('#DropdownName').text(fName);
     </script>
    
 </body>

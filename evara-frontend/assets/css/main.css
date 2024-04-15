@@ -9973,3 +9973,25 @@ span.fi-rs-apps {
 .circle:hover {
   transform: scale(1.1);
 }
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.modal-subtitle {
+    font-size: 18px;
+    font-weight: normal;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.modal-body {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.order-details-item {
+    margin-bottom: 10px;
+}

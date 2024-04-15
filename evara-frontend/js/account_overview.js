@@ -101,6 +101,7 @@ $(document).ready(function () {
                 window.location.href = 'page-login.html';
             }else if(data.status !== 200){
                 alert("Something went wrong");
+                window.location.href = 'page-login.html';
             }else{
                 $('#fName').val(data.payload.FIRSTNAME);
                 $('#DropdownName, #WelcomeName').text(data.payload.FIRSTNAME);
@@ -133,6 +134,8 @@ $(document).ready(function () {
                         updatePaginationButtons();
                     }
                 });
+                localStorage.setItem('firstName', data.payload.FIRSTNAME);
+
             }
 
         },
@@ -209,8 +212,15 @@ $(document).ready(function () {
             user: {}
         };
 
+
+        if ($('#npassword').val() !== $('#cpassword').val()) {
+            alert("Passwords do not match");
+            return false;
+        } 
+
         formData['user'].password = $('#password').val();
         formData['user'].newpassword = $('#npassword').val();
+        
         console.log(formData);
         $.ajax({
             type: 'PUT',
@@ -256,12 +266,24 @@ $(document).ready(function () {
             },
             success: function (data) {
                 console.log(data.payload[0]);
+                const OrderDate = new Date(data.payload[0].orderDatetime).toLocaleDateString('en-US');
+                const endDate = new Date(data.payload[0].endDate).toLocaleDateString('en-US');
                 $('#orderDetailsModalTitle').text(`Order Details`);
-                $('#orderDetailsModalTitle').append(`<p>${data.payload[0].productName} </p>`);
+                $('#orderDetailsModalTitle').addClass('modal-title');
+                $('#orderDetailsModalTitle').append(`<p class="modal-subtitle">${data.payload[0].productName}</p>`);
                 $('#orderDetailsModalBody').empty();
-                for (const [key, value] of Object.entries(data.payload[0])) {
-                    $('#orderDetailsModalBody').append(`<p><strong>${key}:</strong> ${value}</p>`);
-                }
+                $('#orderDetailsModalBody').addClass('modal-body');
+                $('#orderDetailsModalBody').append(`<div class="order-details-item"><strong> Order ID : </strong> ${data.payload[0].orderId}</div>
+                <div class="order-details-item"><strong> Product Name : </strong> ${data.payload[0].productName}</div>
+                <div class="order-details-item"><strong> Brand Name : </strong> ${data.payload[0].brandName}</div>
+                <div class="order-details-item"><strong> Category Name : </strong> ${data.payload[0].categoryName}</div>
+                <div class="order-details-item"><strong> Total Amount : </strong> ${data.payload[0].totalAmount}</div>
+                <div class="order-details-item"><strong> Discount Applied : </strong> ${data.payload[0].discount}</div>
+                <div class="order-details-item"><strong> Gift card number : </strong> ${data.payload[0].giftCardNumber}</div>
+                <div class="order-details-item"><strong> Gift card pin : </strong> ${data.payload[0].giftCardPin}</div>
+                <div class="order-details-item"><strong> Gift card status : </strong> ${data.payload[0].giftCardStatus}</div>
+                <div class="order-details-item"><strong> Valid till : </strong> ${endDate}</div>
+                <div class="order-details-item"><strong> Order Date : </strong> ${OrderDate}</div>`);
                 $('#orderDetailsModal').modal('show');
             },
             error: function (error) {

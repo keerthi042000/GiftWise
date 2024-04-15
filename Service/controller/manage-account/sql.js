@@ -9,6 +9,8 @@ exports.UPDATE_LOGINATTEMPTS = `UPDATE LoginAttempts set loginAttempts = loginAt
 
 exports.RESET_LOGINATTEMPTS = `UPDATE LoginAttempts set loginAttempts = 0,loginDatetime = SYSDATE  where idUser = :idUser`
 
+exports.UPDATE_LASTLOGIN = `UPDATE Users set lastLogin = SYSDATE  where idUser = :idUser`
+
 exports.GET_ID_ROLE = `Select idRole from Roles where isSuperAdmin=:isSuperAdmin AND isCustomer=:isCustomer`
 
 exports.CREATE_USER = `INSERT INTO Users (idRole, emailId, password, isActive, lastLogin) VALUES (:idRole, :emailId, :password, 1, SYSDATE) RETURNING idUser INTO :out_userId`

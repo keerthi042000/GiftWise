@@ -2,6 +2,16 @@ const productDA = require('./productDA');
 const { httpUtil } = require('../../utils');
 
 exports.getAllProduct = async (_, res) => {
+  if(_.query.id && _.query.type){
+    if(_.query.type === 'idBrand'){
+      const data = await productDA.getProductByBrandID(instanceOfSQLServer, _.query.id);
+      return res.json(httpUtil.getSuccess(data));
+    }
+    if(_.query.type === 'idCategory'){
+      const data = await productDA.getProductByCategoryID(instanceOfSQLServer, _.query.id);
+      return res.json(httpUtil.getSuccess(data));
+    }
+  }
   const data = await productDA.getAllProduct(instanceOfSQLServer);
   return res.json(httpUtil.getSuccess(data));
 };

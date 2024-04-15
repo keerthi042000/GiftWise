@@ -33,6 +33,7 @@ exports.updateLoginAttempts = async (connection, idUser) => {
 
 exports.resetLoginAttempts = async (connection, idUser) => {
   const result = await connection.execute(sql.RESET_LOGINATTEMPTS, { idUser });
+  const result1 = await connection.execute(sql.UPDATE_LASTLOGIN, { idUser });
   return result.rows;
 };
 
