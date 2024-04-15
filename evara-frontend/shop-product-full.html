@@ -15,8 +15,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/main.css?v=3.4">
-<script src="./js/app.js"></script>
-
     <script src="./js/app.js"></script>
 </head>
 
@@ -941,11 +939,12 @@
     <script src="./assets/js/main.js?v=3.4"></script>
     <script src="./assets/js/shop.js?v=3.4"></script>
     <script src="./js/footer.js"></script>
-   
     <script>
             const urlParams = new URLSearchParams(window.location.search);
             const idProduct = urlParams.get('idProduct');
-
+            if(idProduct.length == 0){
+                window.location.href = "";
+            }
         function getProduct() {
             $.ajax({
                 type: 'GET',
@@ -979,7 +978,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: orderAPI + '/order/',
+                url: orderAPI,
                 contentType: 'application/json',
                 data: JSON.stringify(formData),
                 success: function (response) {
