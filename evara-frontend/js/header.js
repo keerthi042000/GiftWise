@@ -8,16 +8,8 @@ $(document).ready(function () {
         <div class="main-menu main-menu-grow main-menu-padding-1 main-menu-lh-1 main-menu-mrg-1 hm3-menu-padding d-none d-lg-block hover-boder">
             <nav>
                 <ul>
-                    <li><a class="active" href="index.html">Home <i class="fi-rs-angle-down"></i></a>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Home 1</a></li>
-                            <li><a href="index-2.html">Home 2</a></li>
-                            <li><a href="index-3.html">Home 3</a></li>
-                            <li><a href="index-4.html">Home 4</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="page-contact.html">Contact</a>
+                    <li><a class="active" href="index.html">Home</a>
+
                     </li>
                 </ul>
             </nav>
