@@ -8,6 +8,23 @@ stepsToRedeem AS "stepsToRedeem",
 imageURL AS "imageURL", 
 quantity AS "quantity" from product ORDER BY idProduct ASC`;
 
+exports.GET_PRODUCT = `SELECT 
+P.idProduct AS "idProduct",
+P.idBrand AS "idBrand", 
+P.idCategory AS "idCategory",
+P.productName AS "productName", 
+P.description AS "description", 
+P.termsAndConditions AS "termsAndConditions", 
+P.stepsToRedeem AS "stepsToRedeem", 
+P.imageURL AS "imageURL", 
+P.quantity AS "quantity",
+COALESCE((SELECT discountInPercentage FROM Promocode P1 WHERE P1.idProduct = P.idProduct AND P1.isActive = 1), 0) AS "discountInPercentage",
+COALESCE((SELECT promocode FROM Promocode P1 WHERE P1.idProduct = P.idProduct AND P1.isActive = 1), '') AS "promocode"
+FROM 
+product P
+WHERE 
+P.idProduct = :idProduct`;
+
 exports.GET_PRODUCT_BYBRANDID = `Select idProduct AS "idProduct",
 idBrand AS "idBrand", 
 idCategory AS "idCategory",

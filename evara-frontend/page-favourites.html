@@ -15,6 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/main.css?v=3.4">
+    <script src="./js/app.js"></script>
 </head>
 
 <body>
@@ -148,7 +149,7 @@
                 console.log("inside getfav");
                 $.ajax({
                     type: 'GET',
-                    url: `http://localhost:3004/api/favourites`,
+                    url: favoriteAPI,
                     headers: {
                         'Authorization': 'Bearer ' + accessToken
                     },
@@ -223,7 +224,7 @@
             const productId = $(this).data('product-id');
             $.ajax({
                 type: 'PUT',
-                url: `http://localhost:3004/api/favourites/${productId}`,
+                url: favoriteAPI+ `/${productId}`,
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 },
