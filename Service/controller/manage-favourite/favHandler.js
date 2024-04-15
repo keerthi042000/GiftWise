@@ -1,9 +1,7 @@
 const favDA = require('./favDA');
 const { httpUtil } = require('../../utils')
-const SQLServer = require('../../utils/db');
 const secretKey = require('./../../config/default.json').secretKey;
 const jwt = require('jsonwebtoken');
-let instanceOfSQLServer = new SQLServer()
 
 exports.getAllFav = async (req, res) => {
     try {
