@@ -32,7 +32,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:3004/api/account/login/',
+            url: accountDomain + '/login/',
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function (response) {

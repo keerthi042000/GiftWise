@@ -1,5 +1,7 @@
 const sql = require('./sql');
 
+exports.getProduct = (id) => SQLConnection.execute(sql.GET_PRODUCT, id);
+
 exports.getAllProduct = async (SQLConnection) => SQLConnection.execute(sql.GET_ALL_PRODUCT);
 
 exports.getProductByBrandID = async (SQLConnection, id) => SQLConnection.execute(sql.GET_PRODUCT_BYBRANDID, {id});

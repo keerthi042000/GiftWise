@@ -15,6 +15,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/main.css?v=3.4">
+<script src="./js/app.js"></script>
+
+    <script src="./js/app.js"></script>
 </head>
 
 <body>
@@ -770,6 +773,10 @@
                                             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi? Officia doloremque facere quia. Voluptatum, accusantium!</p>
                                         </div>
 
+                                        <div class="short-desc mb-30" id="Offers">
+                                            
+                                        </div>
+
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                         <div class="detail-extralink">
                                             
@@ -930,12 +937,65 @@
     <script src="assets/js/plugins/scrollup.js"></script>
     <script src="assets/js/plugins/jquery.vticker-min.js"></script>
     <script src="assets/js/plugins/jquery.theia.sticky.js"></script>
-    <!-- <script src="assets/js/plugins/jquery.elevatezoom.js"></script> -->
     <!-- Template  JS -->
-      <script src="./assets/js/main.js?v=3.4"></script>
+    <script src="./assets/js/main.js?v=3.4"></script>
     <script src="./assets/js/shop.js?v=3.4"></script>
-<script src="./js/footer.js"></script>
     <script src="./js/footer.js"></script>
+   
+    <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const idProduct = urlParams.get('idProduct');
+
+        function getProduct() {
+            $.ajax({
+                type: 'GET',
+                url: productAPI + `/${idProduct}`,
+                contentType: 'application/json',
+                success: function (response) {
+
+                    if (response.status !== 200) {
+                        console.log(response)
+                    } else {
+                        processData(response)
+                    }
+                },
+                error: function (error) {
+                    console.error('error:', error);
+                }
+            });
+        }
+        function processData(response) {
+            // response.payload.
+
+        }
+       
+        $('#submitOrder').submit(function (e) {
+            e.preventDefault();
+
+            var formData = {
+               idProduct,
+
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: orderAPI + '/order/',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+
+                    if (response.status !== 200) {
+                        $('#errorMessage').text(response.errorMessage);
+                    } else {
+                       
+                    }
+                },
+                error: function (error) {
+                    console.error('error:', error);
+                }
+            });
+        });
+    </script>
 
 </body>
 
