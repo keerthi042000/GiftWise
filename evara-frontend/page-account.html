@@ -57,6 +57,9 @@
                                             <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                         </li>
                                         <li class="nav-item">
+                                            <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#feedback" role="tab" aria-controls="feedback" aria-selected="true"><i class="far fa-comment mr-10"></i>Feedback</a>
+                                        </li>
+                                        <li class="nav-item">
                                             <a class="nav-link" onclick="logout()"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
                                         </li>
                                     </ul>
@@ -184,6 +187,35 @@
                                                         <div class="col-md-12">
                                                             <button id="saveButton2" style="display: none;" type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>
                                                         </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="feedback" role="tabpanel" aria-labelledby="feedback-tab">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0">Your Feedback</h5>
+                                            </div>
+                                            <div class="card-body contact-from-area">
+                                                <p>Please provide your valuable feedback to improve our product.</p>
+                                                <form id="feedbackForm" method="post" name="feedback" >
+                                                    <div class="form-group">
+                                                        <label for="feedbackText">Your Feedback</label>
+                                                        <textarea required class="form-control" id="feedbackText" name="feedbackText" rows="5"></textarea>
+                                                    </div>
+                                                    <div class="rating-container">
+                                                        <label for="rating">Rating : </label>
+                                                        <div class="star-rating">
+                                                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+                                                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                                                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                                                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                                                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="submit-container">
+                                                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
                                                     </div>
                                                 </form>
                                             </div>

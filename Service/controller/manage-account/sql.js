@@ -17,11 +17,15 @@ exports.CREATE_USER = `INSERT INTO Users (idRole, emailId, password, isActive, l
 
 exports.INSERT_LOGINATTEMPTS = `INSERT INTO LoginAttempts (idUser, loginAttempts, loginDatetime) VALUES (:idUser, 0, SYSDATE)`
 
+exports.INSERT_USERPREFERENCES = `INSERT INTO UserPreference (idUser, email, sms) VALUES (:idUser, :email, :sms)`
+
 exports.INSERT_CUSTOMER = `INSERT INTO Customer (idUser, firstName, lastName, DOB, address, zipcode) VALUES (:idUser, :firstName, :lastName, :dob, :address, :zipcode) RETURNING idCustomer INTO :out_customerId`
 
 exports.INSERT_FAVOURITE = `INSERT INTO UserFavourites (idUser) VALUES (:idUser)`
 
 exports.INSERT_PHONEDETAILS = `INSERT INTO CustomerPhoneDetails (idCustomer, phoneNumber, phoneType) VALUES (:idCustomer, :phone, :phoneType)`
+
+exports.INSERT_FEEDBACK = `INSERT INTO UserFeedback (idUser, message, rating) VALUES (:idUser, :feedback, :rating)`
 
 exports.FETCH_CUSTOMERDETAILS = `Select * from Users left join Customer using(idUser) left join CustomerPhoneDetails using(idCustomer) left join UserRewards using(idUser) where idUser=:idUser`
 

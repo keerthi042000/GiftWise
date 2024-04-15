@@ -11,6 +11,7 @@ router.use((_req, _res, next) => {
 
 router.post('/login', [_async(accountHandler.login)]);
 router.post('/signup', [_async(accountHandler.signup)]);
+router.post('/feedback', [_async(accountHandler.saveFeedback)]);
 router.get('/account_overview', [_async(accountHandler.getAccountOverview)])
 router.put('/update_details', [_async(accountHandler.updateAccount)])
 

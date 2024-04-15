@@ -9995,3 +9995,70 @@ span.fi-rs-apps {
 .order-details-item {
     margin-bottom: 10px;
 }
+
+.feedback-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.feedback-card .card-header {
+  background-color: #f7f7f7;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.feedback-card .form-group {
+  margin-bottom: 20px;
+}
+
+.feedback-card label {
+  font-weight: bold;
+}
+
+.feedback-card textarea {
+  resize: vertical;
+}
+
+.feedback-card button[type="button"] {
+  width: 100%;
+}
+
+.star-rating {
+  display: inline-block;
+  font-size: 0;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  float: right;
+  cursor: pointer;
+  margin: 0 2px;
+  font-size: 24px;
+}
+
+.star-rating label:before {
+  content: '\2605';
+  color: #ccc;
+}
+
+.star-rating input:checked ~ label:before {
+  color: #ffc107;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+}
+
+.rating-container label {
+  margin-right: 10px;
+}
+
+.submit-container {
+  margin-top: 15px;
+}

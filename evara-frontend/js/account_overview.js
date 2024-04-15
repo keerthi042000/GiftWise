@@ -292,5 +292,44 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    $('#feedbackForm').submit(function (e) {
+        e.preventDefault();
+        console.log("inside submit ");
+        const feedbackText = document.getElementById('feedbackText').value;
+        const ratingValue = document.querySelector('.star-rating input:checked').value;
+        const data = {
+            feedback: feedbackText,
+            rating: ratingValue
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3004/api/account/feedback',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                if (response.status === 401) {
+                    alert("Unauthorized");
+                    window.location.href = 'page-login.html';
+                } else if (response.status !== 200) {
+                    console.error('Error:', response);
+                    alert(response.errorMessage);
+                } else {
+                    alert("Thank you for your response");
+                    $('#feedbackText').val('');
+                    $('.star-rating input:checked').prop('checked', false);
+                }
+            },
+            error: function (error) {
+                console.error('Error:', error);
+                alert(error.responseText);
+            }
+        });
+    });
     
 });

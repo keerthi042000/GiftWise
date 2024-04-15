@@ -146,3 +146,28 @@ exports.updateAccount = async (req, res) => {
     }
   }
 };
+
+
+exports.saveFeedback = async (req, res) => {
+  try{    
+
+    const connection = await instanceOfSQLServer.getTransactionConnection();
+
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = await jwt.verify(token, secretKey);
+    const idUser = decoded.idUser;
+    console.log(req.body);
+    const { feedback, rating } = req.body;
+
+    const userFeedbackUpdateResult = await accountDA.insertFeedback(connection, idUser, feedback, rating);
+    connection.commit();
+    return res.json(httpUtil.getSuccess(userFeedbackUpdateResult));
+  } catch (err) {
+    console.log("Error while saving feedback : ",err);
+    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
+      return res.json(httpUtil.getUnauthorized([null, 'Invalid token']))
+    } else {
+      return res.json(httpUtil.getException([null, 'Something went wrong']))
+    }
+  }
+};

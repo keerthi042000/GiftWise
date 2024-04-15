@@ -46,6 +46,7 @@ exports.createUser = async (connection, idRole, emailId, password) => {
   const result = await connection.execute(sql.CREATE_USER, { idRole, emailId, password, out_userId: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT } });
   const [userId] = result.outBinds.out_userId;
   await connection.execute(sql.INSERT_LOGINATTEMPTS, { idUser : userId });
+  await connection.execute(sql.INSERT_USERPREFERENCES, { idUser : userId, email : 1, sms : 0 });
   return userId;
 };
 
@@ -86,5 +87,10 @@ exports.updateDetails = async (connection, idUser, data, queryName) => {
   bindParams.idUser = idUser;
   const sqlQuery = queries[queryName].replace(':updateValues', updateValues);
   const result = await connection.execute(sqlQuery, bindParams);
+  return result.rowsAffected;
+};
+
+exports.insertFeedback = async (connection, idUser, feedback, rating) => {
+  const result = await connection.execute(sql.INSERT_FEEDBACK, { idUser, feedback, rating });
   return result.rowsAffected;
 };
