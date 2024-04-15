@@ -294,9 +294,3 @@ $(document).ready(function () {
     });
     
 });
-
-
-function logout() {
-    localStorage.removeItem('accessToken');
-    window.location.href = 'page-login.html';
-}
