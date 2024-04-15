@@ -31,7 +31,7 @@ $(document).ready(function () {
                         <div class="main-menu main-menu-grow main-menu-padding-1 main-menu-lh-1 main-menu-mrg-1 hm3-menu-padding d-none d-lg-block hover-boder" >
                         <nav>
                         <ul>
-                            <li><a><span id="DropdownName"></span> <i class="fi-rs-angle-down"></i></a>
+                            <li><i class="fi-rs-user" style="width:20px;height:20px"></i><a></i><span id="DropdownName"></span> <i class="fi-rs-angle-down"></i></a>
                                 <ul class="sub-menu">
                                     <li><a href="page-account.html">My Account</a></li>
                                     <li><a onclick="logout()">Logout</a></li>
