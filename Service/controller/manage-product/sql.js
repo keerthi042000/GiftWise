@@ -6,7 +6,7 @@ description AS "description",
 termsAndConditions AS "termsAndConditions", 
 stepsToRedeem AS "stepsToRedeem", 
 imageURL AS "imageURL", 
-P.amount AS "amount",
+amount AS "amount",
 quantity AS "quantity" from product ORDER BY idProduct ASC`;
 
 exports.GET_PRODUCT = `SELECT 
@@ -35,7 +35,7 @@ description AS "description",
 termsAndConditions AS "termsAndConditions", 
 stepsToRedeem AS "stepsToRedeem", 
 imageURL AS "imageURL", 
-P.amount AS "amount",
+amount AS "amount",
 quantity AS "quantity" from product where idBrand = :idBrand ORDER BY idProduct ASC`;
 
 exports.GET_PRODUCT_BYCATEGORYID = `Select idProduct AS "idProduct",
@@ -46,7 +46,7 @@ description AS "description",
 termsAndConditions AS "termsAndConditions", 
 stepsToRedeem AS "stepsToRedeem", 
 imageURL AS "imageURL", 
-P.amount AS "amount",
+amount AS "amount",
 quantity AS "quantity" from product where idCategory = :idCategory ORDER BY idProduct ASC`;
 
 exports.CHECK_PRODUCT_EXIST = 'SELECT COUNT(*) "isExist" FROM product WHERE (idBrand = :idBrand AND idCategory= :idCategory AND productName= :productName) OR idProduct = :idProduct';

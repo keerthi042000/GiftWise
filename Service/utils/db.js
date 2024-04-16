@@ -30,6 +30,20 @@ class SQLServer {
     this.poolName = poolName
   }
 
+  async resetConnection() {
+    try {
+      // Close the existing connection (if open)
+      await oracledb.getPool().close(1); // Close the connection pool with a 10-second timeout
+  
+      // Re-establish the connection
+      await oracledb.createPool({ ...config['db.config'],  "poolAlias": this.poolName } )
+  
+      console.log('SQL connection reset successfully.');
+    } catch (error) {
+      console.error('Error resetting SQL connection:', error);
+    }
+  }
+  
   async getTransactionConnection() {
     this.pool = await this.pool
     this.connection = await oracledb.getConnection();
