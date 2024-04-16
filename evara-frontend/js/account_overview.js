@@ -98,10 +98,10 @@ $(document).ready(function () {
         success: function (data) {
             if(data.status === 401){
                 alert("Unauthorized");
+                logout();
                 window.location.href = 'page-login.html';
             }else if(data.status !== 200){
                 alert("Something went wrong");
-                window.location.href = 'page-login.html';
             }else{
                 $('#fName').val(data.payload.FIRSTNAME);
                 $('#DropdownName, #WelcomeName').text(data.payload.FIRSTNAME);

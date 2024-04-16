@@ -91,6 +91,9 @@
     <script src="./js/footer.js"></script>
     <script>
         var accessToken = localStorage.getItem('accessToken');
+        function redirectProduct(idProduct) {
+            window.location.href = `product.html?idProduct=${idProduct}`;
+        }
         async function getFavourites() {
             return new Promise((resolve, reject) => {
                 console.log("inside getfav");
@@ -105,6 +108,7 @@
                         console.log("res",response);
                         if(response.status === 401){
                             alert("Unauthorized");
+                            logout();
                             window.location.href = 'page-login.html';
                         }else if(response.status !== 200){
                             console.error('Error:', response);
@@ -152,8 +156,8 @@
                         <td class="text-center" data-title="Stock">
                             <span class="color3 font-weight-bold">${valstock}</span>
                         </td>
-                        <td class="text-right" data-title="Cart">
-                            <button class="btn btn-sm"><i class="fi-rs-shopping-bag mr-5"></i>Add to cart</button>
+                        <td class="text-right" data-title="View">
+                            <a onClick="redirectProduct(${element.IDPRODUCT})">View</a>
                         </td>
                         <td class="action" data-title="Remove"><a class="remove-btn" data-product-id="${element.IDPRODUCT}"><i class="fi-rs-trash"></i></a></td>
                     </tr>`)
