@@ -1,0 +1,350 @@
+﻿
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>GiftWise. - eCommerce HTML Template</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="assets/css/main.css?v=3.4">
+    <script src="./js/app.js"></script>
+</head>
+
+<body>
+    <header class="header-area header-style-5">
+        <div class="header-bottom sticky-bar sticky-white-bg" id="headertop">
+        </div>
+    </header>
+   
+    <main class="main">
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product-detail accordion-detail">
+                            <div class="row mb-50">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="detail-gallery">
+                                        <!-- MAIN SLIDES -->
+                                        <div class="product-image-slider">
+                                            <figure class="border-radius-10">
+                                                <img src="" id="imageURL" alt="product image">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    <!-- End Gallery -->
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="detail-info">
+                                        <h2 class="title-detail" id="productName"></h2>
+                                        <div class="product-detail-rating">
+                                            <div class="pro-details-brand">
+                                                <span id="brandName"></a></span>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="clearfix product-price-cover">
+                                            <div class="product-price primary-color float-left">
+                                                <ins><span class="text-brand" id="giftCardPrice">$120.00</span></ins>
+                                                <!-- <ins><span class="old-price font-md ml-15">$200.00</span></ins> -->
+                                                <!-- <span class="save-price  font-md color3 ml-15">25% Off</span> -->
+                                            </div>
+                                        </div>
+                                        <div class="bt-1 border-color-1 mt-15 mb-15"></div>
+                                        <div class="short-desc mb-30">
+                                            <p id="description1"></p>
+                                        </div>
+
+                                        <div class="short-desc mb-30" id="offersDetails">
+                                            
+                                        </div>
+
+                                        <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                                        <div class="detail-extralink">
+                                            
+                                            <!-- <div class="product-extra-link2">
+                                                <button type="submit" class="button button-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal">Buy now</button>
+                                            </div> -->
+
+                                            <div class="product-extra-link2">
+                                                <button type="submit" class="button button-add-to-cart" id="BuyNowButton">Buy now</button>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <!-- Detail Info -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10 m-auto entry-main-content">
+                                    <h2 class="section-title style-1 mb-30">Description</h2>
+                                    <div class="description mb-50">
+                                        <p id="description"></p>
+                                       
+                                        <hr class="wp-block-separator is-style-dots">
+                                     
+                                            <h4 class="mt-30">Steps to redeem</h4>
+                                            <hr class="wp-block-separator is-style-wide">
+                                            <p id="stepsToRedeem"></p>
+                                            <hr class="wp-block-separator is-style-dots">
+                                        <h4 class="mt-30">Terms and condition</h4>
+                                        <hr class="wp-block-separator is-style-wide">
+                                        <p id="termsAndConditions"></p>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <div>
+            <div class="table-responsive">
+                <table class="table shopping-summery text-center clean">
+                    <thead>
+                        <tr class="main-heading">
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Discount</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="product-des product-name">
+                                <h5 class="product-name" id="productioName"> J.Crew Mercantile Women's Short-Sleeve</h5>
+                            </td>
+                            <td class="price" data-title="Price"><span id="price"> $65.00 </span></td>
+                            <td class="text-center" data-title="Stock">
+                                <div class="detail-qty border radius  m-auto">
+                                    <span class="qty-val">1</span>
+                                </div>
+                            </td>
+                            <td class="text-right" data-title="Cart">
+                                <span id="discount">$0.00 </span>
+                            </td>
+                            <td class="text-right" data-title="Cart">
+                                <span id="totalAmount">$65.00 </span>
+                            </td>
+                        </tr>
+                      
+                    </tbody>
+                </table>
+            </div>
+            <form method="post">
+                <div class="form-group">
+                    <input type="text" placeholder="Enter Promo Code...">
+                </div>
+                <div class="form-group">
+                    <button class="btn  btn-md" name="login">Apply Coupon</button>
+                </div>
+            </form>
+         </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Place Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="loginScreen" tabindex="-1" aria-labelledby="loginScreen" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+      <div class="modal-content" >
+        <div class="modal-body" style="text-align: center;">
+         <div>
+            <p> To purchase a gift card, you must either log in or create a new account. </p>
+            <a href="./page-login.html"><button type="button" class="btn btn-primary">Login</button></a>
+            <a href="./page-register.html"><button type="button" class="btn btn-primary">Sign Up</button></a>
+
+         </div>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+        </section>
+    </main>
+    <footer class="main" id="footer">
+
+    </footer>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center">
+                    <h5 class="mb-5">Now Loading</h5>
+                    <div class="loader">
+                        <div class="bar bar1"></div>
+                        <div class="bar bar2"></div>
+                        <div class="bar bar3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor JS-->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/slick.js"></script>
+    <script src="assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+    <script src="assets/js/plugins/jquery-ui.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="assets/js/plugins/magnific-popup.js"></script>
+    <script src="assets/js/plugins/select2.min.js"></script>
+    <script src="assets/js/plugins/waypoints.js"></script>
+    <script src="assets/js/plugins/counterup.js"></script>
+    <script src="assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="assets/js/plugins/images-loaded.js"></script>
+    <script src="assets/js/plugins/isotope.js"></script>
+    <script src="assets/js/plugins/scrollup.js"></script>
+    <script src="assets/js/plugins/jquery.vticker-min.js"></script>
+    <script src="assets/js/plugins/jquery.theia.sticky.js"></script>
+    <!-- Template  JS -->
+    <script src="./assets/js/main.js?v=3.4"></script>
+    <script src="./assets/js/shop.js?v=3.4"></script>
+    <script src="./js/header.js"></script>
+    <script src="./js/footer.js"></script>
+    <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const idProduct = urlParams.get('idProduct');
+            if(idProduct.length == 0){
+                window.location.href = "./index.html";
+            }
+
+        function getPromocode () {
+            $.ajax({
+                type: 'GET',
+                url: `${promocodeAPI}?idProduct=${idProduct}`,
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.status !== 200) {
+                        console.log(response)
+                    } else {
+                        processPromocodeResponse(response)
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        }    
+        function getProduct() {
+            $.ajax({
+                type: 'GET',
+                url: productAPI + `/${idProduct}`,
+                contentType: 'application/json',
+                success: function (response) {
+
+                    if (response.status !== 200) {
+                        console.log(response)
+                    } else {
+                        processData(response)
+                    }
+                },
+                error: function (error) {
+                    console.error('error:', error);
+                }
+            });
+        }
+        function processPromocodeResponse(response){
+            $('#offersDetails').empty()
+            const offers = response.payload.map((element,idx) => {
+                return `<p> ${idx+1}. Unlock savings with <u>${element.name}</u> promo code! Get ${element.discountInPercentage}% off now.</p>`
+            });
+            if(offers.length)
+            $('#offersDetails').append(`<div>Offers:</div>
+            <div id="offerList">
+                ${offers.join("\n")}
+            </div>`)
+            
+        }
+        $('#BuyNowButton').click(function(){
+            console.log("HERE")
+            var accessToken = localStorage.getItem('accessToken');
+            console.log("accessToken",accessToken)
+            if(!accessToken || `${accessToken}`.length == 0){
+                $("#loginScreen").modal('show'); // Show modal
+            }
+        })
+        function processData(response) {
+            getPromocode ()
+            localStorage.setItem('individualProduct', JSON.stringify(response))
+                $('#description').empty()
+                $('#description1').empty()
+                $('#stepsToRedeem').empty()
+                $('#termsAndConditions').empty()
+                $('#productName').empty()
+                $('#brandName').empty()
+                $('#giftCardPrice').empty()
+            response.payload.forEach(element => {
+                $("#imageURL").attr("src", element.imageURL);
+                $('#description').append(element.description)
+                $('#description1').append(element.description)
+                $('#stepsToRedeem').append(element.stepsToRedeem)
+                $('#termsAndConditions').append(element.termsAndConditions)
+                $('#productName').append(element.productName)
+                $('#brandName').append(`Brand: ${element.brandName}`)
+                $('#giftCardPrice').append(`$${element.amount}`)
+            });
+        }
+        
+        getProduct()
+        $('#submitOrder').submit(function (e) {
+            e.preventDefault();
+
+            var formData = {
+               idProduct,
+
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: orderAPI,
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+
+                    if (response.status !== 200) {
+                        $('#errorMessage').text(response.errorMessage);
+                    } else {
+                       
+                    }
+                },
+                error: function (error) {
+                    console.error('error:', error);
+                }
+            });
+        });
+
+        
+    </script>
+</script>
+</body>
+
+</html>

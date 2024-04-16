@@ -7,3 +7,5 @@ exports.UPDATE_PROMOCODE = 'Update Promocode SET idProduct= :idProduct, name= :n
 exports.ADD_PROMOCODE = 'INSERT INTO Promocode (idProduct, name, discountInPercentage, isActive) VALUES (:idProduct, :name, :discountInPercentage, :isActive)';
 
 exports.DELETE_PROMOCODE = 'Delete from Promocode where idPromocode = :idPromocode';
+
+exports.GET_ALL_PROMOCODE_BY_PRODUCT_ID = `Select idPromocode as "idPromocode", idProduct AS "idProduct", name AS "name", discountInPercentage AS "discountInPercentage", isActive AS "isActive" from Promocode where idProduct= :idProduct and isActive = 1 ORDER BY idPromocode ASC`

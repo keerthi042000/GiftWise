@@ -1,12 +1,12 @@
 const sql = require('./sql');
 
-exports.getProduct = (id) => SQLConnection.execute(sql.GET_PRODUCT, id);
+exports.getProduct = (SQLConnection, idProduct) => SQLConnection.execute(sql.GET_PRODUCT, { idProduct });
 
 exports.getAllProduct = async (SQLConnection) => SQLConnection.execute(sql.GET_ALL_PRODUCT);
 
-exports.getProductByBrandID = async (SQLConnection, id) => SQLConnection.execute(sql.GET_PRODUCT_BYBRANDID, {id});
+exports.getProductByBrandID = async (SQLConnection, idbrand) => SQLConnection.execute(sql.GET_PRODUCT_BYBRANDID, { idbrand });
 
-exports.getProductByCategoryID = async (SQLConnection, id) => SQLConnection.execute(sql.GET_PRODUCT_BYCATEGORYID, {id});
+exports.getProductByCategoryID = async (SQLConnection, idCategory) => SQLConnection.execute(sql.GET_PRODUCT_BYCATEGORYID, { idCategory });
 
 exports.checkIfProductExist = async (SQLConnection, productObj) => SQLConnection.execute(sql.CHECK_PRODUCT_EXIST, productObj);
 
