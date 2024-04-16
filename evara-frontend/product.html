@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js" lang="en">
 
 <head>
@@ -24,7 +23,7 @@
         <div class="header-bottom sticky-bar sticky-white-bg" id="headertop">
         </div>
     </header>
-   
+
     <main class="main">
         <div class="footer-bottom"></div>
         <section class="mt-100 mb-60">
@@ -51,10 +50,11 @@
                                             <div class="pro-details-brand">
                                                 <span id="brandName"></a></span>
                                             </div>
-                                           <div>
-                                            <i class="fi-rs-heart" id="addToFavourite"></i>
-                                            <img src="./assets/imgs/theme/icons8-heart-30.png" id="removeFavourite"/>
-                                           </div>
+                                            <div>
+                                                <i class="fi-rs-heart" id="addToFavourite"></i>
+                                                <img src="./assets/imgs/theme/icons8-heart-30.png"
+                                                    id="removeFavourite" />
+                                            </div>
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
@@ -69,21 +69,22 @@
                                         </div>
 
                                         <div class="short-desc mb-30" id="offersDetails">
-                                            
+
                                         </div>
 
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                         <div class="detail-extralink">
-                                            
+
                                             <!-- <div class="product-extra-link2">
                                                 <button type="submit" class="button button-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal">Buy now</button>
                                             </div> -->
 
                                             <div class="product-extra-link2">
-                                                <button type="submit" class="button button-add-to-cart" id="BuyNowButton">Buy now</button>
+                                                <button type="submit" class="button button-add-to-cart"
+                                                    id="BuyNowButton">Buy now</button>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
                                     <!-- Detail Info -->
                                 </div>
@@ -93,104 +94,109 @@
                                     <h2 class="section-title style-1 mb-30">Description</h2>
                                     <div class="description mb-50">
                                         <p id="description"></p>
-                                       
+
                                         <hr class="wp-block-separator is-style-dots">
-                                     
-                                            <h4 class="mt-30">Steps to redeem</h4>
-                                            <hr class="wp-block-separator is-style-wide">
-                                            <p id="stepsToRedeem"></p>
-                                            <hr class="wp-block-separator is-style-dots">
+
+                                        <h4 class="mt-30">Steps to redeem</h4>
+                                        <hr class="wp-block-separator is-style-wide">
+                                        <p id="stepsToRedeem"></p>
+                                        <hr class="wp-block-separator is-style-dots">
                                         <h4 class="mt-30">Terms and condition</h4>
                                         <hr class="wp-block-separator is-style-wide">
                                         <p id="termsAndConditions"></p>
                                     </div>
                                 </div>
                             </div>
-                          
+
                         </div>
                     </div>
                 </div>
-               
+
             </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="placeOrder" tabindex="-1" aria-labelledby="placeOrderLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="placeOrderLabel">Checkout</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-         <div>
-            <div class="table-responsive">
-                <table class="table shopping-summery text-center clean">
-                    <thead>
-                        <tr class="main-heading">
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Discount</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="product-des product-name">
-                                <h5 class="product-name" id="checkoutProductName"></h5>
-                            </td>
-                            <td class="price" data-title="Price"><span id="checkoutPrice"> </span></td>
-                            <td class="text-center" data-title="Stock">
-                                <div class="detail-qty border radius  m-auto">
-                                    <span class="qty-val">1</span>
+            <!-- Modal -->
+            <div class="modal fade" id="placeOrder" tabindex="-1" aria-labelledby="placeOrderLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="placeOrderLabel">Checkout</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <div class="table-responsive">
+                                    <table class="table shopping-summery text-center clean">
+                                        <thead>
+                                            <tr class="main-heading">
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Discount</th>
+                                                <th scope="col">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="product-des product-name">
+                                                    <h5 class="product-name" id="checkoutProductName"></h5>
+                                                </td>
+                                                <td class="price" data-title="Price"><span id="checkoutPrice"> </span>
+                                                </td>
+                                                <td class="text-center" data-title="Stock">
+                                                    <div class="detail-qty border radius  m-auto">
+                                                        <span class="qty-val">1</span>
+                                                    </div>
+                                                </td>
+                                                <td class="text-right" data-title="Cart">
+                                                    <span id="checkoutDiscount"></span>
+                                                </td>
+                                                <td class="text-right" data-title="Cart">
+                                                    <span id="checkoutTotalAmount"></span>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </td>
-                            <td class="text-right" data-title="Cart">
-                                <span id="checkoutDiscount"></span>
-                            </td>
-                            <td class="text-right" data-title="Cart">
-                                <span id="checkoutTotalAmount"></span>
-                            </td>
-                        </tr>
-                      
-                    </tbody>
-                </table>
+
+                                <div class="form-group">
+                                    <input type="text" placeholder="Enter Promo Code..." id="checkPromocode">
+                                    <p id="errorMessage" style="color: red; margin-left: 10px;"></p>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn  btn-md" name="applypromocode" id="applyPromocode">Apply
+                                        Coupon</button>
+                                    <button class="btn  btn-md" name="removePromocode"
+                                        id="removePromocode">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Place Order</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-           
-                <div class="form-group">
-                    <input type="text" placeholder="Enter Promo Code..." id="checkPromocode">
-                    <p id="errorMessage" style="color: red; margin-left: 10px;"></p>
-                </div>
-                <div class="form-group">
-                    <button class="btn  btn-md" name="applypromocode" id="applyPromocode">Apply Coupon</button>
-                    <button class="btn  btn-md" name="removePromocode" id="removePromocode">Remove</button>
-                </div>
-         </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Place Order</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="modal fade" id="loginScreen" tabindex="-1" aria-labelledby="loginScreen" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-      <div class="modal-content" >
-        <div class="modal-body" style="text-align: center;">
-         <div>
-            <p> To purchase a gift card, you must either log in or create a new account. </p>
-            <a href="./page-login.html"><button type="button" class="btn btn-primary">Login</button></a>
-            <a href="./page-register.html"><button type="button" class="btn btn-primary">Sign Up</button></a>
+            <div class="modal fade" id="loginScreen" tabindex="-1" aria-labelledby="loginScreen" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body" style="text-align: center;">
+                            <div>
+                                <p> To purchase a gift card, you must either log in or create a new account. </p>
+                                <a href="./page-login.html"><button type="button"
+                                        class="btn btn-primary">Login</button></a>
+                                <a href="./page-register.html"><button type="button" class="btn btn-primary">Sign
+                                        Up</button></a>
 
-         </div>
-        </div>
-        <div class="modal-footer">
-          
-        </div>
-      </div>
-    </div>
-  </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
     <footer class="main" id="footer">
@@ -237,13 +243,13 @@
     <script src="./js/header.js"></script>
     <script src="./js/footer.js"></script>
     <script>
-            const urlParams = new URLSearchParams(window.location.search);
-            const idProduct = urlParams.get('idProduct');
-            if(idProduct.length == 0){
-                window.location.href = "./index.html";
-            }
-            // Function to calculate the discounted amount
-            function calculateDiscountedAmount(totalAmount, discountPercentage) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const idProduct = urlParams.get('idProduct');
+        if (idProduct.length == 0) {
+            window.location.href = "./index.html";
+        }
+        // Function to calculate the discounted amount
+        function calculateDiscountedAmount(totalAmount, discountPercentage) {
             // Convert the discount percentage to decimal
             const discountDecimal = discountPercentage / 100;
 
@@ -251,97 +257,100 @@
             const discountedAmount = totalAmount * discountDecimal;
 
             return discountedAmount;
-            }
-            $('#removePromocode').hide()
-            localStorage.setItem("idProduct", idProduct)
-            $('#addToFavourite').hide()
-            $('#removeFavourite').hide()
-            $('#applyPromocode').click(function(){
-               let offers = JSON.parse(localStorage.getItem('offers'));
-               console.log("offers>>>>",offers)
-               let record = offers.find(function(ele){
-                console.log("$('#checkPromocode').val()",ele.name, $('#checkPromocode').val())
-                    return ele.name == $('#checkPromocode').val()
-               })
-               console.log("record>>>",record)
-               const individualProduct = localStorage.getItem('individualProduct')
-               
-               if(record && record.name){
+        }
+        $('#removePromocode').hide()
+        localStorage.setItem("idProduct", idProduct)
+        $('#addToFavourite').hide()
+        $('#removeFavourite').hide()
+        $('#applyPromocode').click(function () {
+            let offers = JSON.parse(localStorage.getItem('offers'));
+            console.log("offers>>>>", offers)
+            let record = offers.find(function (ele) {
+                console.log("$('#checkPromocode').val()", ele.name, $('#checkPromocode').val())
+                return ele.name == $('#checkPromocode').val()
+            })
+            console.log("record>>>", record)
+            const individualProduct = localStorage.getItem('individualProduct')
+
+            if (record && record.name) {
                 console.log("INSIDEINDIENDEININDIENDINE>>>>>266")
                 $('#checkoutPrice').empty()
                 $('#checkoutDiscount').empty()
                 $('#checkoutTotalAmount').empty()
 
                 let [product] = JSON.parse(individualProduct)
-                let discount = calculateDiscountedAmount(product.amount,record.discountInPercentage )
+                let discount = calculateDiscountedAmount(product.amount, record.discountInPercentage)
                 $('#checkoutPrice').append(`$${product.amount}`)
                 $('#checkoutDiscount').append(`$${discount}`)
-                $('#checkoutTotalAmount').append(`$${+product.amount-discount}`)
+                $('#checkoutTotalAmount').append(`$${+product.amount - discount}`)
                 $("#checkPromocode").prop("disabled", true);
                 $('#removePromocode').show()
                 $('#applyPromocode').hide()
-               }else{
+            } else {
                 $("#errorMessage").append("Invalid Promocode");
-                    setTimeout(function(){
-                        $("#errorMessage").empty("");
-                    }, 3000); // 3000 milliseconds = 3 seconds
-               }
-            })
-            $('#removePromocode').click(function(){
-               
-                const individualProduct = localStorage.getItem('individualProduct')
-                $('#checkoutPrice').empty()
-                $('#checkoutDiscount').empty()
-                $('#checkoutTotalAmount').empty()
+                setTimeout(function () {
+                    $("#errorMessage").empty("");
+                }, 3000); // 3000 milliseconds = 3 seconds
+            }
+        })
+        $('#removePromocode').click(function () {
 
-                let [product] = JSON.parse(individualProduct)
-                $('#checkoutPrice').append(`$${product.amount}`)
-                $('#checkoutDiscount').append(`$0`)
-                $('#checkoutTotalAmount').append(`$${+product.amount}`)
-                $("#checkPromocode").prop("disabled", false);
-                
-                $('#removePromocode').hide()
-                $('#applyPromocode').show()
-            })
-            function getFavourites() {
-            return new Promise((resolve, reject) => {
-                var accessToken = localStorage.getItem('accessToken');
+            const individualProduct = localStorage.getItem('individualProduct')
+            $('#checkoutPrice').empty()
+            $('#checkoutDiscount').empty()
+            $('#checkoutTotalAmount').empty()
 
-                $.ajax({
-                    type: 'GET',
-                    url: favoriteAPI,
-                    headers: {
-                        'Authorization': 'Bearer ' + accessToken
-                    },
-                    contentType: 'application/json',
-                    success: function (response) {
-                        console.log("res",response);
-                        if(response.status === 401){
-                            alert("Unauthorized");
-                            logout();
-                            window.location.href = 'page-login.html';
-                        }else if(response.status !== 200){
-                            console.error('Error:', response);
-                            alert(response.errorMessage);
-                        }else{
-                            if(response.payload && response.payload.some(va=> va.idProduct == idProduct )){
-                                console.log("IF>>>>>")
-                                $('#addToFavourite').hide()
-                                $('#removeFavourite').show()
-                            }else{
-                               
-                                $('#addToFavourite').show()
-                                $('#removeFavourite').hide()
+            let [product] = JSON.parse(individualProduct)
+            $('#checkoutPrice').append(`$${product.amount}`)
+            $('#checkoutDiscount').append(`$0`)
+            $('#checkoutTotalAmount').append(`$${+product.amount}`)
+            $("#checkPromocode").prop("disabled", false);
+            $('#checkPromocode').val('')
+            $('#removePromocode').hide()
+            $('#applyPromocode').show()
+        })
+        function getFavourites() {
+            var accessToken = localStorage.getItem('accessToken');
+            if (accessToken) {
+                return new Promise((resolve, reject) => {
+
+
+                    $.ajax({
+                        type: 'GET',
+                        url: favoriteAPI,
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
+                        contentType: 'application/json',
+                        success: function (response) {
+                            console.log("res", response);
+                            if (response.status === 401) {
+                                alert("Unauthorized");
+                                logout();
+                                window.location.href = 'page-login.html';
+                            } else if (response.status !== 200) {
+                                console.error('Error:', response);
+                                alert(response.errorMessage);
+                            } else {
+                                if (response.payload && response.payload.some(va => va.idProduct == idProduct)) {
+                                    console.log("IF>>>>>")
+                                    $('#addToFavourite').hide()
+                                    $('#removeFavourite').show()
+                                } else {
+
+                                    $('#addToFavourite').show()
+                                    $('#removeFavourite').hide()
+                                }
                             }
+                        },
+                        error: function (error) {
+                            reject(reject)
                         }
-                    },
-                    error: function (error) {
-                        reject(reject)
-                    }
-                });
-            })
+                    });
+                })
+            }
         }
-        function getPromocode () {
+        function getPromocode() {
             $.ajax({
                 type: 'GET',
                 url: `${promocodeAPI}?idProduct=${idProduct}`,
@@ -356,7 +365,7 @@
                 error: function (error) {
                 }
             });
-        }    
+        }
         function getProduct() {
             $.ajax({
                 type: 'GET',
@@ -375,30 +384,30 @@
                 }
             });
         }
-        function processPromocodeResponse(response){
+        function processPromocodeResponse(response) {
             $('#offersDetails').empty()
             localStorage.setItem('offers', JSON.stringify(response.payload))
-            const offers = response.payload.map((element,idx) => {
-                return `<p> ${idx+1}. Unlock savings with <u>${element.name}</u> promo code! Get ${element.discountInPercentage}% off now.</p>`
+            const offers = response.payload.map((element, idx) => {
+                return `<p> ${idx + 1}. Unlock savings with <u>${element.name}</u> promo code! Get ${element.discountInPercentage}% off now.</p>`
             });
-            if(offers.length)
-            $('#offersDetails').append(`<div>Offers:</div>
+            if (offers.length)
+                $('#offersDetails').append(`<div>Offers:</div>
             <div id="offerList">
                 ${offers.join("\n")}
             </div>`)
-            
+
         }
-        $('#BuyNowButton').click(function(){
-           
+        $('#BuyNowButton').click(function () {
+
             var accessToken = localStorage.getItem('accessToken');
-            if(!accessToken || `${accessToken}`.length == 0){
+            if (!accessToken || `${accessToken}`.length == 0) {
                 $("#loginScreen").modal('show'); // Show modal
-            }else{
+            } else {
                 $('#checkoutProductName').empty()
                 $('#checkoutPrice').empty()
                 $('#checkoutDiscount').empty()
                 $('#checkoutTotalAmount').empty()
-    
+
                 const individualProduct = localStorage.getItem('individualProduct')
                 let [product] = JSON.parse(individualProduct)
                 $('#checkoutProductName').append(product.productName)
@@ -409,11 +418,11 @@
             }
         })
 
-        $('#removeFavourite').click(function(){
+        $('#removeFavourite').click(function () {
             var accessToken = localStorage.getItem('accessToken');
             $.ajax({
                 type: 'DELETE',
-                url: favoriteAPI+ `/${idProduct}`,
+                url: favoriteAPI + `/${idProduct}`,
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 },
@@ -428,8 +437,8 @@
                 }
             });
         })
-       
-        $('#addToFavourite').click(function(){
+
+        $('#addToFavourite').click(function () {
             var accessToken = localStorage.getItem('accessToken');
             $.ajax({
                 type: 'POST',
@@ -452,19 +461,19 @@
                 }
             });
         })
-       
-       
+
+
         function processData(response) {
-            getPromocode ()
+            getPromocode()
             getFavourites()
             localStorage.setItem('individualProduct', JSON.stringify(response.payload))
-                $('#description').empty()
-                $('#description1').empty()
-                $('#stepsToRedeem').empty()
-                $('#termsAndConditions').empty()
-                $('#productName').empty()
-                $('#brandName').empty()
-                $('#giftCardPrice').empty()
+            $('#description').empty()
+            $('#description1').empty()
+            $('#stepsToRedeem').empty()
+            $('#termsAndConditions').empty()
+            $('#productName').empty()
+            $('#brandName').empty()
+            $('#giftCardPrice').empty()
             response.payload.forEach(element => {
                 $("#imageURL").attr("src", element.imageURL);
                 $('#description').append(element.description)
@@ -476,13 +485,13 @@
                 $('#giftCardPrice').append(`$${element.amount}`)
             });
         }
-        
+
         getProduct()
         $('#submitOrder').submit(function (e) {
             e.preventDefault();
 
             var formData = {
-               idProduct,
+                idProduct,
 
             };
 
@@ -496,7 +505,7 @@
                     if (response.status !== 200) {
                         $('#errorMessage').text(response.errorMessage);
                     } else {
-                       
+
                     }
                 },
                 error: function (error) {
@@ -505,9 +514,9 @@
             });
         });
 
-        
+
     </script>
-</script>
+    </script>
 </body>
 
 </html>
