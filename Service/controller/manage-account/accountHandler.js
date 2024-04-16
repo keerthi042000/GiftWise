@@ -30,7 +30,8 @@ exports.login = async (req, res) => {
     // Payload for the JWT token
     const payload = {
       idUser: user[0][0],
-      emailId: user[0][1]
+      emailId: user[0][1],
+      isSuperAdmin: user[0][3]
     };
     const token = jwt.sign(payload, secretKey, { expiresIn: '15m' });
     await accountDA.resetLoginAttempts(connection, user[0][0]);

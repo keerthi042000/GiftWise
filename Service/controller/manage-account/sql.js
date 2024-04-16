@@ -1,5 +1,9 @@
 
-exports.IS_EMAIL_EXISTS = `Select idUser, emailId, password from Users where emailId=:emailId`
+exports.IS_EMAIL_EXISTS = `Select U.idUser AS "idUser", U.emailId AS "emailId", U.password AS "password",
+R.isSuperAdmin AS "isSuperAdmin"
+from Users U
+LEFT JOIN roles R ON R.idRole = U.idRole
+where emailId=:emailId`
 
 exports.VERIFY_USER = `Select idUser,emailId from Users where emailId=:emailId AND password=:password`
 

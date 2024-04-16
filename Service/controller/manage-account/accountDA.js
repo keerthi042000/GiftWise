@@ -13,17 +13,21 @@ exports.verifyUser = async (connection, emailId, password) => {
 
 exports.checkLockedAccount = async (connection, idUser) => {
   const result = await connection.execute(sql.CHECK_LOGINATTEMPTS, { idUser });
-  const [result1] = result.rows;
-  const loginAttempts = result1[1];
-  const lastLockTime = new Date(result1[2]);
+  if (result.rows.length > 0) {
+    const [result1] = result.rows;
+    const loginAttempts = result1[1]
+    const lastLockTime = new Date(result1[2])
 
-  const twentyFourHoursAgo = new Date();
-  twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+    const twentyFourHoursAgo = new Date();
+    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
 
-  if (loginAttempts > 3 && lastLockTime > twentyFourHoursAgo) {
-    return true;
+    if (loginAttempts > 3 && lastLockTime > twentyFourHoursAgo) {
+      return true;
+    }
+    return false;
+  }else{
+    return false
   }
-  return false;
 };
 
 exports.updateLoginAttempts = async (connection, idUser) => {
@@ -45,8 +49,8 @@ exports.getRoleID = async (connection, isSuperAdmin, isCustomer) => {
 exports.createUser = async (connection, idRole, emailId, password) => {
   const result = await connection.execute(sql.CREATE_USER, { idRole, emailId, password, out_userId: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT } });
   const [userId] = result.outBinds.out_userId;
-  await connection.execute(sql.INSERT_LOGINATTEMPTS, { idUser : userId });
-  await connection.execute(sql.INSERT_USERPREFERENCES, { idUser : userId, email : 1, sms : 0 });
+  await connection.execute(sql.INSERT_LOGINATTEMPTS, { idUser: userId });
+  await connection.execute(sql.INSERT_USERPREFERENCES, { idUser: userId, email: 1, sms: 0 });
   return userId;
 };
 
@@ -69,7 +73,7 @@ exports.InsertPhoneDetails = async (connection, idCustomer, phone, phoneType) =>
 };
 
 
-exports.getCustomerDetails = async(SQLConnection, obj) => SQLConnection.execute(sql.FETCH_CUSTOMERDETAILS, obj);
+exports.getCustomerDetails = async (SQLConnection, obj) => SQLConnection.execute(sql.FETCH_CUSTOMERDETAILS, obj);
 
 exports.updateDetails = async (connection, idUser, data, queryName) => {
   const queries = {
@@ -79,10 +83,10 @@ exports.updateDetails = async (connection, idUser, data, queryName) => {
   };
   const columnsToUpdate = Object.keys(data);
   const queryValues = Object.values(data);
-  const updateValues = columnsToUpdate.map((col, index) => `${col} = :val${index+1}`).join(', ');
+  const updateValues = columnsToUpdate.map((col, index) => `${col} = :val${index + 1}`).join(', ');
   const bindParams = {};
   columnsToUpdate.forEach((col, index) => {
-    bindParams[`val${index+1}`] = queryValues[index];
+    bindParams[`val${index + 1}`] = queryValues[index];
   });
   bindParams.idUser = idUser;
   const sqlQuery = queries[queryName].replace(':updateValues', updateValues);
