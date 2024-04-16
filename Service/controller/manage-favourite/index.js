@@ -15,6 +15,7 @@ router.use((req, res, next) => {
 });
 
 router.get('/', [_async(favouriteHandler.getAllFav)]);
-router.put('/:idProduct', [_async(favouriteHandler.deleteFavByID)]);
+router.post('/', [_async(favouriteHandler.addFav)]);
+router.delete('/:idProduct', [_async(favouriteHandler.deleteFavByID)]);
 
 module.exports = router;

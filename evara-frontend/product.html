@@ -53,6 +53,7 @@
                                             </div>
                                            <div>
                                             <i class="fi-rs-heart" id="addToFavourite"></i>
+                                            <img src="./assets/imgs/theme/icons8-heart-30.png" id="removeFavourite"/>
                                            </div>
                                         </div>
                                         <div class="clearfix product-price-cover">
@@ -113,11 +114,11 @@
             </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="placeOrder" tabindex="-1" aria-labelledby="placeOrderLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
+          <h5 class="modal-title" id="placeOrderLabel">Checkout</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -136,33 +137,34 @@
                     <tbody>
                         <tr>
                             <td class="product-des product-name">
-                                <h5 class="product-name" id="productioName"> J.Crew Mercantile Women's Short-Sleeve</h5>
+                                <h5 class="product-name" id="checkoutProductName"></h5>
                             </td>
-                            <td class="price" data-title="Price"><span id="price"> $65.00 </span></td>
+                            <td class="price" data-title="Price"><span id="checkoutPrice"> </span></td>
                             <td class="text-center" data-title="Stock">
                                 <div class="detail-qty border radius  m-auto">
                                     <span class="qty-val">1</span>
                                 </div>
                             </td>
                             <td class="text-right" data-title="Cart">
-                                <span id="discount">$0.00 </span>
+                                <span id="checkoutDiscount"></span>
                             </td>
                             <td class="text-right" data-title="Cart">
-                                <span id="totalAmount">$65.00 </span>
+                                <span id="checkoutTotalAmount"></span>
                             </td>
                         </tr>
                       
                     </tbody>
                 </table>
             </div>
-            <form method="post">
+           
                 <div class="form-group">
-                    <input type="text" placeholder="Enter Promo Code...">
+                    <input type="text" placeholder="Enter Promo Code..." id="checkPromocode">
+                    <p id="errorMessage" style="color: red; margin-left: 10px;"></p>
                 </div>
                 <div class="form-group">
-                    <button class="btn  btn-md" name="login">Apply Coupon</button>
+                    <button class="btn  btn-md" name="applypromocode" id="applyPromocode">Apply Coupon</button>
+                    <button class="btn  btn-md" name="removePromocode" id="removePromocode">Remove</button>
                 </div>
-            </form>
          </div>
         </div>
         <div class="modal-footer">
@@ -240,7 +242,105 @@
             if(idProduct.length == 0){
                 window.location.href = "./index.html";
             }
+            // Function to calculate the discounted amount
+            function calculateDiscountedAmount(totalAmount, discountPercentage) {
+            // Convert the discount percentage to decimal
+            const discountDecimal = discountPercentage / 100;
 
+            // Calculate the discounted amount
+            const discountedAmount = totalAmount * discountDecimal;
+
+            return discountedAmount;
+            }
+            $('#removePromocode').hide()
+            localStorage.setItem("idProduct", idProduct)
+            $('#addToFavourite').hide()
+            $('#removeFavourite').hide()
+            $('#applyPromocode').click(function(){
+               let offers = JSON.parse(localStorage.getItem('offers'));
+               console.log("offers>>>>",offers)
+               let record = offers.find(function(ele){
+                console.log("$('#checkPromocode').val()",ele.name, $('#checkPromocode').val())
+                    return ele.name == $('#checkPromocode').val()
+               })
+               console.log("record>>>",record)
+               const individualProduct = localStorage.getItem('individualProduct')
+               
+               if(record && record.name){
+                console.log("INSIDEINDIENDEININDIENDINE>>>>>266")
+                $('#checkoutPrice').empty()
+                $('#checkoutDiscount').empty()
+                $('#checkoutTotalAmount').empty()
+
+                let [product] = JSON.parse(individualProduct)
+                let discount = calculateDiscountedAmount(product.amount,record.discountInPercentage )
+                $('#checkoutPrice').append(`$${product.amount}`)
+                $('#checkoutDiscount').append(`$${discount}`)
+                $('#checkoutTotalAmount').append(`$${+product.amount-discount}`)
+                $("#checkPromocode").prop("disabled", true);
+                $('#removePromocode').show()
+                $('#applyPromocode').hide()
+               }else{
+                $("#errorMessage").append("Invalid Promocode");
+                    setTimeout(function(){
+                        $("#errorMessage").empty("");
+                    }, 3000); // 3000 milliseconds = 3 seconds
+               }
+            })
+            $('#removePromocode').click(function(){
+               
+                const individualProduct = localStorage.getItem('individualProduct')
+                $('#checkoutPrice').empty()
+                $('#checkoutDiscount').empty()
+                $('#checkoutTotalAmount').empty()
+
+                let [product] = JSON.parse(individualProduct)
+                $('#checkoutPrice').append(`$${product.amount}`)
+                $('#checkoutDiscount').append(`$0`)
+                $('#checkoutTotalAmount').append(`$${+product.amount}`)
+                $("#checkPromocode").prop("disabled", false);
+                
+                $('#removePromocode').hide()
+                $('#applyPromocode').show()
+            })
+            function getFavourites() {
+            return new Promise((resolve, reject) => {
+                var accessToken = localStorage.getItem('accessToken');
+
+                $.ajax({
+                    type: 'GET',
+                    url: favoriteAPI,
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    },
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log("res",response);
+                        if(response.status === 401){
+                            alert("Unauthorized");
+                            logout();
+                            window.location.href = 'page-login.html';
+                        }else if(response.status !== 200){
+                            console.error('Error:', response);
+                            alert(response.errorMessage);
+                        }else{
+                            if(response.payload && response.payload.some(va=> va.idProduct == idProduct )){
+                                console.log("IF>>>>>")
+                                $('#addToFavourite').hide()
+                                $('#removeFavourite').show()
+                            }else{
+                               
+                                $('#addToFavourite').show()
+                                $('#removeFavourite').hide()
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        reject(reject)
+                    }
+                });
+            })
+        }
         function getPromocode () {
             $.ajax({
                 type: 'GET',
@@ -277,6 +377,7 @@
         }
         function processPromocodeResponse(response){
             $('#offersDetails').empty()
+            localStorage.setItem('offers', JSON.stringify(response.payload))
             const offers = response.payload.map((element,idx) => {
                 return `<p> ${idx+1}. Unlock savings with <u>${element.name}</u> promo code! Get ${element.discountInPercentage}% off now.</p>`
             });
@@ -288,16 +389,75 @@
             
         }
         $('#BuyNowButton').click(function(){
-            console.log("HERE")
+           
             var accessToken = localStorage.getItem('accessToken');
-            console.log("accessToken",accessToken)
             if(!accessToken || `${accessToken}`.length == 0){
                 $("#loginScreen").modal('show'); // Show modal
+            }else{
+                $('#checkoutProductName').empty()
+                $('#checkoutPrice').empty()
+                $('#checkoutDiscount').empty()
+                $('#checkoutTotalAmount').empty()
+    
+                const individualProduct = localStorage.getItem('individualProduct')
+                let [product] = JSON.parse(individualProduct)
+                $('#checkoutProductName').append(product.productName)
+                $('#checkoutPrice').append(`$${product.amount}`)
+                $('#checkoutDiscount').append(`$0`)
+                $('#checkoutTotalAmount').append(`$${product.amount}`)
+                $("#placeOrder").modal('show'); // Show modal
             }
         })
+
+        $('#removeFavourite').click(function(){
+            var accessToken = localStorage.getItem('accessToken');
+            $.ajax({
+                type: 'DELETE',
+                url: favoriteAPI+ `/${idProduct}`,
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                success: function (response) {
+                    console.log('Product removed from favorites:', response);
+                    $('#addToFavourite').show()
+                    $('#removeFavourite').hide()
+                },
+                error: function (error) {
+                    console.error('Error removing product from favorites:', error);
+                    alert("Error while removing from favourites");
+                }
+            });
+        })
+       
+        $('#addToFavourite').click(function(){
+            var accessToken = localStorage.getItem('accessToken');
+            $.ajax({
+                type: 'POST',
+                url: favoriteAPI,
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    idProduct: localStorage.getItem('idProduct')
+                }),
+                success: function (response) {
+                    console.log('Product removed from favorites:', response);
+                    $('#addToFavourite').hide()
+                    $('#removeFavourite').show()
+                },
+                error: function (error) {
+                    console.error('Error removing product from favorites:', error);
+                    alert("Error while removing from favourites");
+                }
+            });
+        })
+       
+       
         function processData(response) {
             getPromocode ()
-            localStorage.setItem('individualProduct', JSON.stringify(response))
+            getFavourites()
+            localStorage.setItem('individualProduct', JSON.stringify(response.payload))
                 $('#description').empty()
                 $('#description1').empty()
                 $('#stepsToRedeem').empty()

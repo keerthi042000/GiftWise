@@ -140,7 +140,7 @@
                                 )
                 favResponse.payload.forEach(element => {
                     let valstock = "Out of Stock";
-                    if (element.QUANTITY > 0){
+                    if (element.quantity > 0){
                         valstock = "In Stock";
                     }
                     console.log(valstock);
@@ -148,18 +148,18 @@
                     <tr>
                         <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-1.jpg" alt="#"></td>
                         <td class="product-des product-name">
-                            <h5 class="product-name"><a href="shop-product-right.html">${element.PRODUCTNAME}</a></h5>
-                            <p class="font-xs">${element.DESCRIPTION}
+                            <h5 class="product-name"><a href="shop-product-right.html">${element.productName}</a></h5>
+                            <p class="font-xs">${element.description}
                             </p>
                         </td>
-                        <td class="price" data-title="Price"><span>${element.AMOUNT} </span></td>
+                        <td class="price" data-title="Price"><span>${element.amount} </span></td>
                         <td class="text-center" data-title="Stock">
                             <span class="color3 font-weight-bold">${valstock}</span>
                         </td>
                         <td class="text-right" data-title="View">
-                            <a onClick="redirectProduct(${element.IDPRODUCT})">View</a>
+                            <a onClick="redirectProduct(${element.idProduct})">View</a>
                         </td>
-                        <td class="action" data-title="Remove"><a class="remove-btn" data-product-id="${element.IDPRODUCT}"><i class="fi-rs-trash"></i></a></td>
+                        <td class="action" data-title="Remove"><a class="remove-btn" data-product-id="${element.idProduct}"><i class="fi-rs-trash"></i></a></td>
                     </tr>`)
                 });
                 $('#favTable').append(`</tbody> `);
@@ -174,7 +174,7 @@
             let clickedRow = $(this).closest('tr');
             const productId = $(this).data('product-id');
             $.ajax({
-                type: 'PUT',
+                type: 'DELETE',
                 url: favoriteAPI+ `/${productId}`,
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
