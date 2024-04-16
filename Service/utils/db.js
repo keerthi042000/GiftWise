@@ -2,7 +2,8 @@
 
 const config = require('../config/default.json');
 const oracledb = require('oracledb');
-
+const MAX_RETRY_COUNT = 5;
+const RETRY_DELAY_MS = 100
 function convertKeysToUpperCase(obj) {
   const newObj = {};
   for (let key in obj) {
@@ -56,7 +57,8 @@ class SQLServer {
     }
   }
 
-  async execute(SQL, parameters = {}, commit = false) {
+  async execute(SQL, parameters = {}, commit = false, retryCount = 0) {
+    
     try {
       parameters = convertKeysToUpperCase(parameters);
       const connection = await this.getTransactionConnection();
@@ -82,8 +84,16 @@ class SQLServer {
       }
       return result;
     } catch (err) {
-      console.error("Error executing SQL statement:", err);
-      throw err;
+      // console.error("Error executing SQL statement:", err);
+      if (retryCount < MAX_RETRY_COUNT) { // Define MAX_RETRY_COUNT as per your requirement
+        console.error(`Error executing SQL statement. Retrying (${retryCount + 1}/${MAX_RETRY_COUNT}):`, err);
+        // Retry with a delay
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
+        return this.execute(SQL, parameters, commit, retryCount + 1);
+      } else {
+        throw err; // Throw the error if maximum retry count is reached
+      }
+      // throw err;
     }
   }
 }

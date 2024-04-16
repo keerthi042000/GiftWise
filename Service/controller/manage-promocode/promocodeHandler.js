@@ -1,7 +1,14 @@
 const promocodeDA = require('./promocodeDA');
 const { httpUtil } = require('../../utils');
 
-exports.getAllPromocode = async (_, res) => {
+exports.getAllPromocode = async ( req , res) => {
+  let idProduct = req.query.idProduct
+  console.log("req.query.idProduct",req.query.idProduct)
+  if(idProduct.length > 0){
+      const data = await promocodeDA.getAllPromocodeByProductId(instanceOfSQLServer, idProduct);
+      return res.json(httpUtil.getSuccess(data));
+  }
+
   const data = await promocodeDA.getAllPromocode(instanceOfSQLServer);
   return res.json(httpUtil.getSuccess(data));
 };

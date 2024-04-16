@@ -6,11 +6,13 @@ description AS "description",
 termsAndConditions AS "termsAndConditions", 
 stepsToRedeem AS "stepsToRedeem", 
 imageURL AS "imageURL", 
+P.amount AS "amount",
 quantity AS "quantity" from product ORDER BY idProduct ASC`;
 
 exports.GET_PRODUCT = `SELECT 
 P.idProduct AS "idProduct",
 P.idBrand AS "idBrand", 
+B.brandName AS "brandName",
 P.idCategory AS "idCategory",
 P.productName AS "productName", 
 P.description AS "description", 
@@ -18,10 +20,10 @@ P.termsAndConditions AS "termsAndConditions",
 P.stepsToRedeem AS "stepsToRedeem", 
 P.imageURL AS "imageURL", 
 P.quantity AS "quantity",
-COALESCE((SELECT discountInPercentage FROM Promocode P1 WHERE P1.idProduct = P.idProduct AND P1.isActive = 1), 0) AS "discountInPercentage",
-COALESCE((SELECT promocode FROM Promocode P1 WHERE P1.idProduct = P.idProduct AND P1.isActive = 1), '') AS "promocode"
+P.amount AS "amount"
 FROM 
 product P
+JOIN brand B ON B.idBrand = P.idBrand
 WHERE 
 P.idProduct = :idProduct`;
 
@@ -33,7 +35,8 @@ description AS "description",
 termsAndConditions AS "termsAndConditions", 
 stepsToRedeem AS "stepsToRedeem", 
 imageURL AS "imageURL", 
-quantity AS "quantity" from product where idBrand = :id ORDER BY idProduct ASC`;
+P.amount AS "amount",
+quantity AS "quantity" from product where idBrand = :idBrand ORDER BY idProduct ASC`;
 
 exports.GET_PRODUCT_BYCATEGORYID = `Select idProduct AS "idProduct",
 idBrand AS "idBrand", 
@@ -43,7 +46,8 @@ description AS "description",
 termsAndConditions AS "termsAndConditions", 
 stepsToRedeem AS "stepsToRedeem", 
 imageURL AS "imageURL", 
-quantity AS "quantity" from product where idCategory = :id ORDER BY idProduct ASC`;
+P.amount AS "amount",
+quantity AS "quantity" from product where idCategory = :idCategory ORDER BY idProduct ASC`;
 
 exports.CHECK_PRODUCT_EXIST = 'SELECT COUNT(*) "isExist" FROM product WHERE (idBrand = :idBrand AND idCategory= :idCategory AND productName= :productName) OR idProduct = :idProduct';
 
@@ -61,4 +65,4 @@ SET
 
 exports.ADD_PRODUCT = `INSERT INTO product (idBrand, idCategory, productName,
     description,termsAndConditions,stepsToRedeem,imageURL, quantity ) VALUES (:idBrand, :idCategory, :productName,
-        :description,:termsAndConditions,:stepsToRedeem,:imageURL, :quantity)`;
+        :description,:termsAndConditions,:stepsToRedeem,:imageURL, :quantity, :amount)`;

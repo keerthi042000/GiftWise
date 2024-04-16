@@ -1,18 +1,24 @@
 const productDA = require('./productDA');
 const { httpUtil } = require('../../utils');
 
-exports.getAllProduct = async (_, res) => {
-  if(_.query.id && _.query.type){
-    if(_.query.type === 'idBrand'){
-      const data = await productDA.getProductByBrandID(instanceOfSQLServer, _.query.id);
+exports.getAllProduct = async ( req , res) => {
+  if(req.query.id && req.query.type){
+    if(req.query.type === 'idBrand'){
+      const data = await productDA.getProductByBrandID(instanceOfSQLServer, req.query.id);
       return res.json(httpUtil.getSuccess(data));
     }
-    if(_.query.type === 'idCategory'){
-      const data = await productDA.getProductByCategoryID(instanceOfSQLServer, _.query.id);
+    if(req.query.type === 'idCategory'){
+      const data = await productDA.getProductByCategoryID(instanceOfSQLServer, req.query.id);
       return res.json(httpUtil.getSuccess(data));
     }
   }
   const data = await productDA.getAllProduct(instanceOfSQLServer);
+  return res.json(httpUtil.getSuccess(data));
+};
+
+exports.getProduct = async (req, res) => {
+  const data = await productDA.getProduct(instanceOfSQLServer, req.params.idProduct);
+  console.log(data)
   return res.json(httpUtil.getSuccess(data));
 };
 

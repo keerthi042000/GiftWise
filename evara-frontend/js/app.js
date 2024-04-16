@@ -5,4 +5,4 @@ const productAPI = domain + "/product"
 const brandAPI = domain + "/brand"
 const categoryAPI = domain + "/category"
 const favoriteAPI = domain + "/favourites"
-
+const promocodeAPI = domain + "/promocode"
