@@ -41,11 +41,10 @@ $(document).ready(function () {
                     $('#passwordError').text(response.errorMessage);
                 }else{
                     if(response.payload.isSuperAdmin){
-                        localStorage.setItem('accessToken', response.payload.accessToken);
                         window.location.href = './../../evara-backend/page-brands.html';
                     }else{
-                    localStorage.setItem('accessToken', response.payload.accessToken);
-                    window.location.href = 'page-account.html';
+                     localStorage.setItem('accessToken', response.payload.accessToken);
+                     window.location.href = 'page-account.html';
                     }
                 }
             },
