@@ -528,7 +528,7 @@
             const idPaymentMethod = detectCardType($('#cardNumber').val())
         
             bonus = parseInt(remainingPoints) + parseInt(bonuspoints);
-
+            
             // (:idUser,:idGiftcard,:status,:discount,:totalAmount,:startDate,:endDate,:orderDatetime)
             let orderPostData = {
                 idProduct: idProduct,

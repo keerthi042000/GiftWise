@@ -17,9 +17,9 @@ function generateGiftCardPin() {
 }
 
 // Generate 100 insert queries
-function generateInsertQueries() {
+function generateInsertQueries(count, idProduct) {
     let queries = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < count; i++) {
         let giftCardNumber = generateGiftCardNumber();
         let giftCardPin = generateGiftCardPin();
         if(giftcardNumber.includes(giftCardNumber))
@@ -27,21 +27,29 @@ function generateInsertQueries() {
                  giftCardNumber = generateGiftCardNumber();
             }
         giftcardNumber.push(giftCardNumber)
-        let query = `INSERT INTO GiftCard (IDPRODUCT, GIFTCARDNUMBER, GIFTCARDPIN, STATUS) VALUES (1, '${giftCardNumber}', '${giftCardPin}', 'Inactive');`;
+        let query = `INSERT INTO GiftCard (IDPRODUCT, GIFTCARDNUMBER, GIFTCARDPIN, STATUS) VALUES (${idProduct}, '${giftCardNumber}', '${giftCardPin}', 'Inactive');`;
         queries.push(query);
     }
     return queries;
 }
 
 // Print the insert queries
-require('fs').writeFileSync('./GiftCardSQLQuery.sql', generateInsertQueries().join("\n"))
+
+let prod = {
+    '1': 100,
+    '2': 10,
+    '3': 20,
+    '4': 10,
+    '5': 100,
+    '6': 50,
+    '7': 20,
+    '8': 10,
+    '9': 25,
+}
+
+const result  = Object.keys(prod).map(va=>{
+    return generateInsertQueries(prod[va], va).join("\n")
+})
 
 
-
-// INSERT INTO ORDERS VALUES (1, 1,'Pending',10, 90, '13/04/24', '13/04/25', SYSDATE);
-
-// INSERT INTO ProductOrders  VALUES (1,2);
-// INSERT INTO ProductOrders VALUES (1,3);
-
-// Update giftcard SET status='active' where idGiftcard= 2; 
-// Update giftcard SET status='active' where idGiftcard= 3;
+require('fs').writeFileSync('./GiftCardSQLQuery.sql', result.join("\n"))

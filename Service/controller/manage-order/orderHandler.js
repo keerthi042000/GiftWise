@@ -4,7 +4,7 @@ const axios = require('axios');
 const secretKey = require('./../../config/default.json').secretKey;
 const { httpUtil } = require('../../utils');
 const oracledb = require('oracledb');
-
+const email = require('./../../utils/email')
 exports.getOrder = async (_, res,) => { 
   const idUser = _.query.idUser;
   const orderID = _.query.orderID;
@@ -46,6 +46,8 @@ exports.addOrder = async (req, res) => {
       return res.json(httpUtil.getException([null, giftcardResponse.data.errorMessage]))
     }
     const idGiftCard = giftcardResponse.data.payload[0].idGiftcard;
+    const giftCardNumber = giftcardResponse.data.payload[0].giftCardNumber;
+    const giftCardPin = giftcardResponse.data.payload[0].giftCardPin;
     const ProductOrderresult = await orderDA.addProductOrder(instanceOfSQLServer, orderId, idGiftCard);
     if (userRewards){
       await orderDA.insertRewardsHistory(instanceOfSQLServer, idUser, orderId);
@@ -59,6 +61,8 @@ exports.addOrder = async (req, res) => {
       orderId
     }
     await orderDA.insertTransaction(instanceOfSQLServer, transactionObj)
+    await email.sendMail(decoded.emailId,giftCardNumber, giftCardPin, (+body.discount+ body.totalAmount))
+    await orderDA.insertNotification(instanceOfSQLServer, { idUser, orderId, message: `Email Id: ${decoded.emailId}; \n GiftCardNumber: ${giftCardNumber}; \n Amount: ${+body.discount + body.totalAmount}` })
     return res.json(httpUtil.getSuccess(ProductOrderresult));
   } catch (err) {
     console.log("Error while making order : ", err);

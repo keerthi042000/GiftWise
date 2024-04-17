@@ -150,3 +150,11 @@ exports.INSERT_TRANSACTION = `INSERT INTO Transaction (
     status,
     amount,
     transactionDatetime) VALUES (:idUser, :orderId, :idPaymentMethod, :status, :amount, SYSDATE)`
+
+exports.INSERT_NOTIFICATION = `INSERT INTO Notification (
+    idUser,
+    orderId,
+    isSMSSent,
+    isEmailSent,
+    message,
+    notificationDatetime) VALUES (:idUser, :orderId, 0 , 1 , :message, SYSDATE)`

@@ -209,12 +209,9 @@
             $('#CategoryList').empty();
             CategoryResponse.payload.forEach(element => {
                 console.log("element : ",element);
-                $('#CategoryList').append(`  
-                <div class="col-lg-3 col-md-4 col-8 col-sm-4">              
+                $('#CategoryList').append(`
+                <div class="col-lg-3 col-md-4 col-8 col-sm-4 style="margin-top:10px">              
                 <div class="card-1" onClick="redirectCategory(${element.idCategory})">
-                    <figure class=" img-hover-scale overflow-hidden">
-                        <a><img src="assets/imgs/shop/category-thumb-1.jpg" alt=""></a>
-                    </figure>
                     <h5><a>${element.categoryName}</a></h5>
                 </div></div>`)
             });
@@ -224,12 +221,9 @@
             $('#BrandsList').empty();
             BrandsResponse.payload.forEach(element => {
                 console.log("element : ",element);
-                $('#BrandsList').append(`  
-                <div class="col-lg-3 col-md-4 col-8 col-sm-4">              
+                $('#BrandsList').append(`
+                <div class="col-lg-3 col-md-4 col-8 col-sm-4" style="margin-top:10px">              
                 <div class="card-1" onClick="redirectBrand(${element.idBrand})">
-                    <figure class=" img-hover-scale overflow-hidden">
-                        <a><img src="assets/imgs/shop/category-thumb-1.jpg" alt=""></a>
-                    </figure>
                     <h5><a>${element.brandName}</a></h5>
                 </div></div>`)
             });

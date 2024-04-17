@@ -1,3 +1,4 @@
+const SQLServer = require('../../utils/db');
 const sql = require('./sql');
 exports.getOrder = async (SQLConnection , idUser) => SQLConnection.execute(sql.GET_INDIVIDUAL_ORDER, {idUser});
 
@@ -14,3 +15,5 @@ exports.updateRewards = async (SQLConnection, idUser, rewardPoints) => SQLConnec
 exports.insertRewardsHistory = async (SQLConnection, idUser, orderId) => SQLConnection.execute(sql.INSERT_REWARDSHISTORY, {idUser:idUser, orderId:orderId}, true );
 
 exports.insertTransaction = async (SQLConnection, obj) => SQLConnection.execute(sql.INSERT_TRANSACTION, obj, true );
+
+exports.insertNotification = async (SQLConnection, obj) => SQLConnection.execute(sql.INSERT_NOTIFICATION, obj, true )
