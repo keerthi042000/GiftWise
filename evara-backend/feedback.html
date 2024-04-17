@@ -98,7 +98,7 @@
     function getAllFeedback() {
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:3004/api/account/user/feedback',
+            url: domain + '/api/account/user/feedback',
             contentType: 'application/json',
             success: function (response) {
                 if (response.status !== 200) {

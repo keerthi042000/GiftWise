@@ -109,7 +109,7 @@
         function deleteCategory(idCategory) {
             $.ajax({
                 type: 'DELETE',
-                url: `http://localhost:3004/api/category/${idCategory}`,
+                url: domain+`/api/category/${idCategory}`,
                 contentType: 'application/json',
                 success: function (response) {
 
@@ -128,7 +128,7 @@
             const categoryName = $(`#categoryName${idCategory}`).val()
             $.ajax({
                 type: 'PUT',
-                url: `http://localhost:3004/api/category/${idCategory}`,
+                url: domain + `/api/category/${idCategory}`,
                 contentType: 'application/json',
                 data: JSON.stringify({
                     idCategory,
@@ -179,7 +179,7 @@
         function getCategoryDetails() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:3004/api/category/',
+                url: domain+'/api/category/',
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.status !== 200) {
@@ -202,7 +202,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:3004/api/category/',
+                url: domain +'/api/category/',
                 contentType: 'application/json',
                 data: JSON.stringify(formData),
                 success: function (response) {

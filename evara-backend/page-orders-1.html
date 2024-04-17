@@ -93,7 +93,6 @@
     <script type="text/javascript" src="./app.js"></script>
 
     <script>
-       // localhost:3004/api/order/allOrders
 
        const getPaymentMethodDiv = (a)  => {
             if(a==2) {
@@ -109,7 +108,7 @@
        function getAllOrders() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:3004/api/order/allOrders',
+                url: domain+'/api/order/allOrders',
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.status !== 200) {

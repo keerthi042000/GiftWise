@@ -103,7 +103,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: accountDomain + '/signup/',
+            url: accountAPI + '/signup/',
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function (response) {

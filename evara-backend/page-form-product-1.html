@@ -174,7 +174,7 @@
          function getBrandDetails() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:3004/api/brand/',
+                url: domain+'/api/brand/',
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.status !== 200) {
@@ -194,7 +194,7 @@
         function getProductDetails() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:3004/api/product/',
+                url: domain+'/api/product/',
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.status !== 200) {
@@ -262,7 +262,7 @@
         function getCategoryDetails() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:3004/api/category/',
+                url: domain+'/api/category/',
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.status !== 200) {
@@ -297,7 +297,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:3004/api/product/',
+                url: domain+'/api/product/',
                 contentType: 'application/json',
                 data: JSON.stringify({
                     idBrand,
@@ -327,7 +327,7 @@
         function deleteProduct(idProduct) {
             $.ajax({
                 type: 'DELETE',
-                url: `http://localhost:3004/api/product/${idProduct}`,
+                url: domain+`/api/product/${idProduct}`,
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.status !== 200) {

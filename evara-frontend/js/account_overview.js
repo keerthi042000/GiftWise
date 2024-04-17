@@ -91,7 +91,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'GET',
-        url: accountDomain + '/account_overview/',
+        url: accountAPI + '/account_overview/',
         headers: {
             'Authorization': 'Bearer ' + accessToken
         },
@@ -179,7 +179,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'PUT',
-            url: accountDomain + '/update_details',
+            url: accountAPI + '/update_details',
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             },
@@ -225,7 +225,7 @@ $(document).ready(function () {
         console.log(formData);
         $.ajax({
             type: 'PUT',
-            url: accountDomain + '/update_details',
+            url: accountAPI + '/update_details',
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             },
@@ -308,7 +308,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:3004/api/account/feedback',
+            url: accountAPI+'/feedback',
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             },
