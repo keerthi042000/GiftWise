@@ -172,7 +172,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Place Order</button>
+                            <button id="placeOrderButton" type="button" class="btn btn-primary">Place Order</button>
                         </div>
                     </div>
                 </div>
@@ -416,6 +416,36 @@
                 $('#checkoutTotalAmount').append(`$${product.amount}`)
                 $("#placeOrder").modal('show'); // Show modal
             }
+        })
+
+        $('#placeOrderButton').click(function () {
+            let accessToken = localStorage.getItem('accessToken');
+            let promoCode = $('#checkPromocode').prop('disabled') ? $('#checkPromocode').val() : "";
+
+            // (:idUser,:idGiftcard,:status,:discount,:totalAmount,:startDate,:endDate,:orderDatetime)
+            let orderPostData = {
+                status: 'pending',
+                discount: +$('#checkoutDiscount').text().split("$").join(''),
+                totalAmount: +$('#checkoutTotalAmount').text().split("$").join(''),
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: orderAPI,
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                contentType: 'application/json',
+                data: JSON.stringify(orderPostData),
+                success: function(response) {
+
+                },
+                error: function(error) {
+
+                }
+            })
+
+            console.log(JSON.stringify(orderPostData));
         })
 
         $('#removeFavourite').click(function () {

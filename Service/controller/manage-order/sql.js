@@ -109,11 +109,10 @@ O.orderDatetime`
 
 exports.ADD_ORDER = `INSERT INTO ORDERS (
     idUser,
-    idGiftcard,
     status,
     discount,
     totalAmount,
     startDate,
     endDate,
-    orderDatetime) VALUES (:idUser,:idGiftcard,:status,:discount,:totalAmount,:startDate,:endDate,:orderDatetime)`;
+    orderDatetime) VALUES (:idUser, :status, :discount, :totalAmount, CURRENT_DATE, CURRENT_DATE, ADD_MONTHS(CURRENT_DATE, 12))`;
 
