@@ -297,10 +297,12 @@
             $('#checkoutPrice').empty()
             $('#checkoutDiscount').empty()
             $('#checkoutTotalAmount').empty()
+            $('#remainingPoints').empty()
             let [product] = JSON.parse(individualProduct)
   
             $('#checkoutPrice').append(`$${product.amount}`)
             $('#checkoutDiscount').append(`$${currentDiscount}`)
+            $('#remainingPoints').append(`${localStorage.getItem('remainingPoints')}`)
             $('#checkoutTotalAmount').append(`$${+product.amount - currentDiscount}`)
             $('#removeRewards').show()
             $('#useRewards').hide()
@@ -491,9 +493,12 @@
                 const rewardPoints = localStorage.getItem('rewardPoints')
                 if (rewardPoints > 100 && product.amount > 0){
                     $('#userRewards').append(`<div class="form-group">
-                                    <label>Want to use your rewards ?</label>
-                                    <a id="useRewards" onclick='useRewards(${product.amount})'> Use My Rewards </button>
-                                    <a id="removeRewards" onclick='removeRewards()' style='display: none;'> Remove rewards </a>
+                                    <div id="useRewards"><a onclick='useRewards(${product.amount})'> Use My Rewards </a>
+                                    (Available points : ${localStorage.getItem('rewardPoints')})</div>
+                                    <div id="removeRewards" style='display: none;'>
+                                    <a onclick='removeRewards()'> Remove rewards </a>
+                                    (Remaining points : <span id="remainingPoints"></span>)
+                                    </div>
                                 </div>`)   
                 }
                 $("#placeOrder").modal('show'); // Show modal
@@ -545,13 +550,13 @@
                 contentType: 'application/json',
                 data: JSON.stringify(orderPostData),
                 success: function(response) {
-                    console.log("inside success");
+                    console.log("inside success",response);
                     if(response.status === 401){
                         alert("Unauthorized, Please login again");
                         logout();
                         window.location.href = 'page-login.html';
                     }else if(response.status !== 200){
-                        alert('Something went wrong, please try again!');
+                        alert(response.errorMessage);
                         $('#placeOrder').modal('hide');
                     }else{
                         $('#placeOrder').modal('hide');

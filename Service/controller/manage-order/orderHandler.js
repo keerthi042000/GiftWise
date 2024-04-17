@@ -47,12 +47,16 @@ exports.addOrder = async (req, res) => {
     const result = await orderDA.addOrder(instanceOfSQLServer, body);
     const [orderId] = result.outBinds.OUT_ORDERID;
     const giftcardResponse = await axios.get(`http://localhost:3004/api/giftcard?idProduct=${idProdut}`);
+    if (giftcardResponse.status!=200){
+      return res.json(httpUtil.getException([null, giftcardResponse.data.errorMessage]))
+    }
     const idGiftCard = giftcardResponse.data.payload[0].idGiftcard;
     const ProductOrderresult = await orderDA.addProductOrder(instanceOfSQLServer, orderId, idGiftCard);
     if (userRewards){
       await orderDA.insertRewardsHistory(instanceOfSQLServer, idUser, orderId);
       await orderDA.updateRewards(instanceOfSQLServer, idUser, userRewards.rewardPoints);
     }
+    transactionObj.orderId = orderId;
     await orderDA.insertTransaction(instanceOfSQLServer, transactionObj)
     return res.json(httpUtil.getSuccess(ProductOrderresult));
   } catch (err) {

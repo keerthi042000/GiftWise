@@ -279,6 +279,7 @@ $(document).ready(function () {
                 <div class="order-details-item"><strong> Brand Name : </strong> ${data.payload[0].brandName}</div>
                 <div class="order-details-item"><strong> Category Name : </strong> ${data.payload[0].categoryName}</div>
                 <div class="order-details-item"><strong> Total Amount : </strong> ${data.payload[0].totalAmount}</div>
+                <div class="order-details-item"><strong> Payment Mode : </strong> ${data.payload[0].paymentMethod}</div>
                 <div class="order-details-item"><strong> Discount Applied : </strong> ${data.payload[0].discount}</div>
                 <div class="order-details-item"><strong> Gift card number : </strong> ${data.payload[0].giftCardNumber}</div>
                 <div class="order-details-item"><strong> Gift card pin : </strong> ${data.payload[0].giftCardPin}</div>

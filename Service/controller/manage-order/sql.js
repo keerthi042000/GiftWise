@@ -78,6 +78,7 @@ O.totalAmount AS "totalAmount",
 O.startDate AS "startDate",
 O.endDate AS "endDate",
 O.orderDatetime AS "orderDatetime",
+PM.paymentMethod AS "paymentMethod",
 LISTAGG(DISTINCT G.giftCardNumber, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "giftCardNumber",
 LISTAGG(DISTINCT G.giftCardPin, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "giftCardPin",
 LISTAGG(G.status, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "giftCardStatus",
@@ -96,7 +97,9 @@ Product P ON P.idProduct = G.idProduct
 INNER JOIN 
 Brand B ON B.idBrand = P.idBrand
 INNER JOIN 
-Category C ON C.idCategory = P.idCategory WHERE O.orderId = :orderId
+Category C ON C.idCategory = P.idCategory
+LEFT JOIN TRANSACTION T ON O.orderId = T.orderId
+LEFT JOIN PaymentMethod PM ON T.idPaymentMethod = PM.idPaymentMethod WHERE O.orderId = :orderId
 GROUP BY 
 O.orderId, 
 O.status,
@@ -104,7 +107,8 @@ O.discount,
 O.totalAmount,
 O.startDate,
 O.endDate,
-O.orderDatetime`
+O.orderDatetime,
+PM.paymentMethod`
 
 
 exports.ADD_ORDER = `INSERT INTO ORDERS (
@@ -136,7 +140,8 @@ WHERE idUser = :idUser`;
 
 exports.INSERT_TRANSACTION = `INSERT INTO Transaction (
     idUser,
+    orderId,
     idPaymentMethod,
     status,
     amount,
-    transactionDatetime) VALUES (:idUser, :idPaymentMethod, :status, :amount, SYSDATE)`
+    transactionDatetime) VALUES (:idUser, :orderId, :idPaymentMethod, :status, :amount, SYSDATE)`

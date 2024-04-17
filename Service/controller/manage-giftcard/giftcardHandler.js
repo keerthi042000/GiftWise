@@ -7,7 +7,13 @@ exports.getAllGiftcard = async (_, res) => {
   if (idProduct){
     console.log("inside get gift card");
     const data = await giftcardDA.getGiftcardByProductID(instanceOfSQLServer, idProduct);
-    return res.json(httpUtil.getSuccess(data));
+    if (data.length){
+      await giftcardDA.updateGiftCardStatusByID(instanceOfSQLServer, data[0].idGiftcard);
+      return res.json(httpUtil.getSuccess(data));
+    }
+    else{
+      return res.json(httpUtil.getException([null, 'No Gift Cards available']))
+    }
   }
   const data = await giftcardDA.getAllGiftcard(instanceOfSQLServer);
   return res.json(httpUtil.getSuccess(data));
