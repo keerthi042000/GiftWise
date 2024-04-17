@@ -41,7 +41,7 @@ exports.addProduct = async (req, res) => {
       stepsToRedeem,
       imageURL,
       quantity,
-      // amount
+      amount
     });
     return res.json(httpUtil.getSuccess());
   }
