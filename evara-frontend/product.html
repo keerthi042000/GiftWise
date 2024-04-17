@@ -483,6 +483,7 @@
                 $('#checkoutTotalAmount').empty()
                 $('#checkPromocode').empty()
                 $('#userRewards').empty()
+                currentDiscount = 0;
 
                 const individualProduct = localStorage.getItem('individualProduct')
                 let [product] = JSON.parse(individualProduct)
