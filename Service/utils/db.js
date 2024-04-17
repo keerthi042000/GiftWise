@@ -102,6 +102,7 @@ class SQLServer {
       if (retryCount < MAX_RETRY_COUNT) { // Define MAX_RETRY_COUNT as per your requirement
         console.error(`Error executing SQL statement. Retrying (${retryCount + 1}/${MAX_RETRY_COUNT}):`, err);
         // Retry with a delay
+        await this.resetConnection()
         await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
         return this.execute(SQL, parameters, commit, retryCount + 1);
       } else {
