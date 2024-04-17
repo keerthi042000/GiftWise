@@ -210,7 +210,7 @@
             CategoryResponse.payload.forEach(element => {
                 console.log("element : ",element);
                 $('#CategoryList').append(`
-                <div class="col-lg-3 col-md-4 col-8 col-sm-4 style="margin-top:10px">              
+                <div class="col-lg-3 col-md-4 col-8 col-sm-4" style="margin-top:10px">              
                 <div class="card-1" onClick="redirectCategory(${element.idCategory})">
                     <h5><a>${element.categoryName}</a></h5>
                 </div></div>`)
