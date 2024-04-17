@@ -174,3 +174,10 @@ exports.saveFeedback = async (req, res) => {
     }
   }
 };
+
+exports.getFeedback = async ( req, res) => {
+
+    const records = await accountDA.getFeedback(instanceOfSQLServer);
+    return res.json(httpUtil.getSuccess(records));
+  
+}

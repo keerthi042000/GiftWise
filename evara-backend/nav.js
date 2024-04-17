@@ -26,13 +26,8 @@ $(document).ready(function () {
             </a>
         </li>
         <li class="menu-item">
-            <a class="menu-link" href="page-transactions-1.html"> <i class="icon material-icons md-monetization_on"></i>
-                <span class="text">Transactions</span>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
-                <span class="text">Reviews</span>
+            <a class="menu-link" href="feedback.html"> <i class="icon material-icons md-comment"></i>
+                <span class="text">Feedback</span>
             </a>
         </li>
         </ul>

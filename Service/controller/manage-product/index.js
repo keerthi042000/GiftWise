@@ -18,5 +18,7 @@ router.get('/', [_async(productHandler.getAllProduct)]);
 router.post('/', [_async(productHandler.addProduct)]);
 router.put('/:idProduct', [_async(productHandler.updateProduct)]);
 router.get('/:idProduct', [_async(productHandler.getProduct)]);
+router.delete('/:idProduct', [_async(productHandler.deleteProduct)]);
+
 
 module.exports = router;

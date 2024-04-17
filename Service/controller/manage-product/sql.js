@@ -66,3 +66,5 @@ SET
 exports.ADD_PRODUCT = `INSERT INTO product (idBrand, idCategory, productName,
     description,termsAndConditions,stepsToRedeem,imageURL, quantity ) VALUES (:idBrand, :idCategory, :productName,
         :description,:termsAndConditions,:stepsToRedeem,:imageURL, :quantity, :amount)`;
+
+exports.DELETE_PRODUCT = `DELETE FROM Product where idProduct = :idProduct`

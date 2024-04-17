@@ -247,7 +247,7 @@
                             class="btn btn-light rounded btn-sm font-sm"> <i
                                 class="material-icons md-more_horiz"></i> </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" onClick="submitProduct('brand${idProduct}', ${idProduct})">Submit</a>
+                            <a class="dropdown-item" onClick="submitProduct('product${idProduct}', ${idProduct})">Submit</a>
                             <a class="dropdown-item text-danger" onClick="deleteProduct(${idProduct})">Delete</a>
                         </div>
                     </div>
@@ -323,7 +323,24 @@
                 }
             });
         });
-        
+
+        function deleteProduct(idProduct) {
+            $.ajax({
+                type: 'DELETE',
+                url: `http://localhost:3004/api/product/${idProduct}`,
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.status !== 200) {
+                        console.log(response)
+                    } else {
+                        getProductDetails()
+                    }
+                },
+                error: function (error) {
+                    console.error('error:', error);
+                }
+            });
+        }
     </script>
 </body>
 

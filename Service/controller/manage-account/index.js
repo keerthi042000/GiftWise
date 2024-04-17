@@ -15,4 +15,6 @@ router.post('/feedback', [_async(accountHandler.saveFeedback)]);
 router.get('/account_overview', [_async(accountHandler.getAccountOverview)])
 router.put('/update_details', [_async(accountHandler.updateAccount)])
 
+router.get('/user/feedback', [_async(accountHandler.getFeedback)]);
+
 module.exports = router;

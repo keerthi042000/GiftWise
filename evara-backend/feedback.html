@@ -35,36 +35,36 @@
         <section class="content-main">
             <div class="content-header">
                 <div>
-                    <h2 class="content-title card-title">Order List </h2>
+                    <h2 class="content-title card-title">Feedback</h2>
                 </div>
             </div>
             <div class="card mb-4">
                 <header class="card-header">
                     <div class="row gx-3">
                     </div>
-                </header> <!-- card-header end// -->
+                </header>
+                <!-- card-header end// -->
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th># Order ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Method</th>
+                                    
+                                    <th>#ID</th>
+                                    <th>Email</th>
+                                    <th>Name</th>
+                                    <th>Feedback</th>
+                                    <th>Contact Number</th>
                                 </tr>
                             </thead>
-                            <tbody id="appendOrders">
+                            <tbody id="appendFeedback">
                                 
                             </tbody>
                         </table>
-                    </div> <!-- table-responsive //end -->
-                </div> <!-- card-body end// -->
-            </div> <!-- card end// -->
+                    </div> <!-- table-responsive//end -->
+                </div>
+                <!-- card-body end// -->
+            </div>
         </section> <!-- content-main end// -->
         <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">
@@ -92,54 +92,53 @@
     <script type="text/javascript" src="./nav.js"></script>
     <script type="text/javascript" src="./app.js"></script>
 
+
     <script>
-       // localhost:3004/api/order/allOrders
 
-       const getPaymentMethodDiv = (a)  => {
-            if(a==2) {
-                return ` <div class="icontext">
-                                                    <img class="icon border" src="assets/imgs/card-brands/2.png" alt="Payment">
-                                                </div>`
-            }else{
-                return  `<div class="icontext">
-                                                    <img class="icon border" src="assets/imgs/card-brands/4.png" alt="Payment">
-                                                </div>`
-            }
-       }
-       function getAllOrders() {
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:3004/api/order/allOrders',
-                contentType: 'application/json',
-                success: function (response) {
-                    if (response.status !== 200) {
-                        console.log(response)
-                    } else {
-                        
-                        response.payload.forEach(element => {
-                            $('#appendOrders').append(`<tr>
-                                    <td>${element.orderId}</td>
-                                    <td><b>${element.firstName} ${element.lastName}</b></td>
-                                    <td>${element.emailId}</td>
-                                    <td>$${element.totalAmount}</td>
-                                    <td><a href="./../evara-frontend/product.html?idProduct=${element.idProduct}">${element.productName}</a>
-                                    <td><span class="badge rounded-pill alert-success">${element.status}</span></td>
-                                    <td>${element.orderDatetime}</td>
-                                    <td>
-                                        ${getPaymentMethodDiv(element.idPaymentMethod)}
-                                    <td>
-                                </tr>`)
-                        });
-                       
-                    }
-                },
-                error: function (error) {
+    function getAllFeedback() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3004/api/account/user/feedback',
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.status !== 200) {
+                    console.log(response)
+                } else {
+                        //                     UF.idFeedback AS "idFeedback"
+                        // U.emailId AS "emailId",
+                        // C.firstName AS "firstName",
+                        // C.lastName AS "lastName",
+                        // message AS "message", 
+                        // rating AS "rating" FROM UserFeedback UF
+                    response.payload.forEach(element => {
+                        $('#appendFeedback').append(`<tr>
+        
+                            <td>${element.idFeedback}</td>
+                            <td>${element.firstName} ${element.lastName}</td>
+                            <td>${element.message}</td>
+                            <td>
+                                <ul class="rating-stars">
+                                    <li style="width: ${element.rating*20}%;" class="stars-active">
+                                        <img src="assets/imgs/icons/stars-active.svg" alt="stars" />
+                                    </li>
+                                    <li>
+                                        <img src="assets/imgs/icons/starts-disable.svg" alt="stars" />
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>${element.phoneNumber}</td>
+                        </tr>`)
+                    });
+                   
                 }
-            });
-        }
+            },
+            error: function (error) {
+            }
+        });
+    }
 
-        getAllOrders()
-    </script>
+    getAllFeedback()
+</script>
 </body>
 
 </html>

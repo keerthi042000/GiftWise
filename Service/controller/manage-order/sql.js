@@ -18,7 +18,8 @@ G.status AS "giftCardStatus",
 G.idProduct AS "idProduct",
 P.productName AS "productName",
 B.brandName AS "brandName",
-C.categoryName AS "categoryName"
+C.categoryName AS "categoryName",
+T.idPaymentMethod AS "idPaymentMethod"
 FROM 
 Orders O
 INNER JOIN 
@@ -34,7 +35,9 @@ Product P ON P.idProduct = G.idProduct
 INNER JOIN 
 Brand B ON B.idBrand = P.idBrand
 INNER JOIN 
-Category C ON C.idCategory = P.idCategory`
+Category C ON C.idCategory = P.idCategory
+INNER JOIN
+Transaction T ON T.orderId = O.orderId`
 
 exports.GET_INDIVIDUAL_ORDER = `SELECT 
 O.orderId AS "orderId",
@@ -146,4 +149,5 @@ exports.INSERT_TRANSACTION = `INSERT INTO Transaction (
     idPaymentMethod,
     status,
     amount,
-    transactionDatetime) VALUES (:idUser, :orderId, :idPaymentMethod, :status, :amount, SYSDATE)`
+    transactionDatetime,
+    orderId ) VALUES (:idUser, :orderId, :idPaymentMethod, :status, :amount, SYSDATE, :orderId)`

@@ -40,3 +40,17 @@ exports.UPDATE_USERDETAILS = `UPDATE Users set :updateValues where idUser = :idU
 exports.UPDATE_CUSTOMERDETAILS = `UPDATE Customer set :updateValues where idUser = :idUser`
 
 exports.UPDATE_PHONEDETAILS = `UPDATE CustomerPhoneDetails SET :updateValues where idCustomer = (select idCustomer from Customer where idUser = :idUser)`
+
+exports.GET_FEEDBACK = `SELECT 
+UF.idFeedback AS "idFeedback",
+U.emailId AS "emailId",
+C.firstName AS "firstName",
+C.lastName AS "lastName",
+message AS "message", 
+CP.phoneNumber AS "phoneNumber",
+rating AS "rating" FROM UserFeedback UF
+INNER JOIN Customer C ON C.idUser = UF.idUser
+INNER JOIN Users U ON U.idUser = UF.idUser
+INNER JOIN CustomerPhoneDetails CP ON CP.idCustomer = C.idCustomer
+
+`

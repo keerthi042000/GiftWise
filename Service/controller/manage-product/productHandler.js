@@ -71,3 +71,9 @@ exports.updateProduct = async (req, res) => {
   }
   return res.json(httpUtil.getBadRequest());
 };
+
+exports.deleteProduct = async (req, res) => {
+  const { idProduct } = req.params;
+  await productDA.deleteProduct(instanceOfSQLServer, { idProduct })
+  return res.json(httpUtil.getSuccess([]));
+};

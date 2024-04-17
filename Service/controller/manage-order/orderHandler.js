@@ -37,12 +37,7 @@ exports.addOrder = async (req, res) => {
     }
     const idPaymentMethod = req.body.idPaymentMethod;
     delete req.body.idPaymentMethod;
-    const transactionObj = {
-      idUser,
-      idPaymentMethod,
-      status: 'success',
-      amount: req.body.totalAmount
-    }
+    
     body.out_orderId= { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }
     const result = await orderDA.addOrder(instanceOfSQLServer, body);
     const [orderId] = result.outBinds.OUT_ORDERID;
@@ -56,7 +51,13 @@ exports.addOrder = async (req, res) => {
       await orderDA.insertRewardsHistory(instanceOfSQLServer, idUser, orderId);
       await orderDA.updateRewards(instanceOfSQLServer, idUser, userRewards.rewardPoints);
     }
-    transactionObj.orderId = orderId;
+    const transactionObj = {
+      idUser,
+      idPaymentMethod,
+      status: 'success',
+      amount: req.body.totalAmount,
+      orderId
+    }
     await orderDA.insertTransaction(instanceOfSQLServer, transactionObj)
     return res.json(httpUtil.getSuccess(ProductOrderresult));
   } catch (err) {

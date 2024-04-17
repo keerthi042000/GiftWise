@@ -99,3 +99,5 @@ exports.insertFeedback = async (connection, idUser, feedback, rating) => {
   const result = await connection.execute(sql.INSERT_FEEDBACK, { idUser, feedback, rating });
   return result.rowsAffected;
 };
+
+exports.getFeedback = async (SQLConnection) => SQLConnection.execute(sql.GET_FEEDBACK);

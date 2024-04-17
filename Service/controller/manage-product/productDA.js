@@ -13,3 +13,5 @@ exports.checkIfProductExist = async (SQLConnection, productObj) => SQLConnection
 exports.addProduct = async (SQLConnection, productObj) => SQLConnection.execute(sql.ADD_PRODUCT, productObj, true);
 
 exports.updateProduct = async (SQLConnection, productObj) => SQLConnection.execute(sql.UPDATE_PRODUCT, productObj, true);
+
+exports.deleteProduct = async (SQLConnection, productObj) => SQLConnection.execute(sql.DELETE_PRODUCT, productObj, true);
