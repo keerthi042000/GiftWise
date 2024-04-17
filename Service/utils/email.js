@@ -11,13 +11,13 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-exports.sendMail = (email, giftcardNumber, giftcardPin, amount) => {
+exports.sendMail = (email, giftcardNumber, giftcardPin, amount, imageURL) => {
     // Email message options
     let mailOptions = {
         from: 'vrevankar@wpi.edu', // Sender address
         to: email, // List of recipients
         subject: 'Gift Card', // Subject line
-        html: emailTemplate.getTemplate(giftcardNumber, giftcardPin, amount) // Plain text body
+        html: emailTemplate.getTemplate(giftcardNumber, giftcardPin, amount, imageURL) // Plain text body
     };
 
     // Send mail with defined transport object
