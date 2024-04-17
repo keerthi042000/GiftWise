@@ -15,7 +15,7 @@ router.use((req, res, next) => {
 });
 
 router.get('/', [_async(orderHandler.getOrder)]);
-router.get('/orders', [_async(orderHandler.getAllOrders)]);
+router.get('/allOrders', [_async(orderHandler.getAllOrder)]);
 router.post('/', [_async(orderHandler.addOrder)]);
 
 

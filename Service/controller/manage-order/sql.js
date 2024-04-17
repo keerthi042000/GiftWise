@@ -1,4 +1,10 @@
 exports.GET_ALL_ORDER = `SELECT 
+O.idUser AS "idUser",
+U.emailId As "emailId",
+US.firstName AS "firstName",
+US.lastName AS "lastName",
+US.address AS "address",
+US.zipcode AS "zipcode",
 O.orderId AS "orderId",
 O.status AS "status",
 O.discount AS "discount",
@@ -6,17 +12,21 @@ O.totalAmount AS "totalAmount",
 O.startDate AS "startDate",
 O.endDate AS "endDate",
 O.orderDatetime AS "orderDatetime",
-LISTAGG(DISTINCT G.giftCardNumber, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "giftCardNumber",
-LISTAGG(DISTINCT G.giftCardPin, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "giftCardPin",
-LISTAGG(G.status, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "giftCardStatus",
-LISTAGG(DISTINCT G.idProduct, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "idProduct",
-LISTAGG(DISTINCT P.productName, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "productName",
-LISTAGG(DISTINCT B.brandName, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "brandName",
-LISTAGG(DISTINCT C.categoryName, ',') WITHIN GROUP (ORDER BY G.idGiftcard) AS "categoryName"
+G.giftCardNumber AS "giftCardNumber",
+G.giftCardPin AS "giftCardPin",
+G.status AS "giftCardStatus",
+G.idProduct AS "idProduct",
+P.productName AS "productName",
+B.brandName AS "brandName",
+C.categoryName AS "categoryName"
 FROM 
 Orders O
 INNER JOIN 
 ProductOrders PO ON PO.orderId = O.orderId
+INNER JOIN 
+Customer US ON US.idUser = O.idUser
+INNER JOIN 
+Users U ON U.idUser = O.idUser
 INNER JOIN 
 GiftCard G ON G.idGiftcard = PO.idGiftcard
 INNER JOIN 
@@ -24,15 +34,7 @@ Product P ON P.idProduct = G.idProduct
 INNER JOIN 
 Brand B ON B.idBrand = P.idBrand
 INNER JOIN 
-Category C ON C.idCategory = P.idCategory
-GROUP BY 
-O.orderId, 
-O.status,
-O.discount,
-O.totalAmount,
-O.startDate,
-O.endDate,
-O.orderDatetime`
+Category C ON C.idCategory = P.idCategory`
 
 exports.GET_INDIVIDUAL_ORDER = `SELECT 
 O.orderId AS "orderId",
