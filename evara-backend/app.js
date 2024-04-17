@@ -1,1 +1,1 @@
-let domain = "http://localhost:3004"
+const domain = "https://malamute-communal-skunk.ngrok-free.app"
