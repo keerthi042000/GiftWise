@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
       emailId: user[0][1],
       isSuperAdmin: user[0][3]
     };
-    const token = jwt.sign(payload, secretKey, { expiresIn: '15m' });
+    const token = jwt.sign(payload, secretKey, { expiresIn: '5m' });
     await accountDA.resetLoginAttempts(connection, user[0][0]);
     connection.commit();
     return res.json(httpUtil.getSuccess({
@@ -91,7 +91,7 @@ exports.getAccountOverview = async (req, res) => {
     const idUser = decoded.idUser;
 
     [customer_details] = await accountDA.getCustomerDetails(instanceOfSQLServer, {idUser});
-    const orderApiResponse = await axios.get(`http://localhost:3004/api/order?idUser=${idUser}`);
+    const orderApiResponse = await axios.get(`https://malamute-communal-skunk.ngrok-free.app/api/order?idUser=${idUser}`);
     customer_details['order_details'] = orderApiResponse.data.payload;
     return res.json(httpUtil.getSuccess(customer_details));
   } catch (err) {

@@ -1,4 +1,4 @@
-const domain = "http://localhost:3004"
+const domain = "https://malamute-communal-skunk.ngrok-free.app"
 const accountAPI = domain + "/api/account"
 const orderAPI = domain + "/api/order"
 const productAPI = domain + "/api/product"
