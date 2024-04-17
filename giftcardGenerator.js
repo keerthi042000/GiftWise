@@ -36,15 +36,16 @@ function generateInsertQueries(count, idProduct) {
 // Print the insert queries
 
 let prod = {
-    '1': 100,
-    '2': 10,
-    '3': 20,
-    '4': 10,
-    '5': 100,
-    '6': 50,
-    '7': 20,
-    '8': 10,
-    '9': 25,
+    // '1': 100,
+    // '2': 10,
+    // '3': 20,
+    // '4': 10,
+    // '5': 100,
+    // '6': 50,
+    // '7': 20,
+    // '8': 10,
+    // '9': 25,
+    '10': 50
 }
 
 const result  = Object.keys(prod).map(va=>{
@@ -52,4 +53,4 @@ const result  = Object.keys(prod).map(va=>{
 })
 
 
-require('fs').writeFileSync('./GiftCardSQLQuery.sql', result.join("\n"))
+require('fs').writeFileSync('./GiftCardSQLQuery-Product.sql', result.join("\n"))
