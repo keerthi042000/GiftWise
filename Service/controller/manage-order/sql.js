@@ -114,7 +114,7 @@ exports.ADD_ORDER = `INSERT INTO ORDERS (
     totalAmount,
     startDate,
     endDate,
-    orderDatetime) VALUES (:idUser, :status, :discount, :totalAmount, CURRENT_DATE, CURRENT_DATE, ADD_MONTHS(CURRENT_DATE, 12))
+    orderDatetime) VALUES (:idUser, :status, :discount, :totalAmount, CURRENT_DATE, ADD_MONTHS(CURRENT_DATE, 12), CURRENT_DATE)
     RETURNING orderId INTO :out_orderId`;
 
 

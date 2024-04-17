@@ -128,6 +128,9 @@ exports.updateAccount = async (req, res) => {
       console.log('User update result:', userUpdateResult);
     }
     if (customer && Object.keys(customer).length) {
+      if(customer.dob){
+        customer.dob = new Date(customer.dob)
+      }
       const customerUpdateResult = await accountDA.updateDetails(connection, idUser, customer, 'updateCustomer');
       console.log('Customer update result:', customerUpdateResult);
     }
