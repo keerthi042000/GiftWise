@@ -33,7 +33,7 @@ class SQLServer {
   async resetConnection() {
     try {
       // Close the existing connection (if open)
-      await oracledb.getPool().close(1); // Close the connection pool with a 10-second timeout
+      await oracledb.getPool().close(3); // Close the connection pool with a 10-second timeout
   
       // Re-establish the connection
       await oracledb.createPool({ ...config['db.config'],  "poolAlias": this.poolName } )
