@@ -35,6 +35,14 @@ exports.addOrder = async (req, res) => {
       userRewards = body.userRewards;
       delete body.userRewards;
     }
+    const idPaymentMethod = req.body.idPaymentMethod;
+    delete req.body.idPaymentMethod;
+    const transactionObj = {
+      idUser,
+      idPaymentMethod,
+      status: 'success',
+      amount: req.body.totalAmount
+    }
     body.out_orderId= { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }
     const result = await orderDA.addOrder(instanceOfSQLServer, body);
     const [orderId] = result.outBinds.OUT_ORDERID;
@@ -45,6 +53,7 @@ exports.addOrder = async (req, res) => {
       await orderDA.insertRewardsHistory(instanceOfSQLServer, idUser, orderId);
       await orderDA.updateRewards(instanceOfSQLServer, idUser, userRewards.rewardPoints);
     }
+    await orderDA.insertTransaction(instanceOfSQLServer, transactionObj)
     return res.json(httpUtil.getSuccess(ProductOrderresult));
   } catch (err) {
     console.log("Error while making order : ", err);

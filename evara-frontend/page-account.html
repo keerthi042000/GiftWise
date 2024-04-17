@@ -39,35 +39,50 @@
                                 <div class="dashboard-menu">
                                     <ul class="nav flex-column" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                            <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab"
+                                                href="#dashboard" role="tab" aria-controls="dashboard"
+                                                aria-selected="false"><i
+                                                    class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                                            <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders"
+                                                role="tab" aria-controls="orders" aria-selected="false"><i
+                                                    class="fi-rs-shopping-bag mr-10"></i>Orders</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="far fa-star mr-10"></i>My Rewards</a>
+                                            <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab"
+                                                href="#track-orders" role="tab" aria-controls="track-orders"
+                                                aria-selected="false"><i class="far fa-star mr-10"></i>My Rewards</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
+                                            <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab"
+                                                href="#account-detail" role="tab" aria-controls="account-detail"
+                                                aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#feedback" role="tab" aria-controls="feedback" aria-selected="true"><i class="far fa-comment mr-10"></i>Feedback</a>
+                                            <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab"
+                                                href="#feedback" role="tab" aria-controls="feedback"
+                                                aria-selected="true"><i class="far fa-comment mr-10"></i>Feedback</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" onclick="logout()"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                            <a class="nav-link" onclick="logout()"><i
+                                                    class="fi-rs-sign-out mr-10"></i>Logout</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="tab-content dashboard-content">
-                                    <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                                    <div class="tab-pane fade active show" id="dashboard" role="tabpanel"
+                                        aria-labelledby="dashboard-tab">
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5 class="mb-0">Hello <span id="WelcomeName"></span> </h5>
                                             </div>
                                             <div class="card-body">
-                                                <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a> and <a href="#">edit your password and account details.</a></p>
+                                                <p>From your account dashboard. you can easily check &amp; view your <a
+                                                        href="#">recent orders</a> and <a href="#">edit your password
+                                                        and account details.</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +94,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="table-responsive">
-                                                    <table style="border-collapse: collapse;" >
+                                                    <table style="border-collapse: collapse;">
                                                         <thead style="background-color: #f7f8f9;">
                                                             <tr>
                                                                 <th style="border: none;">Order ID</th>
@@ -88,27 +103,30 @@
                                                                 <th style="border: none;">Total Amount</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody id="ordersBody">                   
+                                                        <tbody id="ordersBody">
                                                         </tbody>
-                                                        
+
                                                     </table>
                                                     <div id="pagination"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="track-orders" role="tabpanel" aria-labelledby="track-orders-tab">
-                                        <div class="card" stype = "align-items: center;">
+                                    <div class="tab-pane fade" id="track-orders" role="tabpanel"
+                                        aria-labelledby="track-orders-tab">
+                                        <div class="card" stype="align-items: center;">
                                             <div class="card-header">
                                                 <h5 class="mb-0">Rewards</h5>
                                             </div>
-                                            <div class="card-body contact-from-area" style="display: flex; flex-direction: column; align-items: center;">
+                                            <div class="card-body contact-from-area"
+                                                style="display: flex; flex-direction: column; align-items: center;">
                                                 <p>Your available reward points</p>
                                                 <div class="circle" id="rewardPointsCircle"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
+                                    <div class="tab-pane fade" id="account-detail" role="tabpanel"
+                                        aria-labelledby="account-detail-tab">
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5>Personal details</h5>
@@ -118,22 +136,31 @@
                                                     <div class="row" id="section1">
                                                         <div class="form-group col-md-6">
                                                             <label>First Name <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="fName" name="fName" type="text" onchange="myFunction('saveButton')">
+                                                            <input required="" class="form-control square" id="fName"
+                                                                name="fName" type="text"
+                                                                onchange="myFunction('saveButton')">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label>Last Name <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="lastName" name="lastName" type="text" onchange="myFunction('saveButton')">
+                                                            <input required="" class="form-control square" id="lastName"
+                                                                name="lastName" type="text"
+                                                                onchange="myFunction('saveButton')">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label>Email Address <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="email" name="email" type="email" onchange="myFunction('saveButton')">
+                                                            <input required="" class="form-control square" id="email"
+                                                                name="email" type="email"
+                                                                onchange="myFunction('saveButton')">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label>DOB <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="dob" name="dob" type="date" onchange="myFunction('saveButton')">
+                                                            <input required="" class="form-control square" id="dob"
+                                                                name="dob" type="date"
+                                                                onchange="myFunction('saveButton')">
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <button class="btn btn-md btn-primary" id="saveButton" style="display: none;">Save details</button>
+                                                            <button class="btn btn-md btn-primary" id="saveButton"
+                                                                style="display: none;">Save details</button>
                                                         </div>
                                                     </div>
                                             </div>
@@ -141,23 +168,31 @@
                                                 <h5>Address & Phone details</h5>
                                             </div>
                                             <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <label>Address <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="Address" name="Address" type="text" onchange="myFunction('saveButton1')">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label>ZipCode <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="ZipCode" name="ZipCode" type="text" onchange="myFunction('saveButton1')">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label>Mobile Number <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="phno" name="phno" type="text" onchange="myFunction('saveButton1')">
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <button id="saveButton1" style="display: none;" type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>
-                                                        </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label>Address <span class="required">*</span></label>
+                                                        <input required="" class="form-control square" id="Address"
+                                                            name="Address" type="text"
+                                                            onchange="myFunction('saveButton1')">
                                                     </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>ZipCode <span class="required">*</span></label>
+                                                        <input required="" class="form-control square" id="ZipCode"
+                                                            name="ZipCode" type="text"
+                                                            onchange="myFunction('saveButton1')">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Mobile Number <span class="required">*</span></label>
+                                                        <input required="" class="form-control square" id="phno"
+                                                            name="phno" type="text"
+                                                            onchange="myFunction('saveButton1')">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <button id="saveButton1" style="display: none;" type="submit"
+                                                            class="btn btn-fill-out submit" name="submit"
+                                                            value="Submit">Save</button>
+                                                    </div>
+                                                </div>
                                                 </form>
                                             </div>
                                             <div class="card-header">
@@ -167,49 +202,67 @@
                                                 <form method="put" name="enq" id="accountUpdatepwd">
                                                     <div class="row">
                                                         <div class="form-group col-md-12">
-                                                            <label>Current Password <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="password" name="password" type="password" onchange="myFunction('saveButton2')">
+                                                            <label>Current Password <span
+                                                                    class="required">*</span></label>
+                                                            <input required="" class="form-control square" id="password"
+                                                                name="password" type="password"
+                                                                onchange="myFunction('saveButton2')">
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <label>New Password <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="npassword" name="npassword" type="password" onchange="myFunction('saveButton2')">
+                                                            <input required="" class="form-control square"
+                                                                id="npassword" name="npassword" type="password"
+                                                                onchange="myFunction('saveButton2')">
                                                         </div>
                                                         <div class="form-group col-md-12">
-                                                            <label>Confirm Password <span class="required">*</span></label>
-                                                            <input required="" class="form-control square" id="cpassword" name="cpassword" type="password" onchange="myFunction('saveButton2')">
+                                                            <label>Confirm Password <span
+                                                                    class="required">*</span></label>
+                                                            <input required="" class="form-control square"
+                                                                id="cpassword" name="cpassword" type="password"
+                                                                onchange="myFunction('saveButton2')">
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <button id="saveButton2" style="display: none;" type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>
+                                                            <button id="saveButton2" style="display: none;"
+                                                                type="submit" class="btn btn-fill-out submit"
+                                                                name="submit" value="Submit">Save</button>
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="feedback" role="tabpanel" aria-labelledby="feedback-tab">
+                                    <div class="tab-pane fade" id="feedback" role="tabpanel"
+                                        aria-labelledby="feedback-tab">
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5 class="mb-0">Your Feedback</h5>
                                             </div>
                                             <div class="card-body contact-from-area">
                                                 <p>Please provide your valuable feedback to improve our product.</p>
-                                                <form id="feedbackForm" method="post" name="feedback" >
+                                                <form id="feedbackForm" method="post" name="feedback">
                                                     <div class="form-group">
                                                         <label for="feedbackText">Your Feedback</label>
-                                                        <textarea required class="form-control" id="feedbackText" name="feedbackText" rows="5"></textarea>
+                                                        <textarea required class="form-control" id="feedbackText"
+                                                            name="feedbackText" rows="5"></textarea>
                                                     </div>
                                                     <div class="rating-container">
                                                         <label for="rating">Rating : </label>
                                                         <div class="star-rating">
-                                                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-                                                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-                                                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-                                                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-                                                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                                                            <input type="radio" id="star5" name="rating"
+                                                                value="5" /><label for="star5"></label>
+                                                            <input type="radio" id="star4" name="rating"
+                                                                value="4" /><label for="star4"></label>
+                                                            <input type="radio" id="star3" name="rating"
+                                                                value="3" /><label for="star3"></label>
+                                                            <input type="radio" id="star2" name="rating"
+                                                                value="2" /><label for="star2"></label>
+                                                            <input type="radio" id="star1" name="rating"
+                                                                value="1" /><label for="star1"></label>
                                                         </div>
                                                     </div>
                                                     <div class="submit-container">
-                                                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                                                        <button type="submit" class="btn btn-primary">Submit
+                                                            Feedback</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -222,7 +275,8 @@
                 </div>
             </div>
         </section>
-        <div class="modal fade" id="orderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderDetailsModalTitle" aria-hidden="true">
+        <div class="modal fade" id="orderDetailsModal" tabindex="-1" role="dialog"
+            aria-labelledby="orderDetailsModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -287,9 +341,19 @@
     <script src="js/footer.js"></script>
 
     <script>
-    function myFunction(buttonId) {
-        $("#" + buttonId).toggle(true);
-    }
+        function myFunction(buttonId) {
+            $("#" + buttonId).toggle(true);
+        }
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Simulate click on the desired nav tab
+            const urlParams = new URLSearchParams(window.location.search);
+            const href = urlParams.get('href');
+            console.log("href>>>>", href)
+            if (href) {
+                document.getElementById('orders-tab').click();
+            }
+        });
+
     </script>
 </body>
 

@@ -12,3 +12,5 @@ exports.addProductOrder = async (SQLConnection, orderId, idGiftCard) => SQLConne
 exports.updateRewards = async (SQLConnection, idUser, rewardPoints) => SQLConnection.execute(sql.UPDATE_REWARDS, {idUser:idUser, points:rewardPoints}, true );
 
 exports.insertRewardsHistory = async (SQLConnection, idUser, orderId) => SQLConnection.execute(sql.INSERT_REWARDSHISTORY, {idUser:idUser, orderId:orderId}, true );
+
+exports.insertTransaction = async (SQLConnection, obj) => SQLConnection.execute(sql.INSERT_TRANSACTION, obj, true );

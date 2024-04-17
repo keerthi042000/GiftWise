@@ -133,4 +133,10 @@ exports.INSERT_REWARDSHISTORY = `INSERT INTO UserRewardsHistory (
 SELECT idReward, :orderId, points, SYSDATE
 FROM UserRewards
 WHERE idUser = :idUser`;
-   
+
+exports.INSERT_TRANSACTION = `INSERT INTO Transaction (
+    idUser,
+    idPaymentMethod,
+    status,
+    amount,
+    transactionDatetime) VALUES (:idUser, :idPaymentMethod, :status, :amount, SYSDATE)`
