@@ -1,7 +1,9 @@
 const sql = require('./sql');
 
-exports.getAllGiftcard = () => SQLConnection.execute(sql.GET_ALL_GIFTCARD);
+exports.getAllGiftcard = async (SQLConnection) => SQLConnection.execute(sql.GET_ALL_GIFTCARD);
 
-exports.checkIfGiftcardExist = (idGiftcard) => SQLConnection.execute(sql.CHECK_GIFTCARD_EXIST, idGiftcard);
+exports.getGiftcardByProductID = async (SQLConnection, idProduct) => SQLConnection.execute(sql.GET_GIFTCARD_BYPRODUCTID, {idProduct});
 
-exports.addGiftcard = (giftcartArr) => SQLConnection.execute(sql.ADD_GIFTCARD, giftcartArr, true);
+exports.checkIfGiftcardExist = async (SQLConnection, idGiftcard) => SQLConnection.execute(sql.CHECK_GIFTCARD_EXIST, idGiftcard);
+
+exports.addGiftcard = async (SQLConnection, giftcartArr) => SQLConnection.execute(sql.ADD_GIFTCARD, giftcartArr, true);

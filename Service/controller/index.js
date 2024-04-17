@@ -5,7 +5,7 @@ const { apiConfig } = require('../constants');
 
 const brandController = require('./manage-brand');
 const productController = require('./manage-product');
-
+const giftCardController = require('./manage-giftcard');
 const categoryController = require('./manage-category');
 const promocodeController = require('./manage-promocode');
 const orderController = require('./manage-order');
@@ -29,7 +29,7 @@ router.use((_req, _res, next) => {
 
 router.use(API.BRAND_API, brandController);
 router.use(API.PRODUCT_API, productController);
-
+router.use(API.GIFTCARD_API, giftCardController);
 router.use(API.CATEGORY_API, categoryController);
 router.use(API.PROMOCODE_API, promocodeController);
 router.use(API.ORDER_API, orderController);

@@ -60,7 +60,7 @@ Product P ON P.idProduct = G.idProduct
 INNER JOIN 
 Brand B ON B.idBrand = P.idBrand
 INNER JOIN 
-Category C ON C.idCategory = P.idCategory WHERE O.idUser = :idUser
+Category C ON C.idCategory = P.idCategory WHERE O.idUser = :idUser 
 GROUP BY 
 O.orderId, 
 O.status,
@@ -68,7 +68,7 @@ O.discount,
 O.totalAmount,
 O.startDate,
 O.endDate,
-O.orderDatetime`
+O.orderDatetime  ORDER BY O.orderId DESC`
 
 exports.GET_INDIVIDUAL_ORDER_BY_ORDERID = `SELECT 
 O.orderId AS "orderId",
@@ -114,5 +114,11 @@ exports.ADD_ORDER = `INSERT INTO ORDERS (
     totalAmount,
     startDate,
     endDate,
-    orderDatetime) VALUES (:idUser, :status, :discount, :totalAmount, CURRENT_DATE, CURRENT_DATE, ADD_MONTHS(CURRENT_DATE, 12))`;
+    orderDatetime) VALUES (:idUser, :status, :discount, :totalAmount, CURRENT_DATE, CURRENT_DATE, ADD_MONTHS(CURRENT_DATE, 12))
+    RETURNING orderId INTO :out_orderId`;
 
+
+exports.ADD_PRODUCTORDER = `INSERT INTO ProductOrders (
+    orderId,
+    idGiftcard) VALUES (:orderId, :idGiftCard)`;
+    

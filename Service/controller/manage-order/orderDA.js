@@ -5,4 +5,6 @@ exports.getOrderbyOrderID = async (SQLConnection , orderID) => SQLConnection.exe
 
 exports.getAllOrder = async (SQLConnection) => SQLConnection.execute(sql.GET_ALL_ORDER);
 
-exports.addOrder = async (SQLConnection, obj) => SQLConnection.execute(sql.ADD_ORDER, obj, true);
+exports.addOrder = async (SQLConnection, obj) => SQLConnection.execute(sql.ADD_ORDER, obj, true );
+
+exports.addProductOrder = async (SQLConnection, orderId, idGiftCard) => SQLConnection.execute(sql.ADD_PRODUCTORDER, {orderId, idGiftCard}, true );

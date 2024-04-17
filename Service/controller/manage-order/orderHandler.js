@@ -1,7 +1,9 @@
 const orderDA = require('./orderDA');
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
 const secretKey = require('./../../config/default.json').secretKey;
 const { httpUtil } = require('../../utils');
+const oracledb = require('oracledb');
 
 exports.getOrder = async (_, res,) => { 
   const idUser = _.query.idUser;
@@ -25,10 +27,16 @@ exports.addOrder = async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = await jwt.verify(token, secretKey);
     const idUser = decoded.idUser;
-
+    const idProdut = body.idProduct;
+    delete body.idProduct;
     body.idUser = idUser;
-    await orderDA.addOrder(instanceOfSQLServer, body);
-    return res.json(httpUtil.getSuccess());
+    body.out_orderId= { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }
+    const result = await orderDA.addOrder(instanceOfSQLServer, body);
+    const [orderId] = result.outBinds.OUT_ORDERID;
+    const giftcardResponse = await axios.get(`http://localhost:3004/api/giftcard?idProduct=${idProdut}`);
+    const idGiftCard = giftcardResponse.data.payload[0].idGiftcard;
+    const ProductOrderresult = await orderDA.addProductOrder(instanceOfSQLServer, orderId, idGiftCard);
+    return res.json(httpUtil.getSuccess(ProductOrderresult));
   } catch (err) {
     console.log("Error while making order : ", err);
     if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {

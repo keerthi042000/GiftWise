@@ -5,12 +5,10 @@ const jwt = require('jsonwebtoken');
 
 exports.getAllFav = async (req, res) => {
   try {
-    console.log("inside fav");
     const token = req.headers.authorization.split(' ')[1];
     const decoded = await jwt.verify(token, secretKey);
     const idUser = decoded.idUser;
     const data = await favDA.getAllFav(instanceOfSQLServer, idUser);
-    console.log("data : ", data);
     return res.json(httpUtil.getSuccess(data));
   } catch (err) {
     console.log("Error while updating : ", err);
@@ -27,10 +25,8 @@ exports.deleteFavByID = async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = await jwt.verify(token, secretKey);
     const idUser = decoded.idUser;
-    console.log("inside fav delete", req.params, idUser);
     const idProduct = req.params.idProduct;
     const data = await favDA.deleteFavByID(instanceOfSQLServer, idUser, idProduct);
-    console.log("data : ", data);
     return res.json(httpUtil.getSuccess(data));
   } catch (err) {
     console.log("Error while updating : ", err);
@@ -49,7 +45,6 @@ exports.addFav = async (req, res) => {
     const idUser = decoded.idUser;
     const idProduct = req.body.idProduct;
     const data = await favDA.addFav(instanceOfSQLServer, {  idUser, idProduct});
-    console.log("data : ", data);
     return res.json(httpUtil.getSuccess(data));
   } catch (err) {
     console.log("Error while updating : ", err);

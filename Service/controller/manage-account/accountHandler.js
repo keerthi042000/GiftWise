@@ -93,7 +93,6 @@ exports.getAccountOverview = async (req, res) => {
     [customer_details] = await accountDA.getCustomerDetails(instanceOfSQLServer, {idUser});
     const orderApiResponse = await axios.get(`http://localhost:3004/api/order?idUser=${idUser}`);
     customer_details['order_details'] = orderApiResponse.data.payload;
-    console.log("customer_Details ; ", customer_details);
     return res.json(httpUtil.getSuccess(customer_details));
   } catch (err) {
     console.log("Error while getting details : ",err);

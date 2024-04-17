@@ -424,6 +424,7 @@
 
             // (:idUser,:idGiftcard,:status,:discount,:totalAmount,:startDate,:endDate,:orderDatetime)
             let orderPostData = {
+                idProduct: idProduct,
                 status: 'pending',
                 discount: +$('#checkoutDiscount').text().split("$").join(''),
                 totalAmount: +$('#checkoutTotalAmount').text().split("$").join(''),
@@ -438,10 +439,22 @@
                 contentType: 'application/json',
                 data: JSON.stringify(orderPostData),
                 success: function(response) {
-
+                    console.log("inside success");
+                    if(response.status === 401){
+                        alert("Unauthorized, Please login again");
+                        logout();
+                        window.location.href = 'page-login.html';
+                    }else if(response.status !== 200){
+                        alert('Something went wrong, please try again!');
+                        $('#placeOrder').modal('hide');
+                    }else{
+                        $('#placeOrder').modal('hide');
+                        alert('Order placed successfully!');
+                    }
                 },
                 error: function(error) {
-
+                    alert('Something went wrong, please try again!');
+                    $('#placeOrder').modal('hide');
                 }
             })
 
