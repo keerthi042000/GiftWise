@@ -44,7 +44,7 @@ $(document).ready(function () {
                         window.location.href = './../../evara-backend/page-brands.html';
                     }else{
                      localStorage.setItem('accessToken', response.payload.accessToken);
-                     window.location.href = 'index.html';
+                     window.location.href = 'page-account.html';
                     }
                 }
             },

@@ -135,6 +135,7 @@ $(document).ready(function () {
                     }
                 });
                 localStorage.setItem('firstName', data.payload.FIRSTNAME);
+                localStorage.setItem('rewardPoints', data.payload.POINTS);
 
             }
 

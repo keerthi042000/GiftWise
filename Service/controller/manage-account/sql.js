@@ -23,6 +23,8 @@ exports.INSERT_LOGINATTEMPTS = `INSERT INTO LoginAttempts (idUser, loginAttempts
 
 exports.INSERT_USERPREFERENCES = `INSERT INTO UserPreference (idUser, email, sms) VALUES (:idUser, :email, :sms)`
 
+exports.INSERT_USERREWARDS = `INSERT INTO UserRewards (idUser, points) VALUES (:idUser, 0)`
+
 exports.INSERT_CUSTOMER = `INSERT INTO Customer (idUser, firstName, lastName, DOB, address, zipcode) VALUES (:idUser, :firstName, :lastName, :dob, :address, :zipcode) RETURNING idCustomer INTO :out_customerId`
 
 exports.INSERT_FAVOURITE = `INSERT INTO UserFavourites (idUser) VALUES (:idUser)`

@@ -28,14 +28,23 @@ exports.addOrder = async (req, res) => {
     const decoded = await jwt.verify(token, secretKey);
     const idUser = decoded.idUser;
     const idProdut = body.idProduct;
+    let userRewards
     delete body.idProduct;
     body.idUser = idUser;
+    if (body.userRewards){
+      userRewards = body.userRewards;
+      delete body.userRewards;
+    }
     body.out_orderId= { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }
     const result = await orderDA.addOrder(instanceOfSQLServer, body);
     const [orderId] = result.outBinds.OUT_ORDERID;
     const giftcardResponse = await axios.get(`http://localhost:3004/api/giftcard?idProduct=${idProdut}`);
     const idGiftCard = giftcardResponse.data.payload[0].idGiftcard;
     const ProductOrderresult = await orderDA.addProductOrder(instanceOfSQLServer, orderId, idGiftCard);
+    if (userRewards){
+      await orderDA.insertRewardsHistory(instanceOfSQLServer, idUser, orderId);
+      await orderDA.updateRewards(instanceOfSQLServer, idUser, userRewards.rewardPoints);
+    }
     return res.json(httpUtil.getSuccess(ProductOrderresult));
   } catch (err) {
     console.log("Error while making order : ", err);

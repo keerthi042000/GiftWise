@@ -112,7 +112,7 @@ $(document).ready(function () {
                     $('#errorMessage').text(response.errorMessage);
                 }else{
                     localStorage.setItem('accessToken', response.payload.accessToken);
-                    window.location.href = 'index.html';
+                    window.location.href = 'page-account.html';
                 }
             },
             error: function (error) {

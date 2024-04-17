@@ -122,3 +122,15 @@ exports.ADD_PRODUCTORDER = `INSERT INTO ProductOrders (
     orderId,
     idGiftcard) VALUES (:orderId, :idGiftCard)`;
     
+exports.UPDATE_REWARDS = `UPDATE UserRewards set points = :points where idUser=:idUser`;
+    
+exports.INSERT_REWARDSHISTORY = `INSERT INTO UserRewardsHistory (
+    idReward,
+    orderId,
+    points,
+    modifiedDatetime
+)
+SELECT idReward, :orderId, points, SYSDATE
+FROM UserRewards
+WHERE idUser = :idUser`;
+   

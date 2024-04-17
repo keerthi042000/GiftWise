@@ -51,6 +51,7 @@ exports.createUser = async (connection, idRole, emailId, password) => {
   const [userId] = result.outBinds.out_userId;
   await connection.execute(sql.INSERT_LOGINATTEMPTS, { idUser: userId });
   await connection.execute(sql.INSERT_USERPREFERENCES, { idUser: userId, email: 1, sms: 0 });
+  await connection.execute(sql.INSERT_USERREWARDS, { idUser: userId});
   return userId;
 };
 
