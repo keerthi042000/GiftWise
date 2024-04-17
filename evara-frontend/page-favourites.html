@@ -146,7 +146,7 @@
                     console.log(valstock);
                     $('#favTable').append(`                
                     <tr>
-                        <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-1.jpg" alt="#"></td>
+                        <td class="image product-thumbnail"><img src="${element.imageURL}" alt="#"></td>
                         <td class="product-des product-name">
                             <h5 class="product-name"><a>${element.productName}</a></h5>
                             <p class="font-xs">${element.description}
@@ -165,7 +165,7 @@
                 $('#favTable').append(`</tbody> `);
             } else {
                 $('#favTable').empty();
-                $('#favTable').append(`<h3>No items to Display</h3>`);
+                $('#favTable').append(`<h3>No items found in Favorites</h3>`);
             }
 
         }
