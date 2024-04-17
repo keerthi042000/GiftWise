@@ -8,6 +8,7 @@
     "coverage": "nyc --reporter=html --reporter=text mocha --timeout 10000 --recursive --exit"
   },
   "dependencies": {
+    "@ngrok/ngrok": "^1.2.0",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "config": "3.1.0",
