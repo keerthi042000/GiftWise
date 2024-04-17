@@ -28,6 +28,8 @@ exports.addOrder = async (req, res) => {
     const decoded = await jwt.verify(token, secretKey);
     const idUser = decoded.idUser;
     const idProdut = body.idProduct;
+    const imageURL =  body.imageURL;
+    delete body.imageURL
     let userRewards
     delete body.idProduct;
     body.idUser = idUser;
@@ -61,7 +63,7 @@ exports.addOrder = async (req, res) => {
       orderId
     }
     await orderDA.insertTransaction(instanceOfSQLServer, transactionObj)
-    await email.sendMail(decoded.emailId,giftCardNumber, giftCardPin, (+body.discount+ body.totalAmount))
+    await email.sendMail(decoded.emailId, giftCardNumber, giftCardPin, (+body.discount+ body.totalAmount), imageURL)
     await orderDA.insertNotification(instanceOfSQLServer, { idUser, orderId, message: `Email Id: ${decoded.emailId}; \n GiftCardNumber: ${giftCardNumber}; \n Amount: ${+body.discount + body.totalAmount}` })
     return res.json(httpUtil.getSuccess(ProductOrderresult));
   } catch (err) {
