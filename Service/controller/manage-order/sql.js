@@ -149,5 +149,4 @@ exports.INSERT_TRANSACTION = `INSERT INTO Transaction (
     idPaymentMethod,
     status,
     amount,
-    transactionDatetime,
-    orderId ) VALUES (:idUser, :orderId, :idPaymentMethod, :status, :amount, SYSDATE, :orderId)`
+    transactionDatetime) VALUES (:idUser, :orderId, :idPaymentMethod, :status, :amount, SYSDATE)`

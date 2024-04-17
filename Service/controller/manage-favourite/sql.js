@@ -1,6 +1,5 @@
 exports.GET_ALL_FAV = `
 Select 
-U.idFavourite AS "idFavourite", 
 U.idUser AS "idUser",
 P.idProduct AS "idProduct",
 P.productName AS "productName",

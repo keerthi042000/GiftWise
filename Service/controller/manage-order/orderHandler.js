@@ -42,7 +42,7 @@ exports.addOrder = async (req, res) => {
     const result = await orderDA.addOrder(instanceOfSQLServer, body);
     const [orderId] = result.outBinds.OUT_ORDERID;
     const giftcardResponse = await axios.get(`http://localhost:3004/api/giftcard?idProduct=${idProdut}`);
-    if (giftcardResponse.status!=200){
+    if (giftcardResponse.data.status!=200){
       return res.json(httpUtil.getException([null, giftcardResponse.data.errorMessage]))
     }
     const idGiftCard = giftcardResponse.data.payload[0].idGiftcard;
