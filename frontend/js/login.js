@@ -41,7 +41,7 @@ $(document).ready(function () {
                     $('#passwordError').text(response.errorMessage);
                 }else{
                     if(response.payload.isSuperAdmin){
-                        window.location.href = './../../evara-backend/page-brands.html';
+                        window.location.href = './../../backend/page-brands.html';
                     }else{
                      localStorage.setItem('accessToken', response.payload.accessToken);
                      window.location.href = 'page-account.html';
