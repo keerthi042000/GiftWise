@@ -7,7 +7,7 @@ let transporter = nodemailer.createTransport({
     secure: false, // true for 465, false for other ports
     auth: {
         user: 'vrevankar@wpi.edu', // Your Outlook email address
-        pass: 'Rev123@123..' // Your Outlook password or application-specific password
+        pass: '' // Your Outlook password or application-specific password
     }
 });
 
