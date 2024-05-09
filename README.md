@@ -1,4 +1,4 @@
-# GiftWise. Gift Mangnement System
+# GiftWise. - Gift Mangnement System
 
 # Project Features
 1. Database schema design <br>
