@@ -52,7 +52,12 @@ class SQLServer {
   
   async getTransactionConnection() {
     this.pool = await this.pool
-    this.connection = await oracledb.getConnection();
+    // this.connection = await oracledb.getConnection();
+    this.connection = await oracledb.getConnection({
+        user: "ADMIN",
+        password: "gcmsCS542...",
+        connectString: "gc_high"  // TNS alias from tnsnames.ora
+    });
     return this.connection;
   }
   async commitAndReleaseConnection() {
