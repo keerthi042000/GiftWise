@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#nav').append(`<ul class="menu-aside">
 
         <li id="brand" class="menu-item ${localStorage.getItem("currentScreen") == "brands"? 'active': ''}">
-            <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-add_box"></i>
+            <a class="menu-link" href="index.html"> <i class="icon material-icons md-add_box"></i>
                 <span class="text">Brands</span> </a>
         </li>  
         <li id="category" class="menu-item ${localStorage.getItem("currentScreen") == "category"? 'active': ''}">

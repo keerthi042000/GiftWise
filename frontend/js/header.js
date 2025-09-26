@@ -34,6 +34,7 @@ $(document).ready(function () {
                             <li><i class="fi-rs-user" style="width:20px;height:20px"></i><a></i><span id="DropdownName"></span> <i class="fi-rs-angle-down"></i></a>
                                 <ul class="sub-menu">
                                     <li><a href="page-account.html">My Account</a></li>
+                                    <li><a href="../backend/index.html">Admin Panel</a></li>
                                     <li><a onclick="logout()">Logout</a></li>
                                 </ul>
                             </li>
