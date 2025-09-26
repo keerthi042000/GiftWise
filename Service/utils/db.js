@@ -6,7 +6,7 @@ config["db.config"].password = process.env.DB_PASSWORD;
 
 const path = require('path');
 // Set TNS_ADMIN to the wallet folder
-process.env.TNS_ADMIN = path.join(__dirname, "../Wallet_GC");
+process.env.TNS_ADMIN = path.join(__dirname, "../../Wallet_GC");
 
 const MAX_RETRY_COUNT = 5;
 const RETRY_DELAY_MS = 100
