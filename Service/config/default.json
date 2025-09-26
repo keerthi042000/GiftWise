@@ -1,13 +1,8 @@
 {
     "db.config": {
       "user": "ADMIN",
-      "password": "abc",
-      "connectString": "gc_high",
-      "poolMin": 2, 
-      "poolMax": 20, 
-      "poolIncrement": 5, 
-      "poolTimeout": 60,
-      "queueTimeout": 120000
+      "password": "gcmsCS542...",
+      "connectString": "gc_high"
   },
   "secretKey": "d2e9227679612de599c0c8e58af212"
 }
