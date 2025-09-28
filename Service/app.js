@@ -16,8 +16,8 @@ app.use(session({
 // const cors = require('cors');
 
 const corsOptions = {
-    // origin: 'https://giftwise-flame.vercel.app', // your frontend URL
-    origin: '*', // your frontend URL
+    origin: 'https://giftwise-flame.vercel.app', // your frontend URL
+    // origin: '*', // your frontend URL
     methods: ['GET','POST','PUT','DELETE','OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true, // allows cookies and auth headers
