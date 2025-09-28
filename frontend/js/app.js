@@ -1,4 +1,5 @@
 const domain = "https://giftwise.onrender.com"
+// const domain = "http://localhost:3004"
 const accountAPI = domain + "/api/account"
 const orderAPI = domain + "/api/order"
 const productAPI = domain + "/api/product"

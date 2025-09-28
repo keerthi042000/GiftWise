@@ -1,12 +1,14 @@
 'user strict';
 
 const config = require('../config/default.json');
-const oracledb = require('oracledb');
+// const oracledb = require('oracledb');
 // config["db.config"].password = process.env.DB_PASSWORD;
 
 const path = require('path');
 // Set TNS_ADMIN to the wallet folder
 process.env.TNS_ADMIN = path.join(__dirname, "../../Wallet_GC");
+// TNS_ADMIN = path.join(__dirname, "../../Wallet_GC");
+const oracledb = require('oracledb');
 
 const MAX_RETRY_COUNT = 5;
 const RETRY_DELAY_MS = 100
@@ -21,28 +23,57 @@ function convertKeysToUpperCase(obj) {
 }
 
 // Create a connection pool
-async function createPool() {
-  try {
-    await oracledb.createPool({ ...config['db.config'],  "poolAlias": this.poolName } );
-    console.log('Connection pool created successfully.');
-  } catch (err) {
-    console.error('Error creating connection pool:', err.message);
-  }
-}
+// async function createPool() {
+//   try {
+//     await oracledb.createPool({ ...config['db.config'],  "poolAlias": this.poolName } );
+//     console.log('Connection pool created successfully.');
+//   } catch (err) {
+//     console.error('Error creating connection pool:', err.message);
+//   }
+// }
 class SQLServer {
   constructor(poolName) {
-    this.pool = createPool();
+    // this.pool = createPool();
+    this.poolName = poolName;
     this.connection = null;
     this.poolName = poolName
+  }
+
+  async createPool() {
+    try {
+      // this.pool = await oracledb.createPool({
+      //   ...config['db.config'],
+      //   poolAlias: this.poolName
+      // });
+
+
+      this.pool = await oracledb.createPool({
+        ...config['db.config'],
+        poolAlias: this.poolName,
+        walletLocation: path.join(__dirname, "../../Wallet_GC/"),
+        walletPassword: "gcmsCS542..."
+      });
+
+      console.log('Connection pool created successfully.');
+    } catch (err) {
+      console.error('Error creating connection pool:', err.message);
+      throw err;
+    }
   }
 
   async resetConnection() {
     try {
       // Close the existing connection (if open)
-      await oracledb.getPool().close(3); // Close the connection pool with a 10-second timeout
+      // await oracledb.getPool().close(3); // Close the connection pool with a 10-second timeout
   
-      // Re-establish the connection
-      await oracledb.createPool({ ...config['db.config'],  "poolAlias": this.poolName } )
+      // // Re-establish the connection
+      // await oracledb.createPool({ ...config['db.config'],  "poolAlias": this.poolName } )
+
+      const pool = oracledb.getPool(this.poolName);
+      if (pool) {
+          await pool.close(3); // close existing pool
+      }
+      await this.createPool(); // create new pool
   
       console.log('SQL connection reset successfully.');
     } catch (error) {
@@ -51,15 +82,22 @@ class SQLServer {
   }
   
   async getTransactionConnection() {
-    this.pool = await this.pool
-    this.connection = await oracledb.getConnection();
-    // this.connection = await oracledb.getConnection({
-    //     user: "ADMIN",
-    //     password: "gcmsCS542...",
-    //     connectString: "gc_high"  // TNS alias from tnsnames.ora
-    // });
+    // this.pool = await this.pool
+    // this.connection = await oracledb.getConnection();
+    // // this.connection = await oracledb.getConnection({
+    // //     user: "ADMIN",
+    // //     password: "gcmsCS542...",
+    // //     connectString: "gc_high"  // TNS alias from tnsnames.ora
+    // // });
+    // return this.connection;
+    if (!this.pool) {
+        await this.createPool(); // ensure pool exists
+    }
+    this.connection = await this.pool.getConnection();
     return this.connection;
   }
+
+  
   async commitAndReleaseConnection() {
     try {
       await this.connection.commit();
